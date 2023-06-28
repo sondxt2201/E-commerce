@@ -43,16 +43,16 @@ const Footer = () => {
                 <a href='mailto: SON.DXT182755@SIS.HUST.EDU.VN' className='mt-2 d-block mb-2 text-white'>SON.DXT182755@SIS.HUST.EDU.VN</a>
                 <div className='social-icons d-flex align-items-center gap-30 mt-4'>
                   <a className='text-white' href=''>
-                    <BsFacebook className='fs-4'/>
+                    <BsFacebook className='fs-4' />
                   </a>
                   <a className='text-white' href=''>
-                    <BsInstagram className='fs-4'/>
+                    <BsInstagram className='fs-4' />
                   </a>
                   <a className='text-white' href=''>
-                    <BsGithub className='fs-4'/>
+                    <BsGithub className='fs-4' />
                   </a>
                   <a className='text-white' href=''>
-                    <BsLinkedin className='fs-4'/>
+                    <BsLinkedin className='fs-4' />
                   </a>
                 </div>
               </div>
