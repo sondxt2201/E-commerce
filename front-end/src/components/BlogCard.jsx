@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Utility from "../utils/Utility";
+
 
 const BlogCard = () => {
   return (
@@ -8,7 +10,7 @@ const BlogCard = () => {
         <img src="images/blog-1.jpg" className="img-fluid w-100" alt="blog" />
       </div>
       <div className="blog-content">
-        <p className="date">1 Dec, 2022</p>
+        <p className="date">{Utility.GetFullDateMinuteString(new Date())}</p>
         <h5 className="title">A beautiful sunday morning renaissance</h5>
         <p className="desc">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque quaerat

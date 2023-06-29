@@ -1,18 +1,16 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { GetFullDateMinuteString } from './utils/Utility';
-
+import Utility from './utils/Utility';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
-
-
-let time = GetFullDateMinuteString(new Date());
+import OurStore from './pages/OurStore';
+import Blog from './pages/Blog';
 
 function App() {
-  { console.log("Website run at: " + time) }
+  { console.log("Website run at: " + Utility.GetFullDateMinuteString(new Date())) }
   return (
     <>
       <BrowserRouter>
@@ -21,6 +19,9 @@ function App() {
             <Route index element={<Home />} />
             <Route path='about' element={<About />} />
             <Route path='contact' element={<Contact />} />
+            <Route path='store' element={<OurStore />} />
+            <Route path='blogs' element={<Blog />} />
+
           </Route>
         </Routes>
       </BrowserRouter>

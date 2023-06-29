@@ -10,7 +10,7 @@ const Header = () => {
           <div className='row'>
             <div className='col-6'>
               <p className='text-white mb-0'>
-                Free Shipping Over 100$ & Free Returns
+                Free Shipping Over $100 & Free Returns
               </p>
             </div>
             <div className='col-6'>
@@ -122,8 +122,8 @@ const Header = () => {
                 <div className='menu-links'>
                   <div className='d-flex align-items-center gap-15'>
                     <NavLink className='' to='/'>Home</NavLink >
-                    <NavLink className='' to='/'>Our Store</NavLink >
-                    <NavLink className='' to='/'>Blogs</NavLink >
+                    <NavLink className='' to='/store'>Our Store</NavLink >
+                    <NavLink className='' to='/blogs'>Blogs</NavLink >
                     <NavLink className='' to='/contact'>Contact</NavLink >
                   </div>
                 </div>

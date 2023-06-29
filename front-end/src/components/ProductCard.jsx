@@ -8,27 +8,24 @@ import watch from "../assets/images/watch.jpg";
 import watch2 from "../assets/images/watch-1.avif";
 import addcart from "../assets/images/add-cart.svg";
 import view from "../assets/images/view.svg";
+
 const ProductCard = (props) => {
   const { grid } = props;
-  console.log(grid);
   let location = useLocation();
 
   return (
     <>
       <div
-        className={` ${
-          location.pathname == "/product" ? `gr-${grid}` : "col-3"
-        } `}
+        className={`${location.pathname == "/store" ? `gr-${grid}` : "col-3"}`}
       >
         <Link
-          to={`${
-            location.pathname == "/"
-              ? "/product/:id"
-              : location.pathname == "/product/:id"
+          className="product-card position-relative"
+          to={`${location.pathname == "/"
+            ? "/product/:id"
+            : location.pathname == "/product/:id"
               ? "/product/:id"
               : ":id"
-          }`}
-          className="product-card position-relative"
+            }`}
         >
           <div className="wishlist-icon position-absolute">
             <button className="border-0 bg-transparent">
@@ -75,18 +72,16 @@ const ProductCard = (props) => {
         </Link>
       </div>
       <div
-        className={` ${
-          location.pathname == "/product" ? `gr-${grid}` : "col-3"
-        } `}
+        className={` ${location.pathname == "/store" ? `gr-${grid}` : "col-3"
+          } `}
       >
         <Link
-          to={`${
-            location.pathname == "/"
-              ? "/product/:id"
-              : location.pathname == "/product/:id"
+          to={`${location.pathname == "/"
+            ? "/product/:id"
+            : location.pathname == "/product/:id"
               ? "/product/:id"
               : ":id"
-          }`}
+            }`}
           className="product-card position-relative"
         >
           <div className="wishlist-icon position-absolute">

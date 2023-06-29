@@ -15,7 +15,7 @@ const SpecialProduct = () => {
             <div className="special-product-content">
               <h5 className="brand">Havels</h5>
               <h6 className="title">
-                Samsung Galaxy Note10+ Mobile Phone; Sim...
+                Samsung Galaxy S23 Mobile Phone; Sim...
               </h6>
               <ReactStars
                 count={5}
@@ -43,8 +43,8 @@ const SpecialProduct = () => {
                   <div
                     className="progress-bar"
                     role="progressbar"
-                    style={{ width: "25%" }}
-                    aria-valuenow="25"
+                    style={{ width: "75%" }}
+                    aria-valuenow="75"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   ></div>

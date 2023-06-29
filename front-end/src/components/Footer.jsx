@@ -42,16 +42,16 @@ const Footer = () => {
                 <a href='tel: +84 8-4844-5844' className='mt-2 d-block mb-2 text-white'>+84 8-4844-5844</a>
                 <a href='mailto: SON.DXT182755@SIS.HUST.EDU.VN' className='mt-2 d-block mb-2 text-white'>SON.DXT182755@SIS.HUST.EDU.VN</a>
                 <div className='social-icons d-flex align-items-center gap-30 mt-4'>
-                  <a className='text-white' href=''>
+                  <a className='text-white' href='#'>
                     <BsFacebook className='fs-4' />
                   </a>
-                  <a className='text-white' href=''>
+                  <a className='text-white' href='#'>
                     <BsInstagram className='fs-4' />
                   </a>
-                  <a className='text-white' href=''>
+                  <a className='text-white' href='#'>
                     <BsGithub className='fs-4' />
                   </a>
-                  <a className='text-white' href=''>
+                  <a className='text-white' href='#'>
                     <BsLinkedin className='fs-4' />
                   </a>
                 </div>
