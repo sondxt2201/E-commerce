@@ -3,7 +3,6 @@ import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import { AiOutlineHome, AiOutlineMail } from "react-icons/ai";
 import { BiPhoneCall, BiInfoCircle } from "react-icons/bi";
-import Container from "../components/Container";
 import Utility from "../utils/Utility";
 
 const Contact = () => {

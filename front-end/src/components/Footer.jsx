@@ -16,7 +16,7 @@ const Footer = () => {
             </div>
             <div className='col-7'>
               <div className="input-group">
-                <inputs
+                <input
                   type="text"
                   className="form-control py-1"
                   placeholder="Your Email Address"
@@ -60,10 +60,11 @@ const Footer = () => {
             <div className='col-3'>
               <h4 className='text-white mb-4'>Information</h4>
               <div className='footer-links d-flex flex-column'>
-                <Link className='text-white py-2 mb-1'>Privacy Policy</Link>
-                <Link className='text-white py-2 mb-1'>Refund Policy</Link>
-                <Link className='text-white py-2 mb-1'>Term & Conditions</Link>
-                <Link className='text-white py-2 mb-1'>Blogs</Link>
+                <Link className='text-white py-2 mb-1' to="/privacy-policy">Privacy Policy</Link>
+                <Link className='text-white py-2 mb-1' to="/refund-policy">Refund Policy</Link>
+                <Link className='text-white py-2 mb-1' to="/shipping-policy">Shipping Policy</Link>
+                <Link className='text-white py-2 mb-1' to="/term-and-conditions">Term & Conditions</Link>
+                <Link className='text-white py-2 mb-1' to="/blogs">Blogs</Link>
               </div>
             </div>
             <div className='col-3'>

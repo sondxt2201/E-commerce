@@ -3,7 +3,7 @@ import React from "react";
 const Color = () => {
   return (
     <>
-      <ul className="colors ps-0">
+      <ul className="colors ps-">
         <li></li>
         <li></li>
         <li></li>

@@ -28,12 +28,12 @@ const Header = () => {
           <div className='row align-items-center'>
             <div className='col-2'>
               <h2>
-                <Link className='text-white'>Digishop</Link>
+                <Link className='text-white' to="/">Digishop</Link>
               </h2>
             </div>
             <div className='col-5'>
               <div className="input-group">
-                <inputs
+                <input
                   type="text"
                   className="form-control py-2"
                   placeholder="Search Product Here..."
@@ -47,7 +47,7 @@ const Header = () => {
             <div className='col-5'>
               <div className='header-upper-links d-flex align-items-center justify-content-between'>
                 <div>
-                  <Link className='d-flex align-items-center gap-10 text-white'>
+                  <Link className='d-flex align-items-center gap-10 text-white' to="/compare-product">
                     <img src='images/compare.svg' alt='compare' />
                     <p className='mb-0'>
                       Compare <br /> Products
@@ -55,7 +55,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link className='d-flex align-items-center gap-10 text-white'>
+                  <Link className='d-flex align-items-center gap-10 text-white' to="/wish-list">
                     <img src='images/wishlist.svg' alt='wishlist' />
                     <p className='mb-0'>
                       Favorite <br /> Wishlist
@@ -63,7 +63,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link className='d-flex align-items-center gap-10 text-white'>
+                  <Link className='d-flex align-items-center gap-10 text-white' to="/login">
                     <img src='images/user.svg' alt='user' />
                     <p className='mb-0'>
                       Login <br /> My account
@@ -71,7 +71,7 @@ const Header = () => {
                   </Link>
                 </div>
                 <div>
-                  <Link className='d-flex align-items-center gap-10 text-white'>
+                  <Link className='d-flex align-items-center gap-10 text-white' to="/cart">
                     <img src='images/cart.svg' alt='cart' />
                     <div className='d-flex flex-column'>
                       <span className='badge bg-white text-dark'>
@@ -108,13 +108,16 @@ const Header = () => {
                     <ul className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton1">
                       <li>
-                        <Link className="dropdown-item text-white" to="#">Action</Link>
+                        <Link className="dropdown-item text-white" to="#">Wacth</Link>
                       </li>
                       <li>
-                        <Link className="dropdown-item text-white" to="#">Another action</Link>
+                        <Link className="dropdown-item text-white" to="#">TV</Link>
                       </li>
                       <li>
-                        <Link className="dropdown-item text-white" to="#">Something else here</Link>
+                        <Link className="dropdown-item text-white" to="#">Camera</Link>
+                      </li>
+                      <li>
+                        <Link className="dropdown-item text-white" to="#">Laptop</Link>
                       </li>
                     </ul>
                   </div>
@@ -122,7 +125,7 @@ const Header = () => {
                 <div className='menu-links'>
                   <div className='d-flex align-items-center gap-15'>
                     <NavLink className='' to='/'>Home</NavLink >
-                    <NavLink className='' to='/store'>Our Store</NavLink >
+                    <NavLink className='' to='/product'>Our Store</NavLink >
                     <NavLink className='' to='/blogs'>Blogs</NavLink >
                     <NavLink className='' to='/contact'>Contact</NavLink >
                   </div>

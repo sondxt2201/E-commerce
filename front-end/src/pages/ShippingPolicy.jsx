@@ -1,20 +1,23 @@
 import React from "react";
 import BreadCrumb from "../components/BreadCrumb";
-import Container from "../components/Container";
 import Meta from "../components/Meta";
 
 const ShippingPolicy = () => {
   return (
     <>
-      <Meta title={"Shippingg Pplicy"} />
-      <BreadCrumb title="Shippingg Pplicy" />
-      <Container class1="policy-wrapper py-5 home-wrapper-2">
-        <div className="row">
-          <div className="col-12">
-            <div className="policy"></div>
+      <Meta title={"Shipping Policy"} />
+      <BreadCrumb title="Shipping Policy" />
+      <section className="policy-wrapper py-5 home-wrapper-2">
+        <div className="container-xxl">
+          <div className="row">
+            <div className="col-12">
+              <div className="policy">
+                You’re only as good as your last collection, which is an enormous pressure. I think there is something about luxury – it’s not something people need, but it’s what they want. It really pulls at their heart. I have a fantastic relationship with money.Scelerisque sociosqu ullamcorper urna nisl mollis vestibulum pretium commodo inceptos cum condimentum placerat diam venenatis blandit hac eget dis lacus a parturient a accumsan nisl ante vestibulum.
+              </div>
+            </div>
           </div>
         </div>
-      </Container>
+      </section>
     </>
   );
 };
