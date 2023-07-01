@@ -11,31 +11,36 @@ const Checkout = () => {
           <div className="row">
             <div className="col-7">
               <div className="checkout-left-data">
-                <h3 className="website-name">Dev Corner</h3>
+                <h3 className="website-name">Check out</h3>
                 <nav
                   style={{ "--bs-breadcrumb-divider": ">" }}
                   aria-label="breadcrumb"
                 >
                   <ol className="breadcrumb">
                     <li className="breadcrumb-item">
-                      <Link className="text-dark total-price" to="/cart">
+                      <Link className="text-dark total-price"
+                        to="/cart"
+                      >
                         Cart
                       </Link>
                     </li>
-                    &nbsp; /&nbsp;
+                    &nbsp; / &nbsp;
                     <li
-                      className="breadcrumb-ite total-price active"
+                      className="breadcrumb-item total-price active"
                       aria-current="page"
                     >
                       Information
                     </li>
-                    &nbsp; /
-                    <li className="breadcrumb-item total-price active">
-                      Shipping
-                    </li>
-                    &nbsp; /
+                    &nbsp; / &nbsp;
                     <li
                       className="breadcrumb-item total-price active"
+                      aria-current="page"
+                    >
+                      Shipping
+                    </li>
+                    &nbsp; / &nbsp;
+                    <li
+                      className="breadcrumb-item total-price active p-0"
                       aria-current="page"
                     >
                       Payment
@@ -135,8 +140,8 @@ const Checkout = () => {
                       <img className="img-fluid" src={watch} alt="product" />
                     </div>
                     <div>
-                      <h5 className="total-price">$1000</h5>
-                      <p className="total-price">$1000</p>
+                      <h5 className="total-price">Apple watch series 3</h5>
+                      <p className="total-price">Black</p>
                     </div>
                   </div>
                   <div className="flex-grow-1">
@@ -154,7 +159,7 @@ const Checkout = () => {
                   <p className="mb-0 total-price">$ 10000</p>
                 </div>
               </div>
-              <div className="d-flex justify-content-between align-items-center border-bootom py-4">
+              <div className="d-flex justify-content-between align-items-center border-bottom py-4">
                 <h4 className="total">Total</h4>
                 <h5 className="total-price">$ 10000</h5>
               </div>

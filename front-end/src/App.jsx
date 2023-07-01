@@ -46,9 +46,9 @@ function App() {
 
             {/* auth */}
             <Route path='login' element={<Login />} />
+            <Route path='sign-up' element={<Signup />} />
             <Route path='forgot-password' element={<Forgotpassword />} />
             <Route path='reset-password' element={<Resetpassword />} />
-            <Route path='sign-up' element={<Signup />} />
 
             {/* information */}
             <Route path='privacy-policy' element={<PrivacyPolicy />} />
@@ -56,11 +56,9 @@ function App() {
             <Route path='refund-policy' element={<RefundPolicy />} />
             <Route path='term-and-conditions' element={<TermAndConditions />} />
 
-            <Route path='check-out' element={<Checkout />} />
-
-
+            {/* cart */}
             <Route path='cart' element={<Cart />} />
-
+            <Route path='check-out' element={<Checkout />} />
 
           </Route>
         </Routes>
