@@ -90,15 +90,13 @@ const Home = () => {
               <div className="services d-flex align-items-center justify-content-between">
                 {service?.map((item, index) => {
                   return (
-                    <>
-                      <div className='d-flex align-items-center gap-15'>
-                        <img src={item.image} alt='services' />
-                        <div>
-                          <h6>{item.title}</h6>
-                          <p className='mb-0'>{item.tagline}</p>
-                        </div>
+                    <div className='d-flex align-items-center gap-15' key={index}>
+                      <img src={item.image} alt='services' />
+                      <div>
+                        <h6>{item.title}</h6>
+                        <p className='mb-0'>{item.tagline}</p>
                       </div>
-                    </>
+                    </div>
                   );
                 })}
               </div>
