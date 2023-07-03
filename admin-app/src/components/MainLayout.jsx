@@ -186,24 +186,27 @@ const MainLayout = () => {
               </span>
             </div>
 
-            <div className="d-flex gap-3 align-items-center dropdown">
+            <div
+              className="d-flex gap-3 align-items-center dropdown"
+              role="button"
+              id="dropdownMenuLink"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
               <div>
                 <img
                   width={32}
                   height={32}
                   src={admin}
                   alt=""
-                /> 
+                />
               </div>
-              <div
-                role="button"
-                id="dropdownMenuLink"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
+
+              <div>
                 <h5 className="mb-0">SONDXT</h5>
                 <p className="mb-0">SON.DXT182755@SIS.HUST.EDU.VN</p>
               </div>
+
               <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <li>
                   <Link
