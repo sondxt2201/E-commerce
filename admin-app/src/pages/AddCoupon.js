@@ -50,10 +50,10 @@ const AddCoupon = () => {
 
   useEffect(() => {
     if (isSuccess && createdCoupon) {
-      toast.success("Coupon Added Successfullly!");
+      toast.success("Coupon Added Successfully!");
     }
     if (isSuccess && updatedCoupon) {
-      toast.success("Coupon Updated Successfullly!");
+      toast.success("Coupon Updated Successfully!");
       navigate("/admin/coupon-list");
     }
     if (isError && couponName && couponDiscount && couponExpiry) {
@@ -93,9 +93,9 @@ const AddCoupon = () => {
           <CustomInput
             type="text"
             name="name"
-            onChng={formik.handleChange("name")}
-            onBlr={formik.handleBlur("name")}
-            val={formik.values.name}
+            onChange={formik.handleChange("name")}
+            onBlur={formik.handleBlur("name")}
+            value={formik.values.name}
             label="Enter Coupon Name"
             id="name"
           />
@@ -105,9 +105,9 @@ const AddCoupon = () => {
           <CustomInput
             type="date"
             name="expiry"
-            onChng={formik.handleChange("expiry")}
-            onBlr={formik.handleBlur("expiry")}
-            val={formik.values.expiry}
+            onChange={formik.handleChange("expiry")}
+            onBlur={formik.handleBlur("expiry")}
+            value={formik.values.expiry}
             label="Enter Expiry Data"
             id="date"
           />
@@ -117,9 +117,9 @@ const AddCoupon = () => {
           <CustomInput
             type="number"
             name="discount"
-            onChng={formik.handleChange("discount")}
-            onBlr={formik.handleBlur("discount")}
-            val={formik.values.discount}
+            onChange={formik.handleChange("discount")}
+            onBlur={formik.handleBlur("discount")}
+            value={formik.values.discount}
             label="Enter Discount"
             id="discount"
           />

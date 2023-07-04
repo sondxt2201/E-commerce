@@ -37,11 +37,11 @@ const Addcolor = () => {
   }, [getColorId]);
   useEffect(() => {
     if (isSuccess && createdColor) {
-      toast.success("Color Added Successfullly!");
+      toast.success("Color Added Successfully!");
     }
     if (isSuccess && updatedColor) {
-      toast.success("Color Updated Successfullly!");
-      navigate("/admin/list-color");
+      toast.success("Color Updated Successfully!");
+      navigate("/admin/color-list");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
@@ -77,9 +77,9 @@ const Addcolor = () => {
           <CustomInput
             type="color"
             label="Enter Product Color"
-            onChng={formik.handleChange("title")}
-            onBlr={formik.handleBlur("title")}
-            val={formik.values.title}
+            onChange={formik.handleChange("title")}
+            onBlur={formik.handleBlur("title")}
+            value={formik.values.title}
             id="color"
           />
           <div className="error">

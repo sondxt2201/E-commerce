@@ -36,7 +36,7 @@ const ViewEnq = () => {
       <div className="d-flex justify-content-between align-items-center">
         <h3 className="mb-4 title">View Enquiry</h3>
         <button
-          className="bg-transpatent border-0 fs-6 mb-0 d-flex align-items-center gap-1"
+          className="bg-transparent border-0 fs-6 mb-0 d-flex align-items-center gap-1"
           onClick={goBack}
         >
           <BiArrowBack className="fs-5" /> Go Back

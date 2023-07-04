@@ -33,9 +33,10 @@ const MainLayout = () => {
     <Layout /* onContextMenu={(e) => e.preventDefault()} */>
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo">
-          <h2 className="text-white fs-5 text-center py-3 mb-0">
+          <h2 className="text-white fs-5 text-center py-3 mb-0 align-items-center">
             <span className="sm-logo">DA</span>
-            <span className="lg-logo">Digishop Admin</span>
+            <span className="lg-logo title-brand">Digishop</span>
+            <span className="role-title text-center">Admin</span>
           </h2>
         </div>
         <Menu
@@ -70,7 +71,7 @@ const MainLayout = () => {
                   label: "Add Product",
                 },
                 {
-                  key: "list-product",
+                  key: "product-list",
                   icon: <AiOutlineShoppingCart className="fs-4" />,
                   label: "Product List",
                 },
@@ -80,7 +81,7 @@ const MainLayout = () => {
                   label: "Brand",
                 },
                 {
-                  key: "list-brand",
+                  key: "brand-list",
                   icon: <SiBrandfolder className="fs-4" />,
                   label: "Brand List ",
                 },
@@ -90,7 +91,7 @@ const MainLayout = () => {
                   label: "Category",
                 },
                 {
-                  key: "list-category",
+                  key: "category-list",
                   icon: <BiCategoryAlt className="fs-4" />,
                   label: "Category List",
                 },
@@ -100,7 +101,7 @@ const MainLayout = () => {
                   label: "Color",
                 },
                 {
-                  key: "list-color",
+                  key: "color-list",
                   icon: <AiOutlineBgColors className="fs-4" />,
                   label: "Color List",
                 },

@@ -6,46 +6,43 @@ import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import {
-  createBrand,
-  getABrand,
+  createCategory,
+  getAProductCategory,
   resetState,
-  updateABrand,
-} from "../features/brand/brandSlice";
-
+  updateAProductCategory,
+} from "../features/pcategory/pcategorySlice";
 let schema = yup.object().shape({
-  title: yup.string().required("Brand Name is Required"),
+  title: yup.string().required("Category Name is Required"),
 });
-const Addbrand = () => {
+const Addcat = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const getPCatId = location.pathname.split("/")[3];
   const navigate = useNavigate();
-  const getBrandId = location.pathname.split("/")[3];
-  const newBrand = useSelector((state) => state.brand);
+  const newCategory = useSelector((state) => state.pCategory);
   const {
     isSuccess,
     isError,
     isLoading,
-    createdBrand,
-    brandName,
-    updatedBrand,
-  } = newBrand;
+    createdCategory,
+    categoryName,
+    updatedCategory,
+  } = newCategory;
   useEffect(() => {
-    if (getBrandId !== undefined) {
-      dispatch(getABrand(getBrandId));
+    if (getPCatId !== undefined) {
+      dispatch(getAProductCategory(getPCatId));
     } else {
       dispatch(resetState());
     }
-  }, [getBrandId]);
-
+  }, [getPCatId]);
   useEffect(() => {
-    if (isSuccess && createdBrand) {
-      toast.success("Brand Added Successfullly!");
+    if (isSuccess && createdCategory) {
+      toast.success("Category Added Successfully!");
     }
-    if (isSuccess && updatedBrand) {
-      toast.success("Brand Updated Successfullly!");
-      navigate("/admin/list-brand");
+    if (isSuccess && updatedCategory) {
+      toast.success("Category Updated Successfully!");
+      navigate("/admin/category-list");
     }
-
     if (isError) {
       toast.error("Something Went Wrong!");
     }
@@ -53,16 +50,16 @@ const Addbrand = () => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      title: brandName || "",
+      title: categoryName || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      if (getBrandId !== undefined) {
-        const data = { id: getBrandId, brandData: values };
-        dispatch(updateABrand(data));
+      if (getPCatId !== undefined) {
+        const data = { id: getPCatId, pCatData: values };
+        dispatch(updateAProductCategory(data));
         dispatch(resetState());
       } else {
-        dispatch(createBrand(values));
+        dispatch(createCategory(values));
         formik.resetForm();
         setTimeout(() => {
           dispatch(resetState());
@@ -70,21 +67,19 @@ const Addbrand = () => {
       }
     },
   });
-
   return (
     <div>
-      <h3 className="mb-4 title">
-        {getBrandId !== undefined ? "Edit" : "Add"} Brand
+      <h3 className="mb-4  title">
+        {getPCatId !== undefined ? "Edit" : "Add"} Category
       </h3>
       <div>
         <form action="" onSubmit={formik.handleSubmit}>
           <CustomInput
             type="text"
-            name="title"
-            onChng={formik.handleChange("title")}
-            onBlr={formik.handleBlur("title")}
-            val={formik.values.title}
-            label="Enter Brand"
+            label="Enter Product Category"
+            onChange={formik.handleChange("title")}
+            onBlur={formik.handleBlur("title")}
+            value={formik.values.title}
             id="brand"
           />
           <div className="error">
@@ -94,7 +89,7 @@ const Addbrand = () => {
             className="btn btn-success border-0 rounded-3 my-5"
             type="submit"
           >
-            {getBrandId !== undefined ? "Edit" : "Add"} Brand
+            {getPCatId !== undefined ? "Edit" : "Add"} Category
           </button>
         </form>
       </div>
@@ -102,4 +97,4 @@ const Addbrand = () => {
   );
 };
 
-export default Addbrand;
+export default Addcat;

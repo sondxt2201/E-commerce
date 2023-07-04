@@ -90,3 +90,17 @@ main::-webkit-scrollbar {
   font-size: 12px;
 }
 
+.role-title {
+  color: whitesmoke;
+  font-size: 13px;
+  margin-left: -10px;
+  position: relative;
+  bottom: -10px;
+  text-transform: uppercase;
+}
+
+.title-brand {
+  font-size: 30px;
+  position: relative;
+  top: -5px;
+}

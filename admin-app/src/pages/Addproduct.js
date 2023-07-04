@@ -14,6 +14,7 @@ import { Select } from "antd";
 import Dropzone from "react-dropzone";
 import { delImg, uploadImg } from "../features/upload/uploadSlice";
 import { createProducts, resetState } from "../features/product/productSlice";
+
 let schema = yup.object().shape({
   title: yup.string().required("Title is Required"),
   description: yup.string().required("Description is Required"),
@@ -48,7 +49,7 @@ const Addproduct = () => {
   const { isSuccess, isError, isLoading, createdProduct } = newProduct;
   useEffect(() => {
     if (isSuccess && createdProduct) {
-      toast.success("Product Added Successfullly!");
+      toast.success("Product Added Successfully!");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
@@ -111,9 +112,9 @@ const Addproduct = () => {
             type="text"
             label="Enter Product Title"
             name="title"
-            onChng={formik.handleChange("title")}
-            onBlr={formik.handleBlur("title")}
-            val={formik.values.title}
+            onChange={formik.handleChange("title")}
+            onBlur={formik.handleBlur("title")}
+            value={formik.values.title}
           />
           <div className="error">
             {formik.touched.title && formik.errors.title}
@@ -133,9 +134,9 @@ const Addproduct = () => {
             type="number"
             label="Enter Product Price"
             name="price"
-            onChng={formik.handleChange("price")}
-            onBlr={formik.handleBlur("price")}
-            val={formik.values.price}
+            onChange={formik.handleChange("price")}
+            onBlur={formik.handleBlur("price")}
+            value={formik.values.price}
           />
           <div className="error">
             {formik.touched.price && formik.errors.price}
@@ -215,9 +216,9 @@ const Addproduct = () => {
             type="number"
             label="Enter Product Quantity"
             name="quantity"
-            onChng={formik.handleChange("quantity")}
-            onBlr={formik.handleBlur("quantity")}
-            val={formik.values.quantity}
+            onChange={formik.handleChange("quantity")}
+            onBlur={formik.handleBlur("quantity")}
+            value={formik.values.quantity}
           />
           <div className="error">
             {formik.touched.quantity && formik.errors.quantity}

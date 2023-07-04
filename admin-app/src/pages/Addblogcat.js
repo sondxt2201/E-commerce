@@ -37,10 +37,10 @@ const Addblogcat = () => {
   }, [getBlogCatId]);
   useEffect(() => {
     if (isSuccess && createBlogCategory) {
-      toast.success("Blog Category Added Successfullly!");
+      toast.success("Blog Category Added Successfully!");
     }
     if (isSuccess && updatedBlogCategory) {
-      toast.success("Blog Category Updated Successfullly!");
+      toast.success("Blog Category Updated Successfully!");
       navigate("/admin/blog-category-list");
     }
     if (isError) {
@@ -77,9 +77,9 @@ const Addblogcat = () => {
           <CustomInput
             type="text"
             name="title"
-            onChng={formik.handleChange("title")}
-            onBlr={formik.handleBlur("title")}
-            val={formik.values.title}
+            onChange={formik.handleChange("title")}
+            onBlur={formik.handleBlur("title")}
+            value={formik.values.title}
             label="Enter Blog Category"
             id="blogcat"
           />
