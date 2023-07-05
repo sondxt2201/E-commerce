@@ -42,7 +42,7 @@ const getallBrand = asyncHandler(async (req, res) => {
     try {
         const getallBrand = await Brand.find();
 
-        res.json({ getallBrand });
+        res.json(getallBrand);
     }
     catch (error) {
         throw new Error(error);

@@ -44,7 +44,7 @@ router.post("/forgot-password-token", forgotPasswordToken);
 router.get("/cart", authMiddleware, getUserCart);
 router.get("/order/get-orders", authMiddleware, getOrders);
 router.get("/refresh", handleRefreshToken);
-router.get("/all-user", getallUser);
+router.get("/all-users", getallUser);
 router.get("/logout", logoutUser);
 router.get("/wishlist", authMiddleware, getWishlist);
 router.get("/:id", authMiddleware, isAdmin, getUser);

@@ -43,7 +43,7 @@ const getallEnquiry = asyncHandler(async (req, res) => {
     try {
         const getallEnquiry = await Enquiry.find();
 
-        res.json({ getallEnquiry });
+        res.json(getallEnquiry);
     }
     catch (error) {
         throw new Error(error);

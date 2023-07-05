@@ -45,6 +45,7 @@ const Categorylist = () => {
     dispatch(getCategories());
   }, []);
   const pCatStat = useSelector((state) => state.pCategory.pCategories);
+  console.log(pCatStat)
   const data1 = [];
   for (let i = 0; i < pCatStat.length; i++) {
     data1.push({

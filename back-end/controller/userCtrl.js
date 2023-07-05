@@ -194,7 +194,7 @@ const reActiveUser = asyncHandler(async (req, res) => {
 const getallUser = asyncHandler(async (req, res) => {
     try {
         const getallUser = await User.find();
-        res.json({ getallUser });
+        res.json(getallUser);
     }
     catch (error) {
         throw new Error(error);

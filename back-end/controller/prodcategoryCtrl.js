@@ -42,7 +42,7 @@ const getallCategory = asyncHandler(async (req, res) => {
     try {
         const getallCategory = await Category.find();
 
-        res.json({ getallCategory });
+        res.json(getallCategory);
     }
     catch (error) {
         throw new Error(error);

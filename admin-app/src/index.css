@@ -90,6 +90,11 @@ main::-webkit-scrollbar {
   font-size: 12px;
 }
 
+.error-large{
+  color: red;
+  font-size: 20px;
+}
+
 .role-title {
   color: whitesmoke;
   font-size: 13px;

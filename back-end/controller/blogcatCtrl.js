@@ -42,7 +42,7 @@ const getallblogCategory = asyncHandler(async (req, res) => {
     try {
         const getallblogCategory = await blogCategory.find();
 
-        res.json({ getallblogCategory });
+        res.json(getallblogCategory);
     }
     catch (error) {
         throw new Error(error);

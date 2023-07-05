@@ -3,11 +3,13 @@ const dbConnect = require("./config/dbConnect");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const { notFound, errorHandler } = require("./middlewares/errorHandler");
+const { GetFullDateMinuteString } = require("./utils/Utility");
 
 const app = express();
 const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 4000;
 const bodyParser = require("body-parser");
+const cors = require("cors");
 
 const authRouter = require("./routes/authRoute");
 const productRouter = require("./routes/productRoute");
@@ -20,11 +22,12 @@ const couponRouter = require("./routes/couponRoute");
 const enqRouter = require("./routes/enqRoute");
 
 
-
 dbConnect();
 
 app.use(express.json())
 app.use(morgan("dev"));
+app.use(cors());
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -44,7 +47,7 @@ app.use("/api/enquiry", enqRouter);
 app.use(notFound);
 app.use(errorHandler);
 
-
+let time = GetFullDateMinuteString(new Date());
 app.listen(PORT, () => {
-    console.log(`Server is running at PORT ${PORT}`);
+    console.log(`Server is running at PORT ${PORT} at ${time}`);
 });

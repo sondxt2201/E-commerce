@@ -43,7 +43,7 @@ const getallColor = asyncHandler(async (req, res) => {
     try {
         const getallColor = await Color.find();
 
-        res.json({ getallColor });
+        res.json(getallColor);
     }
     catch (error) {
         throw new Error(error);

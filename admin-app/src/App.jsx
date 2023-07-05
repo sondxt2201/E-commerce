@@ -27,11 +27,8 @@ import Brandlist from './pages/Brandlist';
 import Addproduct from './pages/Addproduct';
 import Productlist from './pages/Productlist';
 
-import Addcoupon from './pages/AddCoupon';
+import Addcoupon from './pages/Addcoupon';
 import Couponlist from './pages/Couponlist';
-
-
-
 
 
 
