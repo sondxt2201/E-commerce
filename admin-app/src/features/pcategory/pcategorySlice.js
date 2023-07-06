@@ -42,6 +42,7 @@ export const deleteAProductCategory = createAsyncThunk(
     }
   }
 );
+
 export const getAProductCategory = createAsyncThunk(
   "productCategory/get-product-category",
   async (id, thunkAPI) => {

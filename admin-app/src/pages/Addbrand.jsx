@@ -29,6 +29,7 @@ const Addbrand = () => {
     brandName,
     updatedBrand,
   } = newBrand;
+
   useEffect(() => {
     if (getBrandId !== undefined) {
       dispatch(getABrand(getBrandId));
@@ -45,11 +46,11 @@ const Addbrand = () => {
       toast.success("Brand Updated Successfully!");
       navigate("/admin/brand-list");
     }
-
     if (isError) {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
+  
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {

@@ -31,6 +31,7 @@ const columns = [
 const Categorylist = () => {
   const [open, setOpen] = useState(false);
   const [pCatId, setpCatId] = useState("");
+  
   const showModal = (e) => {
     setOpen(true);
     setpCatId(e);
@@ -39,14 +40,17 @@ const Categorylist = () => {
   const hideModal = () => {
     setOpen(false);
   };
+
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(resetState());
     dispatch(getCategories());
   }, []);
+
   const pCatStat = useSelector((state) => state.pCategory.pCategories);
-  console.log(pCatStat)
   const data1 = [];
+
   for (let i = 0; i < pCatStat.length; i++) {
     data1.push({
       key: i + 1,
@@ -68,7 +72,8 @@ const Categorylist = () => {
         </>
       ),
     });
-  }
+  };
+
   const deleteCategory = (e) => {
     dispatch(deleteAProductCategory(e));
     setOpen(false);
@@ -76,6 +81,7 @@ const Categorylist = () => {
       dispatch(getCategories());
     }, 100);
   };
+
   return (
     <div>
       <h3 className="mb-4 title">Product Categories</h3>

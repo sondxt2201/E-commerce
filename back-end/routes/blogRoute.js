@@ -19,7 +19,7 @@ router.get("/:id", getBlog);
 
 // DELETE
 router.delete("/delete-blog/:id", authMiddleware, isAdmin, deleteBlog);
-router.delete("/delete-blog/:id", authMiddleware, isAdmin, deleteImages);
+router.delete("/delete-blog-image/:id", authMiddleware, isAdmin, deleteImages);
 
 
 module.exports = router;

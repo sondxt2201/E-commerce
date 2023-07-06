@@ -14,7 +14,7 @@ import {
 
 let schema = yup.object().shape({
   name: yup.string().required("Coupon Name is Required"),
-  expiry: yup.date().required("Expiry Date is Required"),
+  expire: yup.date().required("expire Date is Required"),
   discount: yup.number().required("Discount Percentage is Required"),
 });
 const AddCoupon = () => {
@@ -31,10 +31,11 @@ const AddCoupon = () => {
     createdCoupon,
     couponName,
     couponDiscount,
-    couponExpiry,
+    couponexpire,
     updatedCoupon,
   } = newCoupon;
-  const changeDateFormet = (date) => {
+
+  const changeDateFormat = (date) => {
     const newDate = new Date(date).toLocaleDateString();
     const [month, day, year] = newDate.split("/");
     return [year, month, day].join("-");
@@ -56,15 +57,16 @@ const AddCoupon = () => {
       toast.success("Coupon Updated Successfully!");
       navigate("/admin/coupon-list");
     }
-    if (isError && couponName && couponDiscount && couponExpiry) {
+    if (isError && couponName && couponDiscount && couponexpire) {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
+  
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
       name: couponName || "",
-      expiry: changeDateFormet(couponExpiry) || "",
+      expire: changeDateFormat(couponexpire) || "",
       discount: couponDiscount || "",
     },
     validationSchema: schema,
@@ -104,15 +106,15 @@ const AddCoupon = () => {
           </div>
           <CustomInput
             type="date"
-            name="expiry"
-            onChange={formik.handleChange("expiry")}
-            onBlur={formik.handleBlur("expiry")}
-            value={formik.values.expiry}
-            label="Enter Expiry Data"
+            name="expire"
+            onChange={formik.handleChange("expire")}
+            onBlur={formik.handleBlur("expire")}
+            value={formik.values.expire}
+            label="Enter expire Data"
             id="date"
           />
           <div className="error">
-            {formik.touched.expiry && formik.errors.expiry}
+            {formik.touched.expire && formik.errors.expire}
           </div>
           <CustomInput
             type="number"

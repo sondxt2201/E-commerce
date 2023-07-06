@@ -30,6 +30,7 @@ const columns = [
 const Brandlist = () => {
   const [open, setOpen] = useState(false);
   const [brandId, setbrandId] = useState("");
+
   const showModal = (e) => {
     setOpen(true);
     setbrandId(e);
@@ -38,11 +39,13 @@ const Brandlist = () => {
   const hideModal = () => {
     setOpen(false);
   };
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(resetState());
     dispatch(getBrands());
   }, []);
+
   const brandState = useSelector((state) => state.brand.brands);
   const data1 = [];
   for (let i = 0; i < brandState.length; i++) {
@@ -67,14 +70,15 @@ const Brandlist = () => {
       ),
     });
   }
+
   const deleteBrand = (e) => {
     dispatch(deleteABrand(e));
-
     setOpen(false);
     setTimeout(() => {
       dispatch(getBrands());
     }, 100);
   };
+
   return (
     <div>
       <h3 className="mb-4 title">Brands</h3>

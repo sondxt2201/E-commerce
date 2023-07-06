@@ -7,14 +7,14 @@ const router = express.Router();
 router.post("/", authMiddleware, isAdmin, createblogCategory);
 
 // PUT 
-router.put("/update-blogcategory/:id", authMiddleware, isAdmin, updateblogCategory);
+router.put("/update-category/:id", authMiddleware, isAdmin, updateblogCategory);
 
 // GET
-router.get("/all-blogcategory", getallblogCategory);
+router.get("/all-category", getallblogCategory);
 router.get("/:id", getblogCategory);
 
 // DELETE
-router.delete("/delete-blogcategory/:id", authMiddleware, isAdmin, deleteblogCategory);
+router.delete("/delete-category/:id", authMiddleware, isAdmin, deleteblogCategory);
 
 
 

@@ -7,6 +7,7 @@ const getProductCategories = async () => {
 
   return response.data;
 };
+
 const createCategory = async (category) => {
   const response = await axios.post(`${base_url}category/`, category, config);
 
@@ -20,20 +21,22 @@ const getProductCategory = async (id) => {
 };
 
 const deleteProductCategory = async (id) => {
-  const response = await axios.delete(`${base_url}category/${id}`, config);
+  const response = await axios.delete(`${base_url}category/delete-category/${id}`, config);
 
   return response.data;
 };
+
 const updateProductCategory = async (category) => {
   console.log(category);
   const response = await axios.put(
-    `${base_url}category/${category.id}`,
+    `${base_url}category/update-category/${category.id}`,
     { title: category.pCatData.title },
     config
   );
 
   return response.data;
 };
+
 const pCategoryService = {
   getProductCategories,
   createCategory,

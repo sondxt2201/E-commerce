@@ -24,8 +24,8 @@ const columns = [
     sorter: (a, b) => a.discount - b.discount,
   },
   {
-    title: "Expiry",
-    dataIndex: "expiry",
+    title: "expire",
+    dataIndex: "expire",
     sorter: (a, b) => a.name.length - b.name.length,
   },
   {
@@ -56,7 +56,7 @@ const Couponlist = () => {
       key: i + 1,
       name: couponState[i].name,
       discount: couponState[i].discount,
-      expiry: new Date(couponState[i].expiry).toLocaleString(),
+      expire: new Date(couponState[i].expire).toLocaleString(),
       action: (
         <>
           <Link
