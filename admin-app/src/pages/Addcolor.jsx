@@ -74,21 +74,15 @@ const Addcolor = () => {
       </h3>
       <div>
         <form action="" onSubmit={formik.handleSubmit}>
-          <div className="d-flex">
+          <div className="col-1">
             <CustomInput
-              type="text"
+              type="color"
               label="Enter Product Color"
               onChange={formik.handleChange("title")}
               onBlur={formik.handleBlur("title")}
               value={formik.values.title}
-              // id="color"
+              id="color"
             />
-            <div className="col-1">
-              <CustomInput
-                type="color"
-                id="color"
-              />
-            </div>
           </div>
           <div className="error">
             {formik.touched.title && formik.errors.title}

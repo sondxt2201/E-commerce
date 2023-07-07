@@ -5,13 +5,13 @@ const Coupon = require("../models/couponModel.js");
 const Order = require("../models/orderModel.js");
 const uniqid = require("uniqid");
 const jwt = require("jsonwebtoken");
+const Utility = require("../utils/Utility.js")
 const asyncHandler = require("express-async-handler");
 const sendEmail = require("./emailCtrl");
 const crypto = require("crypto");
 const generateToken = require("../config/jwtToken");
 const validateMongoDbId = require("../utils/validateMongoDbId");
 const generateRefreshToken = require("../config/refreshToken");
-const { throws } = require("assert");
 
 
 // user login
@@ -259,7 +259,7 @@ const handleRefreshToken = asyncHandler(async (req, res) => {
     const cookie = req.cookies;
     try {
         if (!cookie?.refreshToken) {
-            throw new Error("No refresh coken in cookie");
+            throw new Error("No refresh token in cookie");
         }
         const refreshToken = cookie.refreshToken;
         const user = await User.findOne({ refreshToken });
@@ -497,7 +497,7 @@ const createOrder = asyncHandler(async (req, res) => {
                 method: "COD",
                 amount: finalAmount,
                 status: "Cash on Delivery",
-                createdAt: Date.now(),
+                createdAt: Utility.GetFullDateMinuteString(Date.now()),
                 currency: "VND",
             },
             orderBy: user._id,
@@ -520,13 +520,41 @@ const createOrder = asyncHandler(async (req, res) => {
 });
 
 // get order
-const getOrders = asyncHandler(async (req, res) => {
+const getOrder = asyncHandler(async (req, res) => {
     const { _id } = req.user;
     validateMongoDbId(_id);
 
     try {
-        const userOrder = await Order.findOne({ orderBy: _id }).populate("products.product").exec();
+        const userOrder = await Order.findOne({ orderBy: _id }).populate("products.product").populate("orderBy").exec();
         res.json(userOrder);
+    } catch (error) {
+        throw new Error(error);
+    }
+});
+
+//get all orders
+const getAllOrder = asyncHandler(async (req, res) => {
+    try {
+        const alluserorders = await Order.find()
+            .populate("products.product")
+            .populate("orderBy")
+            .exec();
+        res.json(alluserorders);
+    } catch (error) {
+        throw new Error(error);
+    }
+});
+
+//get order by user id
+const getOrderByUserId = asyncHandler(async (req, res) => {
+    const { id } = req.params;
+    validateMongoDbId(id);
+    try {
+        const userorders = await Order.findOne({ orderby: id })
+            .populate("products.product")
+            .populate("orderBy")
+            .exec();
+        res.json(userorders);
     } catch (error) {
         throw new Error(error);
     }
@@ -579,7 +607,9 @@ module.exports = {
     emptyCart,
     applyCoupon,
     createOrder,
-    getOrders,
+    getOrder,
+    getAllOrder,
+    getOrderByUserId,
     updateOrderStatus
 };
 

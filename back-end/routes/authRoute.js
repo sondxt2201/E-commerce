@@ -23,8 +23,10 @@ const {
     emptyCart,
     applyCoupon,
     createOrder,
-    getOrders,
+    getOrder,
     updateOrderStatus,
+    getAllOrder,
+    getOrderByUserId,
 } = require("../controller/userCtrl");
 const router = express.Router();
 
@@ -39,10 +41,12 @@ router.post("/register", createUser);
 router.post("/login", loginUser);
 router.post("/admin-login", loginAdmin);
 router.post("/forgot-password-token", forgotPasswordToken);
+router.get("/order/order-by-user/:id", authMiddleware, isAdmin, getAllOrder);
 
 // GET
 router.get("/cart", authMiddleware, getUserCart);
-router.get("/order/get-orders", authMiddleware, getOrders);
+router.get("/order/get-order", authMiddleware, getOrder);
+router.get("/order/all-order", authMiddleware, isAdmin, getAllOrder);
 router.get("/refresh", handleRefreshToken);
 router.get("/all-users", getallUser);
 router.get("/logout", logoutUser);

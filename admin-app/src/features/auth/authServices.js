@@ -12,15 +12,17 @@ const login = async (user) => {
 };
 
 const getOrders = async () => {
-  const response = await axios.get(`${base_url}user/getallorders`, config);
+  const response = await axios.get(
+    `${base_url}user/order/all-order`,
+    config
+    );
 
   return response.data;
 };
 
-const getOrder = async (id) => {
-  const response = await axios.post(
-    `${base_url}user/getorderbyuser/${id}`,
-    "",
+const getOrderByUserId = async (id) => {
+  const response = await axios.get(
+    `${base_url}user/order/order-by-user/${id}`,
     config
   );
 
@@ -30,7 +32,7 @@ const getOrder = async (id) => {
 const authService = {
   login,
   getOrders,
-  getOrder,
+  getOrderByUserId,
 };
 
 export default authService;

@@ -5,6 +5,7 @@ import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { getOrders } from "../features/auth/authSlice";
+
 const columns = [
   {
     title: "SNo",
@@ -35,38 +36,38 @@ const columns = [
 
 const Orders = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getOrders());
   }, []);
-  
-  const orderState = useSelector((state) => state.auth.orders);
 
+  const orderState = useSelector((state) => state.auth.orders);
+  console.log(orderState)
   const data1 = [];
-  if (orderState !== null) {
-    for (let i = 0; i < orderState.length; i++) {
-      data1.push({
-        key: i + 1,
-        name: orderState[i].orderby.firstname,
-        product: (
-          <Link to={`/admin/order/${orderState[i].orderby._id}`}>
-            View Orders
+  for (let i = 0; i < orderState.length; i++) {
+    data1.push({
+      key: i + 1,
+      name: orderState[i].orderBy.firstname,
+      product: (
+        <Link to={`/admin/order/${orderState[i].orderBy._id}`} onClick={() => console.log(orderState[i].orderBy._id)}>
+          View Orders
+        </Link>
+      ),
+      amount: orderState[i].paymentIntent.amount,
+      date: new Date(orderState[i].createdAt).toLocaleString(),
+      action: (
+        <>
+          <Link to="/" className=" fs-3 text-danger">
+            <BiEdit />
           </Link>
-        ),
-        amount: orderState[i].paymentIntent.amount,
-        date: new Date(orderState[i].createdAt).toLocaleString(),
-        action: (
-          <>
-            <Link to="/" className=" fs-3 text-danger">
-              <BiEdit />
-            </Link>
-            <Link className="ms-3 fs-3 text-danger" to="/">
-              <AiFillDelete />
-            </Link>
-          </>
-        ),
-      });
-    }
-  }
+          <Link className="ms-3 fs-3 text-danger" to="/">
+            <AiFillDelete />
+          </Link>
+        </>
+      ),
+    });
+  };
+
   return (
     <div>
       <h3 className="mb-4 title">Orders</h3>

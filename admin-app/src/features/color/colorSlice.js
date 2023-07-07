@@ -11,6 +11,7 @@ export const getColors = createAsyncThunk(
     }
   }
 );
+
 export const createColor = createAsyncThunk(
   "color/create-color",
   async (colorData, thunkAPI) => {
@@ -32,6 +33,7 @@ export const getAColor = createAsyncThunk(
     }
   }
 );
+
 export const updateAColor = createAsyncThunk(
   "color/update-color",
   async (color, thunkAPI) => {
@@ -63,6 +65,7 @@ const initialState = {
   isSuccess: false,
   message: "",
 };
+
 export const colorSlice = createSlice({
   name: "colors",
   initialState,

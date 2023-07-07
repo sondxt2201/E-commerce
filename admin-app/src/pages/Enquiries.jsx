@@ -44,6 +44,7 @@ const Enquiries = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [enqId, setenqId] = useState("");
+
   const showModal = (e) => {
     setOpen(true);
     setenqId(e);
@@ -52,10 +53,12 @@ const Enquiries = () => {
   const hideModal = () => {
     setOpen(false);
   };
+
   useEffect(() => {
     dispatch(resetState());
     dispatch(getEnquiries());
   }, []);
+
   const enqState = useSelector((state) => state.enquiry.enquiries);
   const data1 = [];
   for (let i = 0; i < enqState.length; i++) {
@@ -80,7 +83,6 @@ const Enquiries = () => {
           </select>
         </>
       ),
-
       action: (
         <>
           <Link
@@ -98,12 +100,14 @@ const Enquiries = () => {
         </>
       ),
     });
-  }
+  };
+
   const setEnquiryStatus = (e, i) => {
     console.log(e, i);
     const data = { id: i, enqData: e };
     dispatch(updateAEnquiry(data));
   };
+
   const deleteEnq = (e) => {
     dispatch(deleteAEnquiry(e));
     setOpen(false);
@@ -111,6 +115,7 @@ const Enquiries = () => {
       dispatch(getEnquiries());
     }, 100);
   };
+
   return (
     <div>
       <h3 className="mb-4 title">Enquiries</h3>
