@@ -1,4 +1,4 @@
-const cloudinary = require("cloudinary").v2;
+const cloudinary = require("cloudinary");
 
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
@@ -11,13 +11,13 @@ const cloudinaryUploadImg = async (file2Upload) => {
         cloudinary.uploader.upload(file2Upload, (result) => {
             resolve(
                 {
-                    url: result?.secure_url,
-                    asset_id: result?.asset_id,
-                    public_id: result?.public_id,
+                    url: result.secure_url,
+                    asset_id: result.asset_id,
+                    public_id: result.public_id,
                 },
                 {
                     resource_type: "auto",
-                }
+                },
             );
         });
     });
@@ -28,9 +28,9 @@ const cloudinaryDeleteImg = async (file2Delete) => {
         cloudinary.uploader.destroy(file2Delete, (result) => {
             resolve(
                 {
-                    url: result?.secure_url,
-                    asset_id: result?.asset_id,
-                    public_id: result?.public_id,
+                    url: result.secure_url,
+                    asset_id: result.asset_id,
+                    public_id: result.public_id,
                 },
                 {
                     resource_type: "auto",

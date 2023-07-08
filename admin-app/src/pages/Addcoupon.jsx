@@ -55,7 +55,6 @@ const AddCoupon = () => {
     }
     if (isSuccess && updatedCoupon) {
       toast.success("Coupon Updated Successfully!");
-      navigate("/admin/coupon-list");
     }
     if (isError && couponName && couponDiscount && couponexpire) {
       toast.error("Something Went Wrong!");
@@ -75,11 +74,13 @@ const AddCoupon = () => {
         const data = { id: getCouponId, couponData: values };
         dispatch(updateACoupon(data));
         dispatch(resetState());
+        navigate("/admin/coupon-list");
       } else {
         dispatch(createCoupon(values));
         formik.resetForm();
         setTimeout(() => {
           dispatch(resetState);
+          navigate("/admin/coupon-list");
         }, 300);
       }
     },

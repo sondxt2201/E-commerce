@@ -15,6 +15,7 @@ export const uploadImg = createAsyncThunk(
     }
   }
 );
+
 export const delImg = createAsyncThunk(
   "delete/images",
   async (id, thunkAPI) => {
@@ -25,6 +26,7 @@ export const delImg = createAsyncThunk(
     }
   }
 );
+
 const initialState = {
   images: [],
   isError: false,
@@ -32,6 +34,7 @@ const initialState = {
   isSuccess: false,
   message: "",
 };
+
 export const uploadSlice = createSlice({
   name: "images",
   initialState,

@@ -34,7 +34,6 @@ const Addproduct = () => {
   const navigate = useNavigate();
   const [color, setColor] = useState([]);
   const [images, setImages] = useState([]);
-  console.log(color);
   useEffect(() => {
     dispatch(getBrands());
     dispatch(getCategories());
@@ -47,6 +46,7 @@ const Addproduct = () => {
   const imgState = useSelector((state) => state.upload.images);
   const newProduct = useSelector((state) => state.product);
   const { isSuccess, isError, isLoading, createdProduct } = newProduct;
+
   useEffect(() => {
     if (isSuccess && createdProduct) {
       toast.success("Product Added Successfully!");
@@ -55,13 +55,15 @@ const Addproduct = () => {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
+
   const coloropt = [];
   colorState.forEach((i) => {
     coloropt.push({
-      label: i.title,
-      value: i._id,
+      _id: i._id,
+      value: i.title,
     });
   });
+
   const img = [];
   imgState.forEach((i) => {
     img.push({
@@ -74,6 +76,7 @@ const Addproduct = () => {
     formik.values.color = color ? color : " ";
     formik.values.images = img;
   }, [color, img]);
+
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -93,13 +96,15 @@ const Addproduct = () => {
       setColor(null);
       setTimeout(() => {
         dispatch(resetState());
-      }, 3000);
+        navigate("/admin/product-list");
+      }, 500);
     },
   });
+
   const handleColors = (e) => {
     setColor(e);
-    console.log(color);
   };
+
   return (
     <div>
       <h3 className="mb-4 title">Add Product</h3>
@@ -131,7 +136,7 @@ const Addproduct = () => {
             {formik.touched.description && formik.errors.description}
           </div>
           <CustomInput
-            type="number"
+            type="text"
             label="Enter Product Price"
             name="price"
             onChange={formik.handleChange("price")}
@@ -149,11 +154,11 @@ const Addproduct = () => {
             className="form-control py-3 mb-3"
             id=""
           >
-            <option value="">Select Brand</option>
-            {brandState.map((i, j) => {
+            <option value="" disabled>--- Select Brand ---</option>
+            {brandState.map((value, index) => {
               return (
-                <option key={j} value={i.title}>
-                  {i.title}
+                <option key={index} value={value.title}>
+                  {value.title}
                 </option>
               );
             })}
@@ -169,11 +174,11 @@ const Addproduct = () => {
             className="form-control py-3 mb-3"
             id=""
           >
-            <option value="">Select Category</option>
-            {catState.map((i, j) => {
+            <option value="" disabled>--- Select Category ---</option>
+            {catState.map((value, index) => {
               return (
-                <option key={j} value={i.title}>
-                  {i.title}
+                <option key={index} value={value.title}>
+                  {value.title}
                 </option>
               );
             })}
@@ -189,9 +194,7 @@ const Addproduct = () => {
             className="form-control py-3 mb-3"
             id=""
           >
-            <option value="" disabled>
-              Select Category
-            </option>
+            <option value="" disabled>--- Select Tags ---</option>
             <option value="featured">Featured</option>
             <option value="popular">Popular</option>
             <option value="special">Special</option>
@@ -204,16 +207,16 @@ const Addproduct = () => {
             mode="multiple"
             allowClear
             className="w-100"
-            placeholder="Select colors"
+            placeholder="--- Select colors ---"
             defaultValue={color}
-            onChange={(i) => handleColors(i)}
+            onChange={(i,val) => {handleColors(val)}}
             options={coloropt}
           />
           <div className="error">
             {formik.touched.color && formik.errors.color}
           </div>
           <CustomInput
-            type="number"
+            type="text"
             label="Enter Product Quantity"
             name="quantity"
             onChange={formik.handleChange("quantity")}
@@ -240,16 +243,16 @@ const Addproduct = () => {
             </Dropzone>
           </div>
           <div className="showimages d-flex flex-wrap gap-3">
-            {imgState?.map((i, j) => {
+            {imgState?.map((value, index) => {
               return (
-                <div className=" position-relative" key={j}>
+                <div className=" position-relative" key={index}>
                   <button
                     type="button"
-                    onClick={() => dispatch(delImg(i.public_id))}
+                    onClick={() => dispatch(delImg(value.public_id))}
                     className="btn-close position-absolute"
                     style={{ top: "10px", right: "10px" }}
                   ></button>
-                  <img src={i.url} alt="" width={200} height={200} />
+                  <img src={value.url} alt="" width={200} height={200} />
                 </div>
               );
             })}

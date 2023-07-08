@@ -29,10 +29,20 @@ const getOrderByUserId = async (id) => {
   return response.data;
 };
 
+const getOrderByOrderId = async (id) => {
+  const response = await axios.get(
+    `${base_url}user/order/order-by-id/${id}`,
+    config
+  );
+
+  return response.data;
+};
+
 const authService = {
   login,
   getOrders,
   getOrderByUserId,
+  getOrderByOrderId
 };
 
 export default authService;

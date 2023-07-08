@@ -49,7 +49,7 @@ const Orders = () => {
       key: i + 1,
       name: orderState[i].orderBy.firstname,
       product: (
-        <Link to={`/admin/order/${orderState[i].orderBy._id}`} onClick={() => console.log(orderState[i].orderBy._id)}>
+        <Link to={`/admin/order/${orderState[i]._id}`} onClick={() => console.log(orderState[i].orderBy._id)}>
           View Orders
         </Link>
       ),

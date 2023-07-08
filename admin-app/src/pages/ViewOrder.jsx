@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
-import { getOrderByUserId, getOrders } from "../features/auth/authSlice";
+import { getOrderByUserId, getOrders, getOrderByOrderId } from "../features/auth/authSlice";
 const columns = [
   {
     title: "SNo",
@@ -43,14 +43,14 @@ const columns = [
 
 const ViewOrder = () => {
   const location = useLocation();
-  const userId = location.pathname.split("/")[3];
+  const orderId = location.pathname.split("/")[3];
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getOrderByUserId(userId));
+    dispatch(getOrderByOrderId(orderId));
   }, []);
 
-  const orderState = useSelector((state) => state.auth.orders[1].products);
+  const orderState = useSelector((state) => state.auth.order.products);
   console.log(orderState)
   const data1 = [];
   for (let i = 0; i < orderState.length; i++) {
@@ -58,10 +58,10 @@ const ViewOrder = () => {
       key: i + 1,
       name: orderState[i].product.title,
       brand: orderState[i].product.brand,
-      count: orderState[i].count,
       amount: orderState[i].product.price,
-      color: orderState[i].product.color,
       date: orderState[i].product.createdAt,
+      color: orderState[i].color,
+      count: orderState[i].count,
       action: (
         <>
           <Link to="/" className=" fs-3 text-danger">
