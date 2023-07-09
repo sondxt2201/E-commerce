@@ -26,6 +26,7 @@ const updateProduct = async (product) => {
       quantity: product.productData.quantity,
       tags: product.productData.tags,
       color: product.productData.color,
+      images: product.productData.images
     },
     config
   );

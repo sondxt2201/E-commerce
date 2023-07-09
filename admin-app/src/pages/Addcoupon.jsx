@@ -50,12 +50,13 @@ const AddCoupon = () => {
     }
     if (isSuccess && updatedCoupon) {
       toast.success("Coupon Updated Successfully!");
+      navigate("/admin/coupon-list");
     }
     if (isError && couponName && couponDiscount && couponExpire) {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
-  
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -69,13 +70,11 @@ const AddCoupon = () => {
         const data = { id: getCouponId, couponData: values };
         dispatch(updateACoupon(data));
         dispatch(resetState());
-        navigate("/admin/coupon-list");
       } else {
         dispatch(createCoupon(values));
         formik.resetForm();
         setTimeout(() => {
           dispatch(resetState);
-          navigate("/admin/coupon-list");
         }, 300);
       }
     },

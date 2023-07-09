@@ -63,7 +63,7 @@ const Addblog = () => {
     }
     if (isSuccess && updatedBlog) {
       toast.success("Blog Updated Successfully!");
-      // navigate("/admin/blog-list");
+      navigate("/admin/blog-list");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
@@ -77,7 +77,6 @@ const Addblog = () => {
       url: i.url,
     });
   });
-  console.log(img);
   useEffect(() => {
     formik.values.images = img;
   }, [blogImages]);
@@ -88,7 +87,7 @@ const Addblog = () => {
       title: blogName || "",
       description: blogDesc || "",
       category: blogCategory || "",
-      images: "",
+      images: blogImages || {},
     },
     validationSchema: schema,
     onSubmit: (values) => {
@@ -96,14 +95,11 @@ const Addblog = () => {
         const data = { id: getBlogId, blogData: values };
         dispatch(updateABlog(data));
         dispatch(resetState());
-        navigate("/admin/blog-list");
       } else {
         dispatch(createBlogs(values));
         formik.resetForm();
         setTimeout(() => {
           dispatch(resetState());
-          navigate("/admin/blog-list");
-
         }, 300);
       }
     },
@@ -178,16 +174,16 @@ const Addblog = () => {
               </Dropzone>
             </div>
             <div className="showimages d-flex flex-wrap mt-3 gap-3">
-              {imgState?.map((i, j) => {
+              {imgState?.map((value, index) => {
                 return (
-                  <div className=" position-relative" key={j}>
+                  <div className=" position-relative" key={index}>
                     <button
                       type="button"
-                      onClick={() => dispatch(delImg(i.public_id))}
+                      onClick={() => dispatch(delImg(value.public_id))}
                       className="btn-close position-absolute"
                       style={{ top: "10px", right: "10px" }}
                     ></button>
-                    <img src={i.url} alt="" width={200} height={200} />
+                    <img src={value.url} alt="" width={200} height={200} />
                   </div>
                 );
               })}

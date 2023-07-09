@@ -13,7 +13,7 @@ import { getColors } from "../features/color/colorSlice";
 import { Select } from "antd";
 import Dropzone from "react-dropzone";
 import { delImg, uploadImg } from "../features/upload/uploadSlice";
-import { createProducts, getAProduct, resetState } from "../features/product/productSlice";
+import { createProducts, getAProduct, resetState, updateProduct } from "../features/product/productSlice";
 
 let schema = yup.object().shape({
   title: yup.string().required("Title is Required"),
@@ -37,23 +37,12 @@ const Addproduct = () => {
   const [images, setImages] = useState([]);
   const getProductId = location.pathname.split("/")[3];
 
-  useEffect(() => {
-    dispatch(getBrands());
-    dispatch(getCategories());
-    dispatch(getColors());
-
-    if (getProductId !== undefined) {
-      dispatch(getAProduct(getProductId));
-    } else {
-      dispatch(resetState());
-    }
-  }, [getProductId]);
-
   const brandState = useSelector((state) => state.brand.brands);
   const catState = useSelector((state) => state.pCategory.pCategories);
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
-  const newProduct = useSelector((state) => state.product);
+  const productState = useSelector((state) => state.product);
+
   const {
     isSuccess,
     isError,
@@ -67,11 +56,24 @@ const Addproduct = () => {
     productTags,
     productColor,
     productQuantity,
-  } = newProduct;
+    productImages,
+    updatedProduct,
+  } = productState;
+
+  useEffect(() => {
+    dispatch(getBrands());
+    dispatch(getCategories());
+    dispatch(getColors());
+    dispatch(getAProduct(getProductId));
+  }, [getProductId])
 
   useEffect(() => {
     if (isSuccess && createdProduct) {
       toast.success("Product Added Successfully!");
+    }
+    if (isSuccess && updatedProduct) {
+      toast.success("Product Updated Successfully!");
+      navigate("/admin/product-list");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
@@ -97,7 +99,7 @@ const Addproduct = () => {
   useEffect(() => {
     formik.values.color = color ? color : " ";
     formik.values.images = img;
-  }, [color, img]);
+  }, []);
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -110,17 +112,25 @@ const Addproduct = () => {
       tags: productTags || "",
       color: productColor || "",
       quantity: productQuantity || "",
-      images: "",
+      images: productImages || {},
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      dispatch(createProducts(values));
-      formik.resetForm();
-      setColor(null);
-      setTimeout(() => {
-        dispatch(resetState());
-        navigate("/admin/product-list");
-      }, 500);
+      if (getProductId !== undefined) {
+        const data = { id: getProductId, productData: values };
+        dispatch(updateProduct(data));
+        setColor(null);
+        setTimeout(() => {
+          dispatch(resetState());
+        }, 500);
+      } else {
+        dispatch(createProducts(values));
+        formik.resetForm();
+        setColor(null);
+        setTimeout(() => {
+          dispatch(resetState());
+        }, 500);
+      }
     },
   });
 
@@ -130,7 +140,9 @@ const Addproduct = () => {
 
   return (
     <div>
-      <h3 className="mb-4 title">Add Product</h3>
+      <h3 className="mb-4 title">
+        {getProductId !== undefined ? "Edit" : "Add"} Product
+      </h3>
       <div>
         <form
           onSubmit={formik.handleSubmit}
@@ -284,7 +296,7 @@ const Addproduct = () => {
             className="btn btn-success border-0 rounded-3 my-5"
             type="submit"
           >
-            Add Product
+            {getProductId !== undefined ? "Edit" : "Add"} Product
           </button>
         </form>
       </div>

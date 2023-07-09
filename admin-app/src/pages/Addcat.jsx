@@ -43,6 +43,7 @@ const Addcat = () => {
     }
     if (isSuccess && updatedCategory) {
       toast.success("Category Updated Successfully!");
+      navigate("/admin/category-list");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
@@ -59,14 +60,11 @@ const Addcat = () => {
         const data = { id: getPCatId, pCatData: values };
         dispatch(updateAProductCategory(data));
         dispatch(resetState());
-        navigate("/admin/category-list");
-
       } else {
         dispatch(createCategory(values));
         formik.resetForm();
         setTimeout(() => {
           dispatch(resetState());
-          navigate("/admin/category-list");
         }, 300);
       }
     },

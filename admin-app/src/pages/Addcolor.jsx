@@ -41,7 +41,7 @@ const Addcolor = () => {
     }
     if (isSuccess && updatedColor) {
       toast.success("Color Updated Successfully!");
-      // navigate("/admin/color-list");
+      navigate("/admin/color-list");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
@@ -53,20 +53,18 @@ const Addcolor = () => {
     initialValues: {
       title: colorName || "",
     },
-    
+
     validationSchema: schema,
     onSubmit: (values) => {
       if (getColorId !== undefined) {
         const data = { id: getColorId, colorData: values };
         dispatch(updateAColor(data));
         dispatch(resetState());
-        navigate("/admin/color-list");
       } else {
         dispatch(createColor(values));
         formik.resetForm();
         setTimeout(() => {
           dispatch(resetState());
-          navigate("/admin/color-list");
         }, 300);
       }
     },

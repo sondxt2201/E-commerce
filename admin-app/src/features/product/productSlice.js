@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, createAction} from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, createAction } from "@reduxjs/toolkit";
 import productService from "./productService";
 
 export const getProducts = createAsyncThunk(
@@ -99,9 +99,10 @@ export const productSlice = createSlice({
         state.productPrice = action.payload.price;
         state.productBrand = action.payload.brand;
         state.productCategory = action.payload.category;
-        state.productTags= action.payload.tags;
+        state.productTags = action.payload.tags;
         state.productColor = action.payload.color;
         state.productQuantity = action.payload.quantity;
+        state.productImages = action.payload.images;
       })
       .addCase(getAProduct.rejected, (state, action) => {
         state.isLoading = false;
@@ -146,15 +147,16 @@ export const productSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.product = action.payload;
-        state.productTitle = action.payload.title;
-        state.productDescription = action.payload.description;
-        state.productPrice = action.payload.price;
-        state.productBrand = action.payload.brand;
-        state.productCategory = action.payload.category;
-        state.productTags= action.payload.tags;
-        state.productColor = action.payload.color;
-        state.productQuantity = action.payload.quantity;
+        state.updatedProduct = action.payload;
+        // state.productTitle = action.payload.title;
+        // state.productDescription = action.payload.description;
+        // state.productPrice = action.payload.price;
+        // state.productBrand = action.payload.brand;
+        // state.productCategory = action.payload.category;
+        // state.productTags = action.payload.tags;
+        // state.productColor = action.payload.color;
+        // state.productQuantity = action.payload.quantity;
+        // state.productImages = action.payload.images;
       })
       .addCase(updateProduct.rejected, (state, action) => {
         state.isLoading = false;

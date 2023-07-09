@@ -94,7 +94,7 @@ const Productlist = () => {
     setOpen(false);
     setTimeout(() => {
       dispatch(getProducts());
-    }, 100);
+    }, 300);
   };
 
 
