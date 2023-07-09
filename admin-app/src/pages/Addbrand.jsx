@@ -44,13 +44,13 @@ const Addbrand = () => {
     }
     if (isSuccess && updatedBrand) {
       toast.success("Brand Updated Successfully!");
-      navigate("/admin/brand-list");
+      // navigate("/admin/brand-list");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
-  
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -62,11 +62,15 @@ const Addbrand = () => {
         const data = { id: getBrandId, brandData: values };
         dispatch(updateABrand(data));
         dispatch(resetState());
+        navigate("/admin/brand-list");
+
       } else {
         dispatch(createBrand(values));
         formik.resetForm();
         setTimeout(() => {
           dispatch(resetState());
+          navigate("/admin/brand-list");
+
         }, 300);
       }
     },

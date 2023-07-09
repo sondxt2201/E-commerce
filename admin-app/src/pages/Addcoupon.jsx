@@ -5,6 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useFormik } from "formik";
+import { GetFullDateString } from "../utils/Utility";
 import {
   createCoupon,
   getACoupon,
@@ -14,7 +15,7 @@ import {
 
 let schema = yup.object().shape({
   name: yup.string().required("Coupon Name is Required"),
-  expire: yup.date().required("expire Date is Required"),
+  expire: yup.date().required("Expire Date is Required"),
   discount: yup.number().required("Discount Percentage is Required"),
 });
 const AddCoupon = () => {
@@ -31,15 +32,9 @@ const AddCoupon = () => {
     createdCoupon,
     couponName,
     couponDiscount,
-    couponexpire,
+    couponExpire,
     updatedCoupon,
   } = newCoupon;
-
-  const changeDateFormat = (date) => {
-    const newDate = new Date(date).toLocaleDateString();
-    const [month, day, year] = newDate.split("/");
-    return [year, month, day].join("-");
-  };
 
   useEffect(() => {
     if (getCouponId !== undefined) {
@@ -56,7 +51,7 @@ const AddCoupon = () => {
     if (isSuccess && updatedCoupon) {
       toast.success("Coupon Updated Successfully!");
     }
-    if (isError && couponName && couponDiscount && couponexpire) {
+    if (isError && couponName && couponDiscount && couponExpire) {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
@@ -65,7 +60,7 @@ const AddCoupon = () => {
     enableReinitialize: true,
     initialValues: {
       name: couponName || "",
-      expire: changeDateFormat(couponexpire) || "",
+      expire: GetFullDateString(couponExpire) || "",
       discount: couponDiscount || "",
     },
     validationSchema: schema,

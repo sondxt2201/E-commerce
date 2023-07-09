@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { BiEdit } from "react-icons/bi";
@@ -51,28 +51,31 @@ const ViewOrder = () => {
   }, []);
 
   const orderState = useSelector((state) => state.auth.order.products);
-  console.log(orderState)
   const data1 = [];
-  for (let i = 0; i < orderState.length; i++) {
-    data1.push({
-      key: i + 1,
-      name: orderState[i].product.title,
-      brand: orderState[i].product.brand,
-      amount: orderState[i].product.price,
-      date: orderState[i].product.createdAt,
-      color: orderState[i].color,
-      count: orderState[i].count,
-      action: (
-        <>
-          <Link to="/" className=" fs-3 text-danger">
-            <BiEdit />
-          </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
-            <AiFillDelete />
-          </Link>
-        </>
-      ),
-    });
+  if (orderState) {
+    for (let i = 0; i < orderState.length; i++) {
+      data1.push({
+        key: i + 1,
+        name: orderState[i].product.title,
+        brand: orderState[i].product.brand,
+        amount: orderState[i].product.price,
+        date: orderState[i].product.createdAt,
+        color: orderState[i].color,
+        count: orderState[i].count,
+        action: (
+          <>
+            <Link to="/" className=" fs-3 text-danger">
+              <BiEdit />
+            </Link>
+            <Link className="ms-3 fs-3 text-danger" to="/">
+              <AiFillDelete />
+            </Link>
+          </>
+        ),
+      });
+    }
+  } else {
+    console.log(orderState)
   }
   return (
     <div>

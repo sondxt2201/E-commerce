@@ -45,7 +45,7 @@ const Addblogcat = () => {
     }
     if (isSuccess && updatedBlogCategory) {
       toast.success("Blog Category Updated Successfully!");
-      navigate("/admin/blog-category-list");
+      // navigate("/admin/blog-category-list");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
@@ -63,16 +63,20 @@ const Addblogcat = () => {
       if (getBlogCatId !== undefined) {
         dispatch(updateABlogCat(data));
         dispatch(resetState());
+        navigate("/admin/blog-category-list");
+
       } else {
         dispatch(createNewblogCat(values));
         formik.resetForm();
         setTimeout(() => {
           dispatch(resetState());
+          navigate("/admin/blog-category-list");
+
         }, 300);
       }
     },
   });
-  
+
   return (
     <div>
       <h3 className="mb-4  title">

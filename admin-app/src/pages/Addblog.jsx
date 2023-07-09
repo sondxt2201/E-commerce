@@ -63,7 +63,7 @@ const Addblog = () => {
     }
     if (isSuccess && updatedBlog) {
       toast.success("Blog Updated Successfully!");
-      navigate("/admin/blog-list");
+      // navigate("/admin/blog-list");
     }
     if (isError) {
       toast.error("Something Went Wrong!");
@@ -96,11 +96,14 @@ const Addblog = () => {
         const data = { id: getBlogId, blogData: values };
         dispatch(updateABlog(data));
         dispatch(resetState());
+        navigate("/admin/blog-list");
       } else {
         dispatch(createBlogs(values));
         formik.resetForm();
         setTimeout(() => {
           dispatch(resetState());
+          navigate("/admin/blog-list");
+
         }, 300);
       }
     },
