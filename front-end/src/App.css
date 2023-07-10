@@ -55,9 +55,15 @@ a {
   color: var(--color-131921);
 }
 
+.error {
+  color: red;
+  font-size: 12px;
+}
 
-
-
+.error-large{
+  color: red;
+  font-size: 20px;
+}
 
 /* Header begin */
 .header-top-strip {

@@ -16,6 +16,7 @@ var enqSchema = new mongoose.Schema({
     },
     comment: {
         type: String,
+        required: true,
     },
     status: {
         type: String,

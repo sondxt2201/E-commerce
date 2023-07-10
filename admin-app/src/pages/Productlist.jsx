@@ -68,7 +68,7 @@ const Productlist = () => {
       title: productState[i].title,
       brand: productState[i].brand,
       category: productState[i].category,
-      color: productState[i].color.map(item => item.value).join(","),
+      color: productState[i].color.map(item => item?.value).join(","),
       price: productState[i].price,
       action: (
         <>

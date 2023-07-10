@@ -64,7 +64,14 @@ const Addproduct = () => {
     dispatch(getBrands());
     dispatch(getCategories());
     dispatch(getColors());
-    dispatch(getAProduct(getProductId));
+  }, []);
+
+  useEffect(() => {
+    if (getProductId !== undefined) {
+      dispatch(getAProduct(getProductId));
+    } else {
+      dispatch(resetState());
+    }
   }, [getProductId])
 
   useEffect(() => {
@@ -73,9 +80,17 @@ const Addproduct = () => {
     }
     if (isSuccess && updatedProduct) {
       toast.success("Product Updated Successfully!");
-      navigate("/admin/product-list");
     }
-    if (isError) {
+    if (isError &&
+      productTitle &&
+      productDescription &&
+      productPrice &&
+      productBrand &&
+      productCategory &&
+      productTags &&
+      productColor &&
+      productQuantity &&
+      productImages) {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
@@ -110,19 +125,20 @@ const Addproduct = () => {
       brand: productBrand || "",
       category: productCategory || "",
       tags: productTags || "",
-      color: productColor || "",
       quantity: productQuantity || "",
-      images: productImages || {},
+      color: productColor || "",
+      images: productImages || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {
       if (getProductId !== undefined) {
-        const data = { id: getProductId, productData: values };
+        const data = { id: getProductId, productData: values, colors: color, images: img };
+        setColor(color);
         dispatch(updateProduct(data));
-        setColor(null);
-        setTimeout(() => {
-          dispatch(resetState());
-        }, 500);
+        formik.resetForm();
+        dispatch(resetState());
+        navigate("/admin/product-list");
+
       } else {
         dispatch(createProducts(values));
         formik.resetForm();

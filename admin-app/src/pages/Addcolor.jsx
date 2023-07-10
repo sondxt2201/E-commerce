@@ -49,11 +49,9 @@ const Addcolor = () => {
   }, [isSuccess, isError, isLoading, createdColor]);
   const formik = useFormik({
     enableReinitialize: true,
-
     initialValues: {
       title: colorName || "",
     },
-
     validationSchema: schema,
     onSubmit: (values) => {
       if (getColorId !== undefined) {

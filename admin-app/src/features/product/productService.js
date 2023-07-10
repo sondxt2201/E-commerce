@@ -25,8 +25,8 @@ const updateProduct = async (product) => {
       brand: product.productData.brand,
       quantity: product.productData.quantity,
       tags: product.productData.tags,
-      color: product.productData.color,
-      images: product.productData.images
+      color: product.colors,
+      images: product.images
     },
     config
   );
