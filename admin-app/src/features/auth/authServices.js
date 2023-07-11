@@ -7,7 +7,6 @@ const login = async (user) => {
   if (response.data) {
     localStorage.setItem("user", JSON.stringify(response.data));
   };
-
   return response.data;
 };
 
@@ -15,8 +14,7 @@ const getOrders = async () => {
   const response = await axios.get(
     `${base_url}user/order/all-order`,
     config
-    );
-
+  );
   return response.data;
 };
 
@@ -25,7 +23,6 @@ const getOrderByUserId = async (id) => {
     `${base_url}user/order/order-by-user/${id}`,
     config
   );
-
   return response.data;
 };
 
@@ -34,7 +31,6 @@ const getOrderByOrderId = async (id) => {
     `${base_url}user/order/order-by-id/${id}`,
     config
   );
-
   return response.data;
 };
 

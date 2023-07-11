@@ -121,7 +121,6 @@ const add2wishlist = asyncHandler(async (req, res) => {
     try {
         const user = await User.findById(_id);
         const alreadyadded = await user.wishlist.find((val) => (val.toString() === prodId));
-        // console.log(alreadyadded)
         if (alreadyadded) {
             let user = await User.findByIdAndUpdate(
                 _id,

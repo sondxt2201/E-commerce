@@ -9,9 +9,9 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 
 const Login = () => {
-  const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [visible, setVisible] = useState(false);
   const togglePassword = () => {
     setVisible(!visible);
   };
@@ -29,11 +29,17 @@ const Login = () => {
     validationSchema: schema,
     onSubmit: (value) => {
       dispatch(login(value));
-      // alert(JSON.stringify(value, null, 2));
     }
   });
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth)
+  const {
+    user,
+    isLoading,
+    isError,
+    isSuccess,
+    message
+  } = useSelector((state) => state.auth)
+
   useEffect(() => {
     if (isSuccess) {
       navigate("admin");

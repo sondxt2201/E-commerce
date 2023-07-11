@@ -3,10 +3,10 @@ import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import { Link } from "react-router-dom";
 import CustomInput from "../components/CustomInput";
-import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import * as yup from 'yup';
 import { registerUser } from "../features/user/userSlice";
+import * as yup from 'yup';
+import { useFormik } from "formik";
 import { toast } from 'react-toastify'; 
 
 
@@ -48,7 +48,6 @@ const Signup = () => {
     },
     validationSchema: signupSchema,
     onSubmit: (values) => {
-      console.log(values)
       dispatch(registerUser(values))
     },
   })
