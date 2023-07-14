@@ -1,10 +1,26 @@
 {
     "cSpell.words": [
+        "Addblog",
+        "Addblogcat",
+        "Addbrand",
+        "Addcat",
+        "Addcolor",
+        "Addcoupon",
+        "Addproduct",
         "bcategory",
+        "Blogcatlist",
+        "Bloglist",
+        "Brandlist",
+        "Categorylist",
+        "Colorlist",
+        "Couponlist",
         "firstname",
+        "Forgotpassword",
         "formik",
         "lastname",
         "pcategory",
+        "Productlist",
+        "Resetpassword",
         "signup",
         "toastify"
     ]
