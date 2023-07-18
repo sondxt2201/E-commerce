@@ -36,14 +36,14 @@ const ProductCard = (props) => {
             >
               <Link
                 className="product-card position-relative"
-              // to={`${location.pathname == "/"
-              //   ? "/product/:id"
-              //   : location.pathname == "/product/:id"
-              //     ? "/product/:id"
-              //     : location.pathname == "/wish-list"
-              //       ? "/product/:id"
-              //       : ":id"
-              //   }`}
+                to={`${location.pathname == "/"
+                  ? "/product/:id"
+                  : location.pathname == "/product/:id"
+                    ? "/product/:id"
+                    : location.pathname == "/wish-list"
+                      ? "/product/:id"
+                      : ":id"
+                  }`}
               >
                 <div className="wishlist-icon position-absolute">
                   <button className="border-0 bg-transparent" onClick={() => add2Wishlist(item?._id)}>
@@ -55,13 +55,19 @@ const ProductCard = (props) => {
                     src={item?.images[0]?.url}
                     className="img-fluid mx-auto"
                     alt="product image"
-
+                    style={{
+                      height: '270px',
+                      width: '201px',
+                    }}
                   />
                   <img
                     src={item?.images[1]?.url}
                     className="img-fluid mx-auto"
                     alt="product image"
-
+                    style={{
+                      height: '270px',
+                      width: '201px',
+                    }}
                   />
                 </div>
                 <div className="product-details">

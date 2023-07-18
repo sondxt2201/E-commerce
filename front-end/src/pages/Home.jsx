@@ -1,28 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import Marquee from "react-fast-marquee";
 import { Link } from 'react-router-dom';
 import BlogCard from "../components/BlogCard";
 import ProductCard from "../components/ProductCard";
 import SpecialProduct from "../components/SpecialProduct";
 import { service } from '../utils/Data';
+import { useDispatch, useSelector } from "react-redux";
+import { getAllBlog } from "../features/blogs/blogSlice";
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    allBlog();
+  }, []);
+
+  const allBlog = () => {
+    dispatch(getAllBlog())
+  };
+
+  const blogState = useSelector(state => state?.blog?.blogs)
+
   return (
     <>
       <section className='home-wrapper-1 py-5'>
         <div className='container-xxl'>
           <div className='row'>
             <div className='col-6'>
-              <div className='main-banner position-relative'>
+              <div className='main-banner position-relative rounded-3'
+                style={{ 'overflow': 'hidden' }}>
                 <img
                   className='img-fluid rounded-3'
-                  src='images/main-banner-1.jpg'
+                  src='https://www.apple.com/v/macbook-air/q/images/overview/macbook_air__d2234mv3oe0y_large.jpg'
                   alt='main banner'
+                  style={{
+                    right: '-270px',
+                    width: '100%',
+                    position: 'relative',
+                    height: '418px',
+                  }}
                 />
                 <div className="main-banner-content position-absolute">
-                  <h4>SUPERCHARGED FOR PROS</h4>
-                  <h5>iPhone 14 Pro Max</h5>
-                  <p>From $999.00 or $40/mo.</p>
+                  <h4>Strikingly thin and fast <br />
+                    so you can work, play, <br />
+                    or create anywhere.</h4>
+                  <h5>MacBook Air</h5>
+                  <p>From $1299 <br />
+                    of <br />
+                    $108.25/mo. for 12 mo.*</p>
                   <Link className='button'>BUY NOW</Link>
                 </div>
               </div>
@@ -37,8 +62,10 @@ const Home = () => {
                   />
                   <div className="small-banner-content position-absolute">
                     <h4>BEST SALE</h4>
-                    <h5>iPhone 14 Pro Max</h5>
-                    <p>From $999.00<br /> or $40/mo.</p>
+                    <h5>MacBook Air 15”</h5>
+                    <p>From $1299 <br />
+                      of <br />
+                      $108.25/mo. for 12 mo.*</p>
                   </div>
                 </div>
                 <div className="small-banner position-relative">
@@ -49,8 +76,10 @@ const Home = () => {
                   />
                   <div className="small-banner-content position-absolute">
                     <h4>NEW ARRIVAL</h4>
-                    <h5>iPhone 14 Pro Max</h5>
-                    <p>From $999.00 <br /> or $40/mo.</p>
+                    <h5>Apple Watch Ultra</h5>
+                    <p>From $799.00 <br />
+                      or <br />
+                      $33.29/mo.per month for 24 mo.*</p>
                   </div>
                 </div>
                 <div className="small-banner position-relative">
@@ -61,8 +90,10 @@ const Home = () => {
                   />
                   <div className="small-banner-content position-absolute">
                     <h4>NEW ARRIVAL</h4>
-                    <h5>iPhone 14 Pro Max</h5>
-                    <p>From $999.00 <br />or $40/mo.</p>
+                    <h5>iPad Air</h5>
+                    <p>From $599 <br />
+                      or <br />
+                      $49.91/mo.per month for 12 mo.*</p>
                   </div>
                 </div>
                 <div className="small-banner position-relative">
@@ -73,8 +104,10 @@ const Home = () => {
                   />
                   <div className="small-banner-content position-absolute">
                     <h4>NEW ARRIVAL</h4>
-                    <h5>iPhone 14 Pro Max</h5>
-                    <p>From $999.00 <br />or $40/mo.</p>
+                    <h5>AirPods Max</h5>
+                    <p>From $549.00 <br />
+                      or $91.50/mo.per month <br />
+                      for 6 mo.*</p>
                   </div>
                 </div>
 
@@ -114,7 +147,12 @@ const Home = () => {
                     <h6>Music & Gaming</h6>
                     <p>10 Items</p>
                   </div>
-                  <img src="images/camera.jpg" alt="camera" />
+                  <img src="https://cdn.tgdd.vn/Products/Images/44/303500/msi-gaming-gf63-thin-11sc-i5-664vn-glr-thumb-600x600.jpg" alt="camera"
+                    style={{
+                      height: '110px',
+                      width: '110px',
+                    }}
+                  />
                 </div>
                 <div className="d-flex gap align-items-center">
                   <div>
@@ -135,14 +173,24 @@ const Home = () => {
                     <h6>Smart Watches</h6>
                     <p>10 Items</p>
                   </div>
-                  <img src="images/headphone.jpg" alt="camera" />
+                  <img src="https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-tn-2-600x600.jpg" alt="camera"
+                    style={{
+                      height: '110px',
+                      width: '110px',
+                    }}
+                  />
                 </div>
                 <div className="d-flex gap align-items-center">
                   <div>
                     <h6>Music & Gaming</h6>
                     <p>10 Items</p>
                   </div>
-                  <img src="images/camera.jpg" alt="camera" />
+                  <img src="https://cdn.tgdd.vn/Products/Images/2162/249767/sony-srs-xb13-150323-031134-600x600.jpg" alt="camera"
+                    style={{
+                      height: '110px',
+                      width: '110px',
+                    }}
+                  />
                 </div>
                 <div className="d-flex gap align-items-center">
                   <div>
@@ -163,7 +211,12 @@ const Home = () => {
                     <h6>Smart Watches</h6>
                     <p>10 Items</p>
                   </div>
-                  <img src="images/headphone.jpg" alt="camera" />
+                  <img src="https://cdn.tgdd.vn/Products/Images/7077/283208/garmin-forerunner-255-day-silicone-tn-600x600.jpg" alt="camera"
+                    style={{
+                      height: '110px',
+                      width: '110px',
+                    }}
+                  />
                 </div>
               </div>
             </div>
@@ -323,18 +376,18 @@ const Home = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
+            {blogState?.map((item, index) => {
+              if (index <= 4) {
+                return (
+                  <div className="col-3" key={index}>
+                    <BlogCard
+                      data={item}
+                    />
+                  </div>
+                )
+              }
+            })}
+
           </div>
         </div>
       </section>

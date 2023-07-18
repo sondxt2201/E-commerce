@@ -10,7 +10,6 @@ import { getAllProduct } from "../features/products/productSlice";
 const OurStore = () => {
   const [grid, setGrid] = useState(3);
   const dispatch = useDispatch();
-
   const productState = useSelector((state) => state?.product?.products);
 
   useEffect(() => {
@@ -161,7 +160,7 @@ const OurStore = () => {
                         edit={false}
                         activeColor="#ffd700"
                       />
-                      <b>$ 300</b>
+                      <b>$300</b>
                     </div>
                   </div>
                   <div className="random-products d-flex">
@@ -183,7 +182,7 @@ const OurStore = () => {
                         edit={false}
                         activeColor="#ffd700"
                       />
-                      <b>$ 300</b>
+                      <b>$300</b>
                     </div>
                   </div>
                 </div>
@@ -257,10 +256,6 @@ const OurStore = () => {
                     grid={grid}
                     data={productState ? productState : []}
                   />
-                  <ProductCard grid={grid} />
-                  <ProductCard grid={grid} />
-                  <ProductCard grid={grid} />
-
                 </div>
               </div>
             </div>

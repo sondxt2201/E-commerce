@@ -14,10 +14,10 @@ import watch2 from "../assets/images/watch-1.avif";
 
 const SingleProduct = () => {
   const props = {
-    width: 594,
+    width: 600,
     height: 600,
     zoomWidth: 600,
-    img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
+    img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQDY3ref_VW_34FR+watch-49-titanium-ultra_VW_34FR_WF_CO+watch-face-49-alpine-ultra_VW_34FR_WF_CO?wid=700&hei=700&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1683224241054",
   };
 
   const [orderedProduct, setorderedProduct] = useState(true);
@@ -47,28 +47,14 @@ const SingleProduct = () => {
               <div className="other-product-images d-flex flex-wrap gap-15">
                 <div>
                   <img
-                    src={watch}
+                    src='https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQDY3ref_VW_PF+watch-49-titanium-ultra_VW_PF_WF_CO+watch-face-49-alpine-ultra_VW_PF_WF_CO?wid=700&hei=700&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1683224241054'
                     className="img-fluid"
                     alt=""
                   />
                 </div>
                 <div>
                   <img
-                    src={watch2}
-                    className="img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <img
-                    src={watch}
-                    className="img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <img
-                    src={watch2}
+                    src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQDY3ref?wid=700&hei=700&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1660715729849"
                     className="img-fluid"
                     alt=""
                   />
@@ -79,11 +65,11 @@ const SingleProduct = () => {
               <div className="main-product-details">
                 <div className="border-bottom">
                   <h3 className="title">
-                    Kids Headphones Bulk 10 Pack Multi Colored For Students
+                    Titanium Case with Orange Alpine Loop
                   </h3>
                 </div>
                 <div className="border-bottom py-3">
-                  <p className="price">$ 100</p>
+                  <p className="price">$799</p>
                   <div className="d-flex align-items-center gap-10">
                     <ReactStars
                       count={5}
@@ -105,7 +91,7 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Brand:</h3>
-                    <p className="product-data">Havels</p>
+                    <p className="product-data">Apple</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Category:</h3>
@@ -211,10 +197,12 @@ const SingleProduct = () => {
               <h4>Description</h4>
               <div className="bg-white p-3">
                 <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Tenetur nisi similique illum aut perferendis voluptas, quisquam
-                  obcaecati qui nobis officia. Voluptatibus in harum deleniti
-                  labore maxime officia esse eos? Repellat?
+                  - Chức năng màn hình luôn bật giữ cho chức năng xem giờ luôn hoạt động,tiết kiệm pin hơn <br />
+                  - Thoải mái sử dụng ở hồ bơi hay ngoài trời với chuẩn kháng bụi IP6X ,chống nước đến 50m <br />
+                  - Đo nhịp tim,oxy trong máu,theo dõi giấc ngủ cùng nhiều tính năng sức khoẻ tích hợp sẵn <br />
+                  - Trải nghiệm âm nhạc với bộ nhớ trong 32GB cùng khả năng kết nối tai nghe bluetooth <br />
+                  - Cổng sạc Type C,sạc nhanh 45 phút cho 80% pin <br />
+                  Ra mắt cùng thời diểm ra mắt iPhone 2021, đồng hồ thông minh Apple Watch Series 7 có nhiều thay đổi về thiết kế so với các dòng Apple Watch trước đó. Cụ thể so với Series 6, thế hệ Series 7 này có sự thay đổi về kích thước với phiên bản màn hình lớn nhất gọi tên Apple Series 7 41mm 4g. Bên cạnh đó, Apple Watch Seri 7 41mm là phiên bản màn hình nhỏ nhất, nhỉnh hơn một chút so với phiên bản 40mm thế hệ trước, rất thích hợp với người dùng cổ tay nhỏ.
                 </p>
               </div>
             </div>

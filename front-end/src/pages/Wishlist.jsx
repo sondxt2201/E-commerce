@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import ProductCard from "../components/ProductCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getWishlist } from "../features/user/userSlice";
 
 const Wishlist = () => {
   const [grid, setGrid] = useState(3);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    Wishlist();
+  }, []);
+
+  const Wishlist = () => {
+    dispatch(getWishlist())
+  };
+
+  const wishlistState = useSelector(state => state?.auth?.wishlist)
 
   return (
     <>
@@ -57,11 +70,19 @@ const Wishlist = () => {
               </div>
               <div className="products-list pb-5">
                 <div className="d-flex gap-10 flex-wrap">
-                  <ProductCard grid={grid} />
-                  <ProductCard grid={grid} />
-                  <ProductCard grid={grid} />
-                  <ProductCard grid={grid} />
-
+                  {wishlistState ? (
+                    <>
+                      <ProductCard
+                        data={wishlistState ? wishlistState : []}
+                      />
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-center fs-3">
+                        NO DATA
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

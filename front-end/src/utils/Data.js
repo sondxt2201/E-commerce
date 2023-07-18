@@ -17,7 +17,7 @@ export const service = [
     {
         "title": "Affordable Prices",
         "tagline": "Get Factory Default Price",
-        "image": "images/service-04.pn",
+        "image": "images/service-04.png",
     },
     {
         "title": "Secure Payment",
