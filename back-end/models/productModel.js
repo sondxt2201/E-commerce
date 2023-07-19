@@ -43,8 +43,10 @@ var productSchema = new mongoose.Schema({
             url: String,
         }
     ],
+    tags: {
+        type: String,
+    },
     color: [],
-    tags: [],
     ratings: [
         {
             star: Number,

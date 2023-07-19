@@ -212,7 +212,7 @@ const OurStore = () => {
                     </select>
                   </div>
                   <div className="d-flex align-items-center gap-10">
-                    <p className="totalproducts mb-0">21 Products</p>
+                    <p className="totalproducts mb-0">{productState.length} Products</p>
                     <div className="d-flex gap-10 align-items-center grid">
                       <img
                         onClick={() => {
@@ -252,10 +252,23 @@ const OurStore = () => {
               </div>
               <div className="products-list pb-5">
                 <div className="d-flex gap-10 flex-wrap">
-                  <ProductCard
-                    grid={grid}
-                    data={productState ? productState : []}
-                  />
+                  {
+                    productState
+                      ? ((productState.map((item, index) => {
+                        return (
+                          <ProductCard
+                            key={index}
+                            grid={grid}
+                            data={item}
+                          />
+                        )
+                      })))
+                      : (
+                        <div className="d-flex gap-10 flex-wrap">
+                          NO DATA
+                        </div>
+                      )
+                  }
                 </div>
               </div>
             </div>

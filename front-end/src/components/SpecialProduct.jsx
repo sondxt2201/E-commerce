@@ -1,31 +1,71 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWishlist } from "../features/products/productSlice";
 
+const SpecialProduct = (props) => {
+  const { data } = props;
+  let location = useLocation();
+  const dispatch = useDispatch();
 
-const SpecialProduct = () => {
+  const add2Wishlist = (id) => {
+    dispatch(addToWishlist(id))
+  }
+
   return (
     <>
       <div className="col-6 mb-3">
         <div className="special-product-card">
           <div className="d-flex justify-content-between">
-            <div>
-              <img src="images/watch.jpg" className="img-fluid" alt="watch" />
-            </div>
+            <Link
+              to={`${location.pathname == "/"
+                ? `/product/${data?._id}`
+                : location.pathname == `/product/${data?._id}`
+                  ? `/product/${data?._id}`
+                  : location.pathname == "/wish-list"
+                    ? `/product/${data?._id}`
+                    : `${data?._id}`
+                }`}
+            >
+              <div>
+                <img
+                  src={data.images
+                    ? data.images[0]?.url
+                    : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"} className="img-fluid"
+                  alt="watch"
+                  style={{
+                    width: "400px",
+                    height: "320px",
+                    paddingRight: "10px"
+                  }}
+                />
+              </div>
+            </Link>
             <div className="special-product-content">
-              <h5 className="brand">Havels</h5>
-              <h6 className="title">
-                Samsung Galaxy S23 Mobile Phone; Sim...
-              </h6>
+              <Link
+
+                to={`${location.pathname == "/"
+                  ? `/product/${data?._id}`
+                  : location.pathname == `/product/${data?._id}`
+                    ? `/product/${data?._id}`
+                    : location.pathname == "/wish-list"
+                      ? `/product/${data?._id}`
+                      : `${data?._id}`
+                  }`}
+              >
+                <h5 className="brand">{data?.brand}</h5>
+                <h6 className="title">{data?.title}</h6>
+              </Link>
               <ReactStars
                 count={5}
                 size={24}
-                value={4}
+                value={parseInt(data?.totalrating)}
                 edit={false}
                 activeColor="#ffd700"
               />
               <p className="price">
-                <span className="red-p">$100</span> &nbsp; <strike>$200</strike>
+                <span className="red-p">{`$${data?.price}`}</span> &nbsp; <strike>{`$${data?.price + 500}`}</strike>
               </p>
               <div className="discount-till d-flex align-items-center gap-10">
                 <p className="mb-0">
@@ -38,15 +78,15 @@ const SpecialProduct = () => {
                 </div>
               </div>
               <div className="prod-count my-3">
-                <p>Products: 5</p>
+                <p>Products: {data?.quantity}</p>
                 <div className="progress">
                   <div
                     className="progress-bar"
                     role="progressbar"
-                    style={{ width: "75%" }}
-                    aria-valuenow="75"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
+                    style={{ width: data?.quantity / data?.quantity + data?.sold * 100 + "%" }}
+                    aria-valuenow={data?.quantity / data?.quantity + data?.sold * 100}
+                    aria-valuemin={data?.quantity}
+                    aria-valuemax={data?.sold + data?.quantity}
                   ></div>
                 </div>
               </div>
@@ -57,6 +97,6 @@ const SpecialProduct = () => {
       </div>
     </>
   );
-};
+}
 
 export default SpecialProduct;

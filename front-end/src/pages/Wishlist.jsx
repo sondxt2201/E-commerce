@@ -30,7 +30,7 @@ const Wishlist = () => {
               <div className="filter-sort-grid mb-4">
                 <div className="d-flex justify-content-between align-items-center flex-row-reverse">
                   <div className="d-flex align-items-center gap-10 ">
-                    <p className="totalproducts mb-0">4 Products</p>
+                    <p className="totalproducts mb-0">{wishlistState.length} Products</p>
                     <div className="d-flex gap-10 align-items-center grid">
                       <img
                         onClick={() => {
@@ -70,93 +70,29 @@ const Wishlist = () => {
               </div>
               <div className="products-list pb-5">
                 <div className="d-flex gap-10 flex-wrap">
-                  {wishlistState ? (
-                    <>
-                      <ProductCard
-                        data={wishlistState ? wishlistState : []}
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <div className="text-center fs-3">
-                        NO DATA
-                      </div>
-                    </>
-                  )}
+                  {
+                    wishlistState
+                      ? ((wishlistState?.map((item, index) => {
+                        return (
+                          <ProductCard
+                            key={index}
+                            grid={grid}
+                            data={item}
+                          />
+                        )
+                      })))
+                      : (
+                        <div className="text-center fs-3">
+                          NO DATA
+                        </div>
+                      )
+                  }
                 </div>
               </div>
             </div>
-
-            {/* <div className="col-3">
-              <div className="wishlist-card position-relative">
-                <img
-                  src="images/cross.svg"
-                  alt="cross"
-                  className="position-absolute cross img-fluid"
-                />
-                <div className="wishlist-card-image">
-                  <img
-                    src="images/watch.jpg"
-                    className="img-fluid w-100"
-                    alt="watch"
-                  />
-                </div>
-                <div className="py-3 px-3">
-                  <h5 className="title">
-                    Honor T1 7.0 1 GB RAM 8 GB ROM 7 Inch With Wi-Fi+3G Tablet
-                  </h5>
-                  <h6 className="price">$ 100</h6>
-                </div>
-              </div>
-            </div>
-            <div className="col-3">
-              <div className="wishlist-card position-relative">
-                <img
-                  src="images/cross.svg"
-                  alt="cross"
-                  className="position-absolute cross img-fluid"
-                />
-                <div className="wishlist-card-image">
-                  <img
-                    src="images/watch.jpg"
-                    className="img-fluid w-100"
-                    alt="watch"
-                  />
-                </div>
-                <div className="py-3 px-3">
-                  <h5 className="title">
-                    Honor T1 7.0 1 GB RAM 8 GB ROM 7 Inch With Wi-Fi+3G Tablet
-                  </h5>
-                  <h6 className="price">$ 100</h6>
-                </div>
-              </div>
-            </div>
-            <div className="col-3">
-              <div className="wishlist-card position-relative">
-                <img
-                  src="images/cross.svg"
-                  alt="cross"
-                  className="position-absolute cross img-fluid"
-                />
-                <div className="wishlist-card-image">
-                  <img
-                    src="images/watch.jpg"
-                    className="img-fluid w-100"
-                    alt="watch"
-                  />
-                </div>
-                <div className="py-3 px-3">
-                  <h5 className="title">
-                    Honor T1 7.0 1 GB RAM 8 GB ROM 7 Inch With Wi-Fi+3G Tablet
-                  </h5>
-                  <h6 className="price">$ 100</h6>
-                </div>
-              </div>
-            </div> */}
-
           </div>
         </div>
-      </section>
+      </section >
     </>
   );
 };

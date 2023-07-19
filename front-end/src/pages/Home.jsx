@@ -7,19 +7,30 @@ import SpecialProduct from "../components/SpecialProduct";
 import { service } from '../utils/Data';
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBlog } from "../features/blogs/blogSlice";
+import { getAllProduct } from "../features/products/productSlice";
+import { addToWishlist } from "../features/products/productSlice";
+
+
 
 const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
     allBlog();
+    allProduct();
   }, []);
 
   const allBlog = () => {
     dispatch(getAllBlog())
   };
 
-  const blogState = useSelector(state => state?.blog?.blogs)
+  const allProduct = () => {
+    dispatch(getAllProduct())
+  }
+
+
+  const blogState = useSelector((state) => state?.blog?.blogs)
+  const productState = useSelector((state) => state?.product?.products);
 
   return (
     <>
@@ -27,8 +38,10 @@ const Home = () => {
         <div className='container-xxl'>
           <div className='row'>
             <div className='col-6'>
-              <div className='main-banner position-relative rounded-3'
-                style={{ 'overflow': 'hidden' }}>
+              <div
+                className='main-banner position-relative rounded-3'
+                style={{ overflow: 'hidden' }}
+              >
                 <img
                   className='img-fluid rounded-3'
                   src='https://www.apple.com/v/macbook-air/q/images/overview/macbook_air__d2234mv3oe0y_large.jpg'
@@ -54,7 +67,9 @@ const Home = () => {
             </div>
             <div className='col-6'>
               <div className="d-flex flex-wrap justify-content-between align-items-center gap-10">
-                <div className="small-banner position-relative">
+                <div className="small-banner position-relative"
+                  style={{ overflow: 'hidden' }}
+                >
                   <img
                     className='img-fluid rounded-3'
                     src='images/catbanner-01.jpg'
@@ -68,7 +83,9 @@ const Home = () => {
                       $108.25/mo. for 12 mo.*</p>
                   </div>
                 </div>
-                <div className="small-banner position-relative">
+                <div className="small-banner position-relative"
+                  style={{ overflow: 'hidden' }}
+                >
                   <img
                     className='img-fluid rounded-3'
                     src='images/catbanner-02.jpg'
@@ -82,7 +99,9 @@ const Home = () => {
                       $33.29/mo.per month for 24 mo.*</p>
                   </div>
                 </div>
-                <div className="small-banner position-relative">
+                <div className="small-banner position-relative"
+                  style={{ overflow: 'hidden' }}
+                >
                   <img
                     className='img-fluid rounded-3'
                     src='images/catbanner-03.jpg'
@@ -96,7 +115,9 @@ const Home = () => {
                       $49.91/mo.per month for 12 mo.*</p>
                   </div>
                 </div>
-                <div className="small-banner position-relative">
+                <div className="small-banner position-relative"
+                  style={{ overflow: 'hidden' }}
+                >
                   <img
                     className='img-fluid rounded-3'
                     src='images/catbanner-04.jpg'
@@ -110,7 +131,6 @@ const Home = () => {
                       for 6 mo.*</p>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -229,10 +249,17 @@ const Home = () => {
             <div className="col-12">
               <h3 className="section-heading">Featured Collection</h3>
             </div>
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+            <div className="row" >
+              {productState && productState?.map((item, index) => {
+                if (item.tags === "featured")
+                  return (
+                    <ProductCard
+                      key={index}
+                      data={item}
+                    />
+                  )
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -309,11 +336,16 @@ const Home = () => {
               <h3 className="section-heading">Special Products</h3>
             </div>
           </div>
-          <div className="row">
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
-            <SpecialProduct />
+          <div className="row" >
+            {productState && productState?.map((item, index) => {
+              if (item.tags === "special")
+                return (
+                  <SpecialProduct
+                    key={index}
+                    data={item}
+                  />
+                )
+            })}
           </div>
         </div>
       </section>
@@ -324,11 +356,16 @@ const Home = () => {
               <h3 className="section-heading">Our Popular Products</h3>
             </div>
           </div>
-          <div className="row">
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
-            <ProductCard />
+          <div className="row" >
+            {productState && productState?.map((item, index) => {
+              if (item.tags === "popular")
+                return (
+                  <ProductCard
+                    key={index}
+                    data={item}
+                  />
+                )
+            })}
           </div>
         </div>
       </section>
