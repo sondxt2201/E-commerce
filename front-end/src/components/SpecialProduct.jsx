@@ -1,6 +1,6 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist } from "../features/products/productSlice";
 
@@ -8,6 +8,7 @@ const SpecialProduct = (props) => {
   const { data } = props;
   let location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const add2Wishlist = (id) => {
     dispatch(addToWishlist(id))
@@ -18,45 +19,33 @@ const SpecialProduct = (props) => {
       <div className="col-6 mb-3">
         <div className="special-product-card">
           <div className="d-flex justify-content-between">
-            <Link
-              to={`${location.pathname == "/"
-                ? `/product/${data?._id}`
-                : location.pathname == `/product/${data?._id}`
-                  ? `/product/${data?._id}`
-                  : location.pathname == "/wish-list"
-                    ? `/product/${data?._id}`
-                    : `${data?._id}`
-                }`}
-            >
-              <div>
-                <img
-                  src={data.images
-                    ? data.images[0]?.url
-                    : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"} className="img-fluid"
-                  alt="watch"
-                  style={{
-                    width: "400px",
-                    height: "320px",
-                    paddingRight: "10px"
-                  }}
-                />
-              </div>
-            </Link>
-            <div className="special-product-content">
-              <Link
+            <Link to={`/product/${data?._id}`}>
+              <img
+                alt="watch"
+                style={{
+                  width: "400px",
+                  height: "320px",
+                  paddingRight: "10px",
+                }}
+                src={data.images
+                  ? data.images[0]?.url
+                  : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"} className="img-fluid"
 
-                to={`${location.pathname == "/"
-                  ? `/product/${data?._id}`
-                  : location.pathname == `/product/${data?._id}`
-                    ? `/product/${data?._id}`
-                    : location.pathname == "/wish-list"
-                      ? `/product/${data?._id}`
-                      : `${data?._id}`
-                  }`}
+              />
+            </Link>
+            <div className="special-product-content" >
+              <div
+                style={{
+                  cursor: "pointer"
+                }}
+                onClick={() => {
+                  navigate(`/product/${data?._id}`)
+                  console.log("test")
+                }}
               >
                 <h5 className="brand">{data?.brand}</h5>
                 <h6 className="title">{data?.title}</h6>
-              </Link>
+              </div>
               <ReactStars
                 count={5}
                 size={24}

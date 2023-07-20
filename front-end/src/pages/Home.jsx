@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Marquee from "react-fast-marquee";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import BlogCard from "../components/BlogCard";
 import ProductCard from "../components/ProductCard";
 import SpecialProduct from "../components/SpecialProduct";
@@ -8,12 +8,11 @@ import { service } from '../utils/Data';
 import { useDispatch, useSelector } from "react-redux";
 import { getAllBlog } from "../features/blogs/blogSlice";
 import { getAllProduct } from "../features/products/productSlice";
-import { addToWishlist } from "../features/products/productSlice";
-
-
 
 const Home = () => {
   const dispatch = useDispatch();
+  const blogState = useSelector((state) => state?.blog?.blogs)
+  const productState = useSelector((state) => state?.product?.products);
 
   useEffect(() => {
     allBlog();
@@ -27,10 +26,6 @@ const Home = () => {
   const allProduct = () => {
     dispatch(getAllProduct())
   }
-
-
-  const blogState = useSelector((state) => state?.blog?.blogs)
-  const productState = useSelector((state) => state?.product?.products);
 
   return (
     <>

@@ -39,6 +39,28 @@ export const getWishlist = createAsyncThunk(
     }
 )
 
+export const addProd2Cart = createAsyncThunk(
+    "user/cart/add",
+    async (cartData, thunkAPI) => {
+        try {
+            return await authService.add2Cart(cartData);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+)
+
+export const getUserCart = createAsyncThunk(
+    "user/cart/get",
+    async (thunkAPI) => {
+        try {
+            return await authService.getCart();
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+)
+
 const initialState = {
     user: getUserfromLocalStorage,
     isError: false,
@@ -46,6 +68,8 @@ const initialState = {
     isLoading: false,
     message: "",
     wishlist: [],
+    cartProduct: {},
+    cartProducts: [],
     createdUser: {},
 };
 
@@ -109,6 +133,45 @@ export const authSlice = createSlice({
                 state.wishlist = action.payload;
             })
             .addCase(getWishlist.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.message = action.error;
+                if (state.isError) {
+                    toast.error("Something Went Wrong!");
+                }
+            })
+            .addCase(addProd2Cart.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(addProd2Cart.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.cartProduct = action.payload;
+                if (state.isSuccess) {
+                    toast.success("Add Product To Cart Successfully!");
+                }
+            })
+            .addCase(addProd2Cart.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.message = action.error;
+                if (state.isError) {
+                    toast.error("Something Went Wrong!");
+                }
+            })
+            .addCase(getUserCart.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getUserCart.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.isSuccess = true;
+                state.cartProducts = action.payload;
+            })
+            .addCase(getUserCart.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = false;
                 state.isSuccess = true;

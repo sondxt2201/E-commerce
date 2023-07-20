@@ -10,8 +10,8 @@ import { getABlog } from "../features/blogs/blogSlice";
 const SingleBlog = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-
   const getBlogId = location.pathname.split("/")[2];
+  const blogState = useSelector(state => state?.blog?.blog)
 
   useEffect(() => {
     getBlog();
@@ -21,7 +21,6 @@ const SingleBlog = () => {
     dispatch(getABlog(getBlogId))
   };
 
-  const blogState = useSelector(state => state?.blog?.blog)
   return (
     <>
       <Meta title={blogState?.title} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
@@ -7,17 +7,63 @@ import ReactImageZoom from "react-image-zoom";
 import Color from "../components/Color";
 import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import watch from "../assets/images/watch.jpg";
 import watch2 from "../assets/images/watch-1.avif";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWishlist, getAProduct } from "../features/products/productSlice";
+import { toast } from "react-toastify";
+import { addProd2Cart } from "../features/user/userSlice";
 
 
 const SingleProduct = () => {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [color, setColor] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+
+  const getProductId = location.pathname.split("/")[2];
+  const productState = useSelector(state => state?.product?.product)
+
+  const {
+    isSuccess,
+    isError,
+    isLoading,
+  } = productState;
+
+  useEffect(() => {
+    dispatch(getAProduct(getProductId));
+  }, [isSuccess, isError, isLoading]);
+
+  const add2Wishlist = () => {
+    // addToWishlist(getProductId);
+  }
+
+  const add2Cart = () => {
+    console.log(quantity, color, getProductId)
+    if (color === null) {
+      toast.error("Please Choose Color")
+      return false;
+    } else {
+      dispatch(addProd2Cart({
+        productId: getProductId,
+        color: color,
+        price: productState?.price,
+        quantity: quantity,
+      }))
+    }
+  };
+
+
   const props = {
     width: 600,
     height: 600,
     zoomWidth: 600,
-    img: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQDY3ref_VW_34FR+watch-49-titanium-ultra_VW_34FR_WF_CO+watch-face-49-alpine-ultra_VW_34FR_WF_CO?wid=700&hei=700&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1683224241054",
+    img: productState?.images
+      ? productState?.images[0]?.url
+      : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"
   };
 
   const [orderedProduct, setorderedProduct] = useState(true);
@@ -45,65 +91,63 @@ const SingleProduct = () => {
                 </div>
               </div>
               <div className="other-product-images d-flex flex-wrap gap-15">
-                <div>
-                  <img
-                    src='https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQDY3ref_VW_PF+watch-49-titanium-ultra_VW_PF_WF_CO+watch-face-49-alpine-ultra_VW_PF_WF_CO?wid=700&hei=700&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1683224241054'
-                    className="img-fluid"
-                    alt=""
-                  />
-                </div>
-                <div>
-                  <img
-                    src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MQDY3ref?wid=700&hei=700&trim=1%2C0&fmt=p-jpg&qlt=95&.v=1660715729849"
-                    className="img-fluid"
-                    alt=""
-                  />
-                </div>
+                {productState?.images?.map((item, index) => {
+                  return (
+                    <img
+                      key={index}
+                      src={item?.url
+                        ? item?.url
+                        : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"}
+                      className="img-fluid"
+                      alt=""
+                    />
+                  )
+                })}
               </div>
             </div>
             <div className="col-6">
               <div className="main-product-details">
                 <div className="border-bottom">
                   <h3 className="title">
-                    Titanium Case with Orange Alpine Loop
+                    {productState?.title}
                   </h3>
                 </div>
                 <div className="border-bottom py-3">
-                  <p className="price">$799</p>
+                  <p className="price">${productState?.price}</p>
                   <div className="d-flex align-items-center gap-10">
                     <ReactStars
                       count={5}
                       size={24}
-                      value={4}
+                      value={parseInt(productState?.totalrating)}
                       edit={false}
                       activeColor="#ffd700"
                     />
-                    <p className="mb-0 t-review">( 2 Reviews )</p>
+                    <p className="mb-0 t-review">{"2 Reviews"}</p>
                   </div>
                   <a className="review-btn" href="#review">
                     Write a Review
                   </a>
                 </div>
                 <div className=" py-3">
-                  <div className="d-flex gap-10 align-items-center my-2">
+                  {/* <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Type:</h3>
-                    <p className="product-data">Watch</p>
-                  </div>
+                    <p className="product-data">{productState?.category}</p>
+                  </div> */}
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Brand:</h3>
-                    <p className="product-data">Apple</p>
+                    <p className="product-data">{productState?.brand}</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Category:</h3>
-                    <p className="product-data">Watch</p>
+                    <p className="product-data">{productState?.category}</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Tags:</h3>
-                    <p className="product-data">Watch</p>
+                    <p className="product-data">{productState?.tags}</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Availability:</h3>
-                    <p className="product-data">In Stock</p>
+                    <p className="product-data">{productState?.quantity > 0 ? productState?.quantity : "Out of Stock"}</p>
                   </div>
                   <div className="d-flex gap-10 flex-column mt-2 mb-3">
                     <h3 className="product-heading">Size:</h3>
@@ -124,7 +168,7 @@ const SingleProduct = () => {
                   </div>
                   <div className="d-flex gap-10 flex-column mt-2 mb-3">
                     <h3 className="product-heading">Color:</h3>
-                    <Color />
+                    <Color colorData={productState?.color} setColor={setColor} />
                   </div>
                   <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3">
                     <h3 className="product-heading">Quantity:</h3>
@@ -133,18 +177,23 @@ const SingleProduct = () => {
                         type="number"
                         name=""
                         min={1}
-                        max={10}
+                        max={productState?.quantity}
                         className="form-control"
                         style={{ width: "70px" }}
                         id=""
+                        value={quantity}
+                        onChange={(e) => { setQuantity(e.target.value) }}
                       />
                     </div>
                     <div className="d-flex align-items-center gap-30 ms-5">
                       <button
                         className="button border-0"
-                        data-bs-toggle="modal"
-                        data-bs-target="#staticBackdrop"
+                        // data-bs-toggle="modal"
+                        // data-bs-target="#staticBackdrop"
                         type="button"
+                        onClick={() => {
+                          add2Cart()
+                        }}
                       >
                         Add to Cart
                       </button>
@@ -157,7 +206,11 @@ const SingleProduct = () => {
                         <TbGitCompare className="fs-5 me-2" /> Add to Compare
                       </a>
                     </div>
-                    <div>
+                    <div
+                      // onClick={() =>
+                      //   add2Wishlist()
+                      // }
+                    >
                       <a href="">
                         <AiOutlineHeart className="fs-5 me-2" /> Add to Wishlist
                       </a>
@@ -177,7 +230,7 @@ const SingleProduct = () => {
                       href="#"
                       onClick={() => {
                         copyToClipboard(
-                          "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
+                          window.location.href
                         );
                       }}
                     >
@@ -196,13 +249,9 @@ const SingleProduct = () => {
             <div className="col-12">
               <h4>Description</h4>
               <div className="bg-white p-3">
-                <p>
-                  - Chức năng màn hình luôn bật giữ cho chức năng xem giờ luôn hoạt động,tiết kiệm pin hơn <br />
-                  - Thoải mái sử dụng ở hồ bơi hay ngoài trời với chuẩn kháng bụi IP6X ,chống nước đến 50m <br />
-                  - Đo nhịp tim,oxy trong máu,theo dõi giấc ngủ cùng nhiều tính năng sức khoẻ tích hợp sẵn <br />
-                  - Trải nghiệm âm nhạc với bộ nhớ trong 32GB cùng khả năng kết nối tai nghe bluetooth <br />
-                  - Cổng sạc Type C,sạc nhanh 45 phút cho 80% pin <br />
-                  Ra mắt cùng thời diểm ra mắt iPhone 2021, đồng hồ thông minh Apple Watch Series 7 có nhiều thay đổi về thiết kế so với các dòng Apple Watch trước đó. Cụ thể so với Series 6, thế hệ Series 7 này có sự thay đổi về kích thước với phiên bản màn hình lớn nhất gọi tên Apple Series 7 41mm 4g. Bên cạnh đó, Apple Watch Seri 7 41mm là phiên bản màn hình nhỏ nhất, nhỉnh hơn một chút so với phiên bản 40mm thế hệ trước, rất thích hợp với người dùng cổ tay nhỏ.
+                <p
+                  dangerouslySetInnerHTML={{ __html: productState?.description }}
+                >
                 </p>
               </div>
             </div>
