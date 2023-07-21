@@ -27,7 +27,9 @@ const {
     updateOrderStatus,
     getAllOrder,
     getOrderByUserId,
-    getOrderByOrderId
+    getOrderByOrderId,
+    removeProductFromCart,
+    updateProductQuantity
 } = require("../controller/userCtrl");
 const router = express.Router();
 
@@ -42,6 +44,7 @@ router.post("/register", createUser);
 router.post("/login", loginUser);
 router.post("/admin-login", loginAdmin);
 router.post("/forgot-password-token", forgotPasswordToken);
+
 
 // GET
 router.get("/cart", authMiddleware, getUserCart);
@@ -67,9 +70,14 @@ router.put("/reactive-user/:id", authMiddleware, isAdmin, reActiveUser);
 router.put("/order/update-order/:id", authMiddleware, isAdmin, updateOrderStatus);
 
 
+
 // DELETE
+router.delete("/delete-cart", authMiddleware, emptyCart);
+router.delete("/remove-product/:id", authMiddleware, removeProductFromCart);
 router.delete("/delete-user/:id", authMiddleware, isAdmin, deleteUser);
-router.delete("/delete-cart/", authMiddleware, emptyCart);
+router.delete("/update-product/:id/:quantity", authMiddleware, updateProductQuantity);
+
+
 
 
 

@@ -13,7 +13,7 @@ import watch2 from "../assets/images/watch-1.avif";
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishlist, getAProduct } from "../features/products/productSlice";
 import { toast } from "react-toastify";
-import { addProd2Cart } from "../features/user/userSlice";
+import { addProd2Cart, getUserCart } from "../features/user/userSlice";
 
 
 const SingleProduct = () => {
@@ -23,9 +23,11 @@ const SingleProduct = () => {
 
   const [color, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [alreadyAdded, setAlreadyAdded] = useState(false);
 
   const getProductId = location.pathname.split("/")[2];
   const productState = useSelector(state => state?.product?.product)
+  const cartState = useSelector(state => state?.auth?.cartProducts)
 
   const {
     isSuccess,
@@ -35,16 +37,24 @@ const SingleProduct = () => {
 
   useEffect(() => {
     dispatch(getAProduct(getProductId));
+    dispatch(getUserCart());
   }, [isSuccess, isError, isLoading]);
+
+  useEffect(() => {
+    for (let index = 0; index < cartState.length; index++) {
+      if (getProductId === cartState[index]?.productId._id) {
+        setAlreadyAdded(true)
+      }
+    }
+  })
 
   const add2Wishlist = () => {
     // addToWishlist(getProductId);
   }
 
   const add2Cart = () => {
-    console.log(quantity, color, getProductId)
     if (color === null) {
-      toast.error("Please Choose Color")
+      toast.error("Please Choose Color");
       return false;
     } else {
       dispatch(addProd2Cart({
@@ -52,7 +62,8 @@ const SingleProduct = () => {
         color: color,
         price: productState?.price,
         quantity: quantity,
-      }))
+      }));
+      navigate('/cart')
     }
   };
 
@@ -146,7 +157,7 @@ const SingleProduct = () => {
                     <p className="product-data">{productState?.tags}</p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-2">
-                    <h3 className="product-heading">Availability:</h3>
+                    <h3 className="product-heading">Available:</h3>
                     <p className="product-data">{productState?.quantity > 0 ? productState?.quantity : "Out of Stock"}</p>
                   </div>
                   <div className="d-flex gap-10 flex-column mt-2 mb-3">
@@ -166,36 +177,46 @@ const SingleProduct = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="d-flex gap-10 flex-column mt-2 mb-3">
-                    <h3 className="product-heading">Color:</h3>
-                    <Color colorData={productState?.color} setColor={setColor} />
-                  </div>
+                  {alreadyAdded === false
+                    && (
+                      <div className="d-flex gap-10 flex-column mt-2 mb-3">
+                        <h3 className="product-heading">Color:</h3>
+                        <Color colorData={productState?.color} setColor={setColor} />
+                      </div>
+                    )
+                  }
                   <div className="d-flex align-items-center gap-15 flex-row mt-2 mb-3">
-                    <h3 className="product-heading">Quantity:</h3>
-                    <div className="">
-                      <input
-                        type="number"
-                        name=""
-                        min={1}
-                        max={productState?.quantity}
-                        className="form-control"
-                        style={{ width: "70px" }}
-                        id=""
-                        value={quantity}
-                        onChange={(e) => { setQuantity(e.target.value) }}
-                      />
-                    </div>
-                    <div className="d-flex align-items-center gap-30 ms-5">
+                    {alreadyAdded === false
+                      && (
+                        <>
+                          <h3 className="product-heading">Quantity:</h3>
+                          <div className="">
+                            <input
+                              type="number"
+                              name=""
+                              min={1}
+                              max={productState?.quantity}
+                              className="form-control"
+                              style={{ width: "70px" }}
+                              id=""
+                              value={quantity}
+                              onChange={(e) => { setQuantity(e.target.value) }}
+                            />
+                          </div>
+                        </>
+                      )
+                    }
+                    <div className={`d-flex align-items-center gap-30 ms-5 ${alreadyAdded ? 'ms-0' : 'ms-5'} `}>
                       <button
                         className="button border-0"
                         // data-bs-toggle="modal"
                         // data-bs-target="#staticBackdrop"
                         type="button"
                         onClick={() => {
-                          add2Cart()
+                          alreadyAdded ? navigate('/cart') : add2Cart()
                         }}
                       >
-                        Add to Cart
+                        {alreadyAdded ? "Go to Cart" : "Add to Cart"}
                       </button>
                       <button className="button signup">Buy It Now</button>
                     </div>
@@ -207,9 +228,9 @@ const SingleProduct = () => {
                       </a>
                     </div>
                     <div
-                      // onClick={() =>
-                      //   add2Wishlist()
-                      // }
+                    // onClick={() =>
+                    //   add2Wishlist()
+                    // }
                     >
                       <a href="">
                         <AiOutlineHeart className="fs-5 me-2" /> Add to Wishlist

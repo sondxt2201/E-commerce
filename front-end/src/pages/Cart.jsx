@@ -1,20 +1,48 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUserCart } from "../features/user/userSlice";
+import { getUserCart, removeAProduct, updateAProduct } from "../features/user/userSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const [productUpdateDetail, setProductUpdateDetail] = useState(null);
   const userCartState = useSelector((state) => state?.auth?.cartProducts);
-
-  console.log(userCartState);
 
   useEffect(() => {
     dispatch(getUserCart())
   }, [])
+
+  useEffect(() => {
+    if (productUpdateDetail !== null) {
+      dispatch(updateAProduct({
+        id: productUpdateDetail?.id,
+        quantity: productUpdateDetail?.quantity
+      }));
+      setTimeout(() => {
+        dispatch(getUserCart())
+      }, 300);
+    }
+  }, [productUpdateDetail])
+
+  const deleteAProduct = (id) => {
+    dispatch(removeAProduct(id));
+    setTimeout(() => {
+      dispatch(getUserCart())
+    }, 300);
+  }
+
+  const totalPrice = () => {
+    let total = 0;
+    if (userCartState) {
+      userCartState?.forEach((item) => {
+        total += (item?.price * item?.quantity)
+      });
+    }
+    return total;
+  }
 
   return (
     <>
@@ -36,7 +64,9 @@ const Cart = () => {
                     <div className="cart-col-1 gap-15 d-flex align-items-center">
                       <div className="w-25">
                         <img
-                          src="images/watch.jpg"
+                          src={item?.productId?.images
+                            ? item?.productId?.images[0]?.url
+                            : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"}
                           className="img-fluid"
                           alt="product image" />
                       </div>
@@ -59,14 +89,15 @@ const Cart = () => {
                           className="form-control"
                           type="number"
                           name=""
-                          min={1}
-                          max={10}
+                          min={0}
+                          max={item?.productId?.quantity}
                           id=""
                           value={item?.quantity}
+                          onChange={(e) => { setProductUpdateDetail({ id: item?._id, quantity: e.target.value }) }}
                         />
                       </div>
                       <div>
-                        <AiFillDelete className="text-danger " />
+                        <AiFillDelete className="text-danger " onClick={() => deleteAProduct(item?._id)} />
                       </div>
                     </div>
                     <div className="cart-col-4">
@@ -83,7 +114,7 @@ const Cart = () => {
                   Continue To Shopping
                 </Link>
                 <div className="d-flex flex-column align-items-end">
-                  <h4>SubTotal: $ 300</h4>
+                  <h4>SubTotal: ${totalPrice()}</h4>
                   <p>Taxes and shipping calculated at checkout</p>
                   <Link to="/check-out" className="button">
                     Checkout

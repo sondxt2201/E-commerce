@@ -428,6 +428,44 @@ const emptyCart = asyncHandler(async (req, res) => {
     }
 });
 
+// remove 1 product from cart
+const removeProductFromCart = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { id } = req.params;
+    validateMongoDbId(_id);
+
+    try {
+        const deleteProductFromCart = await Cart.deleteOne({
+            userId: _id,
+            _id: id
+        });
+        res.json(deleteProductFromCart)
+    } catch (error) {
+        throw new Error(error);
+    }
+})
+
+// upadte product quantity from cart
+const updateProductQuantity = asyncHandler(async (req, res) => {
+    const { _id } = req.user;
+    const { id, quantity } = req.params;
+    validateMongoDbId(_id);
+
+    console.log(id, quantity);
+    try {
+        const cartItem = await Cart.findOne({
+            userId: _id,
+            _id: id,
+        });
+        cartItem.quantity = quantity;
+        cartItem.save();
+        res.json(cartItem)
+    } catch (error) {
+        throw new Error(error);
+    }
+})
+
+
 // apply coupon
 const applyCoupon = asyncHandler(async (req, res) => {
     const { coupon } = req.body;
@@ -536,7 +574,6 @@ const getOrderByUserId = asyncHandler(async (req, res) => {
             .populate("orderBy")
             .exec();
         res.json(userorders);
-        console.log(userorders)
     } catch (error) {
         throw new Error(error);
     }
@@ -550,7 +587,6 @@ const getOrderByOrderId = asyncHandler(async (req, res) => {
             .populate("products.product")
             .exec();
         res.json(order);
-        // console.log(order)
     } catch (error) {
         throw new Error(error);
     }
@@ -607,6 +643,8 @@ module.exports = {
     getAllOrder,
     getOrderByUserId,
     updateOrderStatus,
-    getOrderByOrderId
+    getOrderByOrderId,
+    removeProductFromCart,
+    updateProductQuantity
 };
 
