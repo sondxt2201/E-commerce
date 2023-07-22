@@ -124,7 +124,7 @@ const Addblog = () => {
                 value={formik.values.title}
               />
             </div>
-            <div className="error">
+            <div className="error ms-2 my-1">
               {formik.touched.title && formik.errors.title}
             </div>
             <select
@@ -144,7 +144,7 @@ const Addblog = () => {
                 );
               })}
             </select>
-            <div className="error">
+            <div className="error ms-2 my-1">
               {formik.touched.category && formik.errors.category}
             </div>
             <ReactQuill
@@ -154,7 +154,7 @@ const Addblog = () => {
               onChange={formik.handleChange("description")}
               value={formik.values.description}
             />
-            <div className="error">
+            <div className="error ms-2 my-1">
               {formik.touched.description && formik.errors.description}
             </div>
             <div className="bg-white border-1 p-5 text-center mt-3">

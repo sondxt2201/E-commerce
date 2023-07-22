@@ -172,7 +172,7 @@ const Addproduct = () => {
             onBlur={formik.handleBlur("title")}
             value={formik.values.title}
           />
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.title && formik.errors.title}
           </div>
           <div className="">
@@ -183,7 +183,7 @@ const Addproduct = () => {
               value={formik.values.description}
             />
           </div>
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.description && formik.errors.description}
           </div>
           <CustomInput
@@ -194,7 +194,7 @@ const Addproduct = () => {
             onBlur={formik.handleBlur("price")}
             value={formik.values.price}
           />
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.price && formik.errors.price}
           </div>
           <select
@@ -214,7 +214,7 @@ const Addproduct = () => {
               );
             })}
           </select>
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.brand && formik.errors.brand}
           </div>
           <select
@@ -234,7 +234,7 @@ const Addproduct = () => {
               );
             })}
           </select>
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.category && formik.errors.category}
           </div>
           <select
@@ -250,7 +250,7 @@ const Addproduct = () => {
             <option value="popular">Popular</option>
             <option value="special">Special</option>
           </select>
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.tags && formik.errors.tags}
           </div>
 
@@ -263,7 +263,7 @@ const Addproduct = () => {
             onChange={(i, val) => { handleColors(val) }}
             options={coloropt}
           />
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.color && formik.errors.color}
           </div>
           <CustomInput
@@ -274,7 +274,7 @@ const Addproduct = () => {
             onBlur={formik.handleBlur("quantity")}
             value={formik.values.quantity}
           />
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.quantity && formik.errors.quantity}
           </div>
           <div className="bg-white border-1 p-5 text-center">

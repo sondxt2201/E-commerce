@@ -5,6 +5,7 @@ import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserCart, removeAProduct, updateAProduct } from "../features/user/userSlice";
+import * as ntc from "ntcjs";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -74,9 +75,9 @@ const Cart = () => {
                         <p className="">{item?.productId?.title}</p>
                         <p className="d-flex gap-3">Color:
                           <ul className="colors ps-0">
-                            <li style={{ backgroundColor: item?.color?.title }} >
-                            </li>
+                            <li style={{ backgroundColor: item?.color?.title }} ></li>
                           </ul>
+                          <span>{ntc.name(item?.color?.title)[1]}</span>
                         </p>
                       </div>
                     </div>

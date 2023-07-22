@@ -56,12 +56,12 @@ const ViewOrder = () => {
     for (let i = 0; i < orderState.length; i++) {
       data1.push({
         key: i + 1,
-        name: orderState[i].product.title,
-        brand: orderState[i].product.brand,
-        amount: orderState[i].product.price,
-        date: orderState[i].product.createdAt,
-        color: orderState[i].color,
-        count: orderState[i].count,
+        name: orderState[i]?.product?.title,
+        brand: orderState[i]?.product?.brand,
+        amount: orderState[i]?.product?.price,
+        date: orderState[i]?.product?.createdAt,
+        color: orderState[i]?.color,
+        count: orderState[i]?.count,
         action: (
           <>
             <Link to="/" className=" fs-3 text-danger">

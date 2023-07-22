@@ -96,7 +96,7 @@ const AddCoupon = () => {
             label="Enter Coupon Name"
             id="name"
           />
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.name && formik.errors.name}
           </div>
           <CustomInput
@@ -108,7 +108,7 @@ const AddCoupon = () => {
             label="Enter expire Data"
             id="date"
           />
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.expire && formik.errors.expire}
           </div>
           <CustomInput
@@ -120,7 +120,7 @@ const AddCoupon = () => {
             label="Enter Discount"
             id="discount"
           />
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.discount && formik.errors.discount}
           </div>
           <button

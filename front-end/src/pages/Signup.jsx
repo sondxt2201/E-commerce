@@ -76,7 +76,7 @@ const Signup = () => {
                     onChange={formik.handleChange("firstname")}
                     onBlur={formik.handleBlur("firstname")}
                   />
-                  <div className="error">
+                  <div className="error ms-2 my-1">
                     {formik.touched.firstname && formik.errors.firstname}
                   </div>
                   <CustomInput
@@ -87,7 +87,7 @@ const Signup = () => {
                     onChange={formik.handleChange("lastname")}
                     onBlur={formik.handleBlur("lastname")}
                   />
-                  <div className="error">
+                  <div className="error ms-2 my-1">
                     {formik.touched.lastname && formik.errors.lastname}
                   </div>
                   <CustomInput
@@ -98,7 +98,7 @@ const Signup = () => {
                     onChange={formik.handleChange("email")}
                     onBlur={formik.handleBlur("email")}
                   />
-                  <div className="error">
+                  <div className="error ms-2 my-1">
                     {formik.touched.email && formik.errors.email}
                   </div>
                   <CustomInput
@@ -109,7 +109,7 @@ const Signup = () => {
                     onChange={formik.handleChange("mobile")}
                     onBlur={formik.handleBlur("mobile")}
                   />
-                  <div className="error">
+                  <div className="error ms-2 my-1">
                     {formik.touched.mobile && formik.errors.mobile}
                   </div>
                   <CustomInput
@@ -120,7 +120,7 @@ const Signup = () => {
                     onChange={formik.handleChange("password")}
                     onBlur={formik.handleBlur("password")}
                   />
-                  <div className="error">
+                  <div className="error ms-2 my-1">
                     {formik.touched.password && formik.errors.password}
                   </div>
                   <div>

@@ -38,8 +38,8 @@ const router = express.Router();
 
 // POST
 router.post("/cart", authMiddleware, userCart);
-router.post("/cart/applycoupon", authMiddleware, applyCoupon);
-router.post("/cart/cash-order", authMiddleware, createOrder);
+// router.post("/cart/applycoupon", authMiddleware, applyCoupon);
+router.post("/cart/create-order", authMiddleware, createOrder);
 router.post("/register", createUser);
 router.post("/login", loginUser);
 router.post("/admin-login", loginAdmin);
@@ -48,14 +48,14 @@ router.post("/forgot-password-token", forgotPasswordToken);
 
 // GET
 router.get("/cart", authMiddleware, getUserCart);
-router.get("/order/get-order", authMiddleware, getOrder);
-router.get("/order/all-order", authMiddleware, isAdmin, getAllOrder);
+// router.get("/order/get-order", authMiddleware, getOrder);
+// router.get("/order/all-order", authMiddleware, isAdmin, getAllOrder);
 router.get("/refresh", handleRefreshToken);
 router.get("/all-users", getallUser);
 router.get("/logout", logoutUser);
 router.get("/wishlist", authMiddleware, getWishlist);
 router.get("/:id", authMiddleware, isAdmin, getUser);
-router.get("/order/order-by-user/:id", authMiddleware, isAdmin, getOrderByUserId);
+// router.get("/order/order-by-user/:id", authMiddleware, isAdmin, getOrderByUserId);
 router.get("/order/order-by-id/:id", authMiddleware, isAdmin, getOrderByOrderId);
 
 
@@ -67,8 +67,7 @@ router.put("/reset-password/:token", resetPassword);
 router.put("/block-user/:id", authMiddleware, isAdmin, blockUser);
 router.put("/unblock-user/:id", authMiddleware, isAdmin, unblockUser);
 router.put("/reactive-user/:id", authMiddleware, isAdmin, reActiveUser);
-router.put("/order/update-order/:id", authMiddleware, isAdmin, updateOrderStatus);
-
+// router.put("/order/update-order/:id", authMiddleware, isAdmin, updateOrderStatus);
 
 
 // DELETE

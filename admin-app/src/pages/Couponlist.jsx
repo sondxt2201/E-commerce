@@ -36,7 +36,9 @@ const columns = [
 
 const Couponlist = () => {
   const [open, setOpen] = useState(false);
-  const [couponId, setcouponId] = useState("");
+  const [couponId, setcouponId] = useState(null);
+  const couponState = useSelector((state) => state.coupon.coupons);
+
   const showModal = (e) => {
     setOpen(true);
     setcouponId(e);
@@ -45,11 +47,20 @@ const Couponlist = () => {
   const hideModal = () => {
     setOpen(false);
   };
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCoupon());
   }, []);
-  const couponState = useSelector((state) => state.coupon.coupons);
+  
+  const deleteCoupon = (e) => {
+    dispatch(deleteACoupon(e));
+    setOpen(false);
+    setTimeout(() => {
+      dispatch(getAllCoupon());
+    }, 100);
+  };
+  
   const data1 = [];
   for (let i = 0; i < couponState.length; i++) {
     data1.push({
@@ -75,14 +86,6 @@ const Couponlist = () => {
       ),
     });
   }
-  const deleteCoupon = (e) => {
-    dispatch(deleteACoupon(e));
-
-    setOpen(false);
-    setTimeout(() => {
-      dispatch(getAllCoupon());
-    }, 100);
-  };
   return (
     <div>
       <h3 className="mb-4 title">Coupons</h3>

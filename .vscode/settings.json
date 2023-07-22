@@ -19,9 +19,12 @@
         "formik",
         "lastname",
         "pcategory",
+        "pincode",
         "Productlist",
+        "razorpay",
         "Resetpassword",
         "signup",
-        "toastify"
+        "toastify",
+        "uniqid"
     ]
 }

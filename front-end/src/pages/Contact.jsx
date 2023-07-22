@@ -71,7 +71,7 @@ const Contact = () => {
                         onBlur={formik.handleBlur("name")}
                         value={formik.values.name}
                       />
-                      <div className="error">
+                      <div className="error ms-2 my-1">
                         {formik.touched.name && formik.errors.name}
                       </div>
                     </div>
@@ -85,7 +85,7 @@ const Contact = () => {
                         onBlur={formik.handleBlur("email")}
                         value={formik.values.email}
                       />
-                      <div className="error">
+                      <div className="error ms-2 my-1">
                         {formik.touched.email && formik.errors.email}
                       </div>
                     </div>
@@ -99,7 +99,7 @@ const Contact = () => {
                         onBlur={formik.handleBlur("mobile")}
                         value={formik.values.mobile}
                       />
-                      <div className="error">
+                      <div className="error ms-2 my-1">
                         {formik.touched.mobile && formik.errors.mobile}
                       </div>
                     </div>

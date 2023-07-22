@@ -84,7 +84,7 @@ const Addcolor = () => {
               id="color"
             />
           </div>
-          <div className="error">
+          <div className="error ms-2 my-1">
             {formik.touched.title && formik.errors.title}
           </div>
           <button
