@@ -86,7 +86,7 @@ const Checkout = () => {
   }
 
   const checkoutHandler = async () => {
-    const res = await loadScript("https://checkout.razorpay.com/v1/Checkout.js")
+    const res = await loadScript("https://checkout.razorpay.com/v1/Checkout.jsx")
     if (!res) {
       alert("Razorpay SDK falsed to load!");
       return;
