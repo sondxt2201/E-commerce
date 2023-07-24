@@ -8,6 +8,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import * as ntc from "ntcjs";
 import { useState } from "react";
+import axios from "axios";
+import { config } from "../utils/axiosConfig";
 
 const shippingSchema = yup.object({
   country: yup.string().required("Country is Required"),
@@ -42,8 +44,8 @@ const Checkout = () => {
     },
     validationSchema: shippingSchema,
     onSubmit: (values) => {
+      checkoutHandler()
       setShippingInfo(values)
-      console.log(shippingInfo)
     },
   })
 
@@ -62,6 +64,77 @@ const Checkout = () => {
     totalFee = totalPrice() + parseInt(shippingFee)
     return totalFee;
   }
+
+  const loadScript = async (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      
+      script.src = src;
+      script.async = true;
+
+      script.onload = () => {
+        resolve(true);
+      }
+
+      script.onerror = () => {
+        resolve(false);
+      }
+
+      document.body.appendChild(script);
+      // document.body.appendChild(script);
+    })
+  }
+
+  const checkoutHandler = async () => {
+    const res = await loadScript("https://checkout.razorpay.com/v1/Checkout.js")
+    if (!res) {
+      alert("Razorpay SDK falsed to load!");
+      return;
+    }
+    const result = await axios.post("http://localhost:5000/api/user/order/checkout", "", config)
+    if (!result) {
+      alert("Something Went Wrong!")
+      return;
+    }
+    const { amount, id: order_id, currency } = result.data.order;
+    console.log(result)
+
+    const options = {
+      key: "rzp_test_Iwzv1fbqTMdnYJ",
+      amount: amount,
+      currency: currency,
+      name: "Digishop",
+      description: "Test Transaction",
+      order_id: order_id,
+      handler: async function (response) {
+        const data = {
+          orderCreationId: order_id,
+          razorpayPaymentId: response.razorpay_payment_id,
+          razorpayOrderId: response.razorpay_order_id,
+          razorpaySignature: response.razorpay_signature,
+        };
+
+        const result = await axios.post("http://localhost:5000/api/user/order/paymentVerification", data, config);
+
+        alert(result);
+      },
+      prefill: {
+        name: "SonDXT",
+        email: "Son.dxt182755@sis.hust.edu.vn",
+        contact: "+84 848445844",
+      },
+      notes: {
+        address: "Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội",
+      },
+      theme: {
+        color: "#61dafb",
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
+
 
   return (
     <>
