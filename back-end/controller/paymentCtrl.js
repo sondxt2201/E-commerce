@@ -7,7 +7,7 @@ const instance = new Razorpay({
 
 const checkout = async (req, res) => {
     const option = {
-        amount: 50000,
+        amount: 1000,
         currency: "USD",
     }
     const order = await instance.orders.create(option)
@@ -18,10 +18,10 @@ const checkout = async (req, res) => {
 }
 
 const paymentVerification = async (req, res) => {
-    const { razorpayOrderId, raazorpayPaymentId } = req.body;
+    const { razorpayOrderId, razorpayPaymentId } = req.body;
     res.json({
         razorpayOrderId,
-        raazorpayPaymentId,
+        razorpayPaymentId,
     })
 }
 

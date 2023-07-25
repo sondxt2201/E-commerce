@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getUserCart } from "../features/user/userSlice";
+import { createAnOrder, getUserCart } from "../features/user/userSlice";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import * as ntc from "ntcjs";
@@ -13,8 +13,8 @@ import { config } from "../utils/axiosConfig";
 
 const shippingSchema = yup.object({
   country: yup.string().required("Country is Required"),
-  firstname: yup.string().required("First name is Required"),
-  lastname: yup.string().required("Last name is Required"),
+  firstName: yup.string().required("First name is Required"),
+  lastName: yup.string().required("Last name is Required"),
   address: yup.string().required("Address is Required"),
   city: yup.string().required("City is Required"),
   state: yup.string().required("State/District is Required"),
@@ -23,19 +23,37 @@ const shippingSchema = yup.object({
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const cartState = useSelector(state => state?.auth?.cartProducts)
+  const cartState = useSelector(state => state?.auth?.cartProducts);
   const [shippingInfo, setShippingInfo] = useState(null);
+  const [cartProductState, setCartProductState] = useState([]);
+  const [paymentInfo, setPaymentInfo] = useState({
+    razorpayPaymentId: "",
+    razorpayOrderId: "",
+  });
 
   useEffect(() => {
     dispatch(getUserCart())
   }, [])
 
+  useEffect(() => {
+    let items = []
+    for (let index = 0; index < cartState?.length; index++) {
+      items.push({
+        productId: cartState[index].productId._id,
+        colorId: cartState[index].color._id,
+        quantity: cartState[index].quantity,
+        price: cartState[index].price
+      });
+    }
+    setCartProductState(items);
+  }, []);
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
       country: "",
-      firstname: "",
-      lastname: "",
+      firstName: "",
+      lastName: "",
       address: "",
       city: "",
       state: "",
@@ -44,8 +62,10 @@ const Checkout = () => {
     },
     validationSchema: shippingSchema,
     onSubmit: (values) => {
-      checkoutHandler()
       setShippingInfo(values)
+      setTimeout(() => {
+        checkoutHandler()
+      }, 300)
     },
   })
 
@@ -65,10 +85,10 @@ const Checkout = () => {
     return totalFee;
   }
 
-  const loadScript = async (src) => {
+  const loadScript = (src) => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
-      
+
       script.src = src;
       script.async = true;
 
@@ -81,24 +101,21 @@ const Checkout = () => {
       }
 
       document.body.appendChild(script);
-      // document.body.appendChild(script);
     })
   }
 
   const checkoutHandler = async () => {
-    const res = await loadScript("https://checkout.razorpay.com/v1/Checkout.jsx")
+    const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js")
     if (!res) {
-      alert("Razorpay SDK falsed to load!");
+      alert("Razorpay SDK failed to load!");
       return;
     }
-    const result = await axios.post("http://localhost:5000/api/user/order/checkout", "", config)
+    const result = await axios.post("http://localhost:5000/api/user/order/checkout", totalFee(), config)
     if (!result) {
       alert("Something Went Wrong!")
       return;
     }
     const { amount, id: order_id, currency } = result.data.order;
-    console.log(result)
-
     const options = {
       key: "rzp_test_Iwzv1fbqTMdnYJ",
       amount: amount,
@@ -111,12 +128,23 @@ const Checkout = () => {
           orderCreationId: order_id,
           razorpayPaymentId: response.razorpay_payment_id,
           razorpayOrderId: response.razorpay_order_id,
-          razorpaySignature: response.razorpay_signature,
-        };
+          // razorpaySignature: response.razorpay_signature,
+        }
 
-        const result = await axios.post("http://localhost:5000/api/user/order/paymentVerification", data, config);
+        setPaymentInfo({
+          razorpayPaymentId: response.razorpay_payment_id,
+          razorpayOrderId: response.razorpay_order_id,
+        })
 
-        alert(result);
+        const result = await axios.post("http://localhost:5000/api/user/order/paymentVerification", data, config)
+
+        dispatch(createAnOrder({
+          totalPrice: totalPrice(),
+          totalPriceAfterDiscount: totalPrice(),
+          orderItems: cartProductState,
+          paymentInfo: paymentInfo,
+          shippingInfo: shippingInfo
+        }))
       },
       prefill: {
         name: "SonDXT",
@@ -220,12 +248,12 @@ const Checkout = () => {
                       type="text"
                       placeholder="First Name"
                       className="form-control"
-                      value={formik.values.firstname}
-                      onChange={formik.handleChange("firstname")}
-                      onBlur={formik.handleBlur("firstname")}
+                      value={formik.values.firstName}
+                      onChange={formik.handleChange("firstName")}
+                      onBlur={formik.handleBlur("firstName")}
                     />
                     <div className="error ms-2 my-1">
-                      {formik.touched.firstname && formik.errors.firstname}
+                      {formik.touched.firstName && formik.errors.firstName}
                     </div>
                   </div>
                   <div className="flex-grow-1">
@@ -233,12 +261,12 @@ const Checkout = () => {
                       type="text"
                       placeholder="Last Name"
                       className="form-control"
-                      value={formik.values.lastname}
-                      onChange={formik.handleChange("lastname")}
-                      onBlur={formik.handleBlur("lastname")}
+                      value={formik.values.lastName}
+                      onChange={formik.handleChange("lastName")}
+                      onBlur={formik.handleBlur("lastName")}
                     />
                     <div className="error ms-2 my-1">
-                      {formik.touched.lastname && formik.errors.lastname}
+                      {formik.touched.lastName && formik.errors.lastName}
                     </div>
                   </div>
                   <div className="w-100">
