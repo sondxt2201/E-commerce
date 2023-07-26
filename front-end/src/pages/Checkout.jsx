@@ -24,29 +24,13 @@ const shippingSchema = yup.object({
 const Checkout = () => {
   const dispatch = useDispatch();
   const cartState = useSelector(state => state?.auth?.cartProducts);
-  const [shippingInfo, setShippingInfo] = useState(null);
+  const [shippingInfo, setShippingInfo] = useState();
   const [cartProductState, setCartProductState] = useState([]);
-  const [paymentInfo, setPaymentInfo] = useState({
-    razorpayPaymentId: "",
-    razorpayOrderId: "",
-  });
+  const [paymentInfo, setPaymentInfo] = useState();
 
   useEffect(() => {
     dispatch(getUserCart())
   }, [])
-
-  useEffect(() => {
-    let items = []
-    for (let index = 0; index < cartState?.length; index++) {
-      items.push({
-        productId: cartState[index].productId._id,
-        colorId: cartState[index].color._id,
-        quantity: cartState[index].quantity,
-        price: cartState[index].price
-      });
-    }
-    setCartProductState(items);
-  }, []);
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -110,7 +94,7 @@ const Checkout = () => {
       alert("Razorpay SDK failed to load!");
       return;
     }
-    const result = await axios.post("http://localhost:5000/api/user/order/checkout", totalFee(), config)
+    const result = await axios.post("http://localhost:5000/api/user/order/checkout", { amount: totalFee(5) }, config)
     if (!result) {
       alert("Something Went Wrong!")
       return;
@@ -131,12 +115,24 @@ const Checkout = () => {
           // razorpaySignature: response.razorpay_signature,
         }
 
-        setPaymentInfo({
+        const result = await axios.post("http://localhost:5000/api/user/order/paymentVerification", data, config)
+
+        let payment = {
           razorpayPaymentId: response.razorpay_payment_id,
           razorpayOrderId: response.razorpay_order_id,
-        })
+        }
+        setPaymentInfo(payment)
 
-        const result = await axios.post("http://localhost:5000/api/user/order/paymentVerification", data, config)
+        let items = []
+        for (let index = 0; index < cartState?.length; index++) {
+          items.push({
+            product: cartState[index]?.productId?._id,
+            color: cartState[index]?.color?._id,
+            quantity: cartState[index]?.quantity,
+            price: cartState[index]?.price
+          });
+        }
+        setCartProductState(items);
 
         dispatch(createAnOrder({
           totalPrice: totalPrice(),

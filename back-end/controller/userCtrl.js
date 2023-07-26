@@ -573,6 +573,7 @@ const getOrderByOrderId = asyncHandler(async (req, res) => {
 const createOrder = asyncHandler(async (req, res) => {
     const { shippingInfo, orderItems, totalPrice, totalPriceAfterDiscount, paymentInfo } = req.body;
     const { _id } = req.user;
+    console.log(req.body)
     try {
         const order = await Order.create({
             shippingInfo,
@@ -584,7 +585,7 @@ const createOrder = asyncHandler(async (req, res) => {
         })
         res.json({
             order,
-            success: true,
+            success: true
         })
     } catch (error) {
         throw new Error(error)

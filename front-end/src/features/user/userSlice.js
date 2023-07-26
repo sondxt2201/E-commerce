@@ -107,7 +107,7 @@ const initialState = {
     cartProducts: [],
     deletedProduct: {},
     updatedProduct: {},
-    orderedProducts: [],
+    orderedProducts: {},
 };
 
 export const authSlice = createSlice({
