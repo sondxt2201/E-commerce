@@ -6,10 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 const Header = () => {
   const dispatch = useDispatch();
   const cartState = useSelector(state => state?.auth?.cartProducts)
+  const authState = useSelector(state => state.auth)
 
-  // useEffect(() => {
-  //   dispatch(totalPrice())
-  // }, [cartState])
 
   const totalPrice = () => {
     let total = 0;
@@ -29,6 +27,11 @@ const Header = () => {
       });
     }
     return total;
+  }
+
+  const handlelogout = () => {
+    localStorage.clear()
+    window.location.reload()
   }
 
   return (
@@ -90,12 +93,29 @@ const Header = () => {
                     </p>
                   </Link>
                 </div>
-                <div>
-                  <Link className='d-flex align-items-center gap-10 text-white' to="/login">
+                <div className='dropdown-header'>
+                  <Link
+                    to={authState?.user === null ? "/login" : "/user-profile"}
+                    className='d-flex align-items-center gap-10 text-white'
+                  >
                     <img src='images/user.svg' alt='user' />
-                    <p className='mb-0'>
-                      Login <br /> My account
-                    </p>
+                    {
+                      authState?.user === null ? (
+                        <p className='mb-0'>
+                          Login <br /> My account
+                        </p>
+                      ) : (
+                        <div className='mb-0'>
+                          Welcome <br /> {authState?.user?.firstname + " " + authState?.user?.lastname}
+                          <ul class="dropdown-menu-header">
+                            <li>
+                              <span className='border border-0 bg-transparent text-white text-uppercase' type='button' onClick={() => handlelogout()}> Logout</span>
+                            </li>
+                          </ul>
+                        </div>
+                      )
+
+                    }
                   </Link>
                 </div>
                 <div>
@@ -154,6 +174,7 @@ const Header = () => {
                   <div className='d-flex align-items-center gap-15'>
                     <NavLink className='' to='/'>Home</NavLink >
                     <NavLink className='' to='/product'>Our Store</NavLink >
+                    <NavLink className='' to='/user-order'>My Order</NavLink >
                     <NavLink className='' to='/blogs'>Blogs</NavLink >
                     <NavLink className='' to='/contact'>Contact</NavLink >
                   </div>

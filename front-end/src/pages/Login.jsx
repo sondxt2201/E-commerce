@@ -15,12 +15,19 @@ const loginSchema = yup.object({
 });
 
 const Login = () => {
+  const authState = useSelector(state => state?.auth)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [visible, setVisible] = useState(false);
   const togglePassword = () => {
     setVisible(!visible);
   };
+
+  const {
+    isSuccess,
+    isError,
+    isLoading,
+  } = authState;
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -30,9 +37,16 @@ const Login = () => {
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      dispatch(login(values))
+      dispatch(login(values));
+
     },
   })
+
+  useEffect(() => {
+    if (isSuccess == true) {
+      navigate("/")
+    }
+  }, [isSuccess])
 
   return (
     <>

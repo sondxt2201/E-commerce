@@ -17,7 +17,7 @@ var brandSchema = new mongoose.Schema({
 }, {
     timestamps: {
         createdAt: 'createdAt',
-        updatedAt: 'updatedAt'
+        updatedAt: 'updatedAt',
     }
 });
 

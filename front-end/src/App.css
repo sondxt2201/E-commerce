@@ -60,7 +60,7 @@ a {
   font-size: 12px;
 }
 
-.error-large{
+.error-large {
   color: red;
   font-size: 20px;
 }
@@ -121,6 +121,50 @@ a {
 .header-bottom .dropdown-item:hover {
   background-color: transparent;
   color: var(--color-febd69) !important;
+}
+
+
+.dropdown-header {
+  text-align: center;
+  text-decoration: none;
+  z-index: 1;
+  transform: perspective(1000px);
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-menu-header {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  text-align: center;
+  top: 0;
+  visibility: hidden;
+  z-index: -99999;
+}
+
+.dropdown-menu-header li {
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  background-color: #131921;
+  position: relative;
+  top: 15px;
+  left: 20px;
+}
+
+.dropdown-header:hover .dropdown-menu-header {
+  opacity: 1;
+  visibility: visible;
+  top: 100%;
+  width: 100%;
+  -webkit-transition: all .5s, background, 2s .5s linear;
+  transition: all .5s, background 2s .5s linear;
 }
 
 /* Header end */

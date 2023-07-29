@@ -41,12 +41,12 @@ const SingleProduct = () => {
   }, [isSuccess, isError, isLoading]);
 
   useEffect(() => {
-    for (let index = 0; index < cartState.length; index++) {
+    for (let index = 0; index < cartState?.length; index++) {
       if (getProductId === cartState[index]?.productId._id) {
         setAlreadyAdded(true)
       }
     }
-  })
+  },[])
 
   const add2Wishlist = () => {
     // addToWishlist(getProductId);
@@ -160,7 +160,7 @@ const SingleProduct = () => {
                     <h3 className="product-heading">Available:</h3>
                     <p className="product-data">{productState?.quantity > 0 ? productState?.quantity : "Out of Stock"}</p>
                   </div>
-                  <div className="d-flex gap-10 flex-column mt-2 mb-3">
+                  {/* <div className="d-flex gap-10 flex-column mt-2 mb-3">
                     <h3 className="product-heading">Size:</h3>
                     <div className="d-flex flex-wrap gap-15">
                       <span className="badge border border-1 bg-white text-dark border-secondary">
@@ -176,7 +176,7 @@ const SingleProduct = () => {
                         XXL
                       </span>
                     </div>
-                  </div>
+                  </div> */}
                   {alreadyAdded === false
                     && (
                       <div className="d-flex gap-10 flex-column mt-2 mb-3">

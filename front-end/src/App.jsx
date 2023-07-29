@@ -22,6 +22,10 @@ import RefundPolicy from './pages/RefundPolicy';
 import TermAndConditions from './pages/TermAndContions';
 import SingleProduct from './pages/SingleProduct';
 import Checkout from './pages/Checkout';
+import { PrivateRoutes } from './routing/PrivateRoutes';
+import { OpenRoutes } from './routing/OpenRoutes';
+import Order from './pages/Order';
+import Profile from './pages/Profile';
 
 function App() {
   { console.log("Website run at: " + Utility.GetFullDateMinuteString(new Date())) }
@@ -42,13 +46,13 @@ function App() {
             <Route path='product' element={<OurStore />} />
             <Route path='product/:id' element={<SingleProduct />} />
             <Route path='compare-product' element={<CompareProduct />} />
-            <Route path='wish-list' element={<Wishlist />} />
+            <Route path='wish-list' element={<PrivateRoutes><Wishlist /></PrivateRoutes>} />
 
             {/* auth */}
-            <Route path='login' element={<Login />} />
-            <Route path='sign-up' element={<Signup />} />
+            <Route path='login' element={<OpenRoutes><Login /></OpenRoutes>} />
+            <Route path='sign-up' element={<OpenRoutes><Signup /></OpenRoutes>} />
             <Route path='forgot-password' element={<Forgotpassword />} />
-            <Route path='reset-password' element={<Resetpassword />} />
+            <Route path='reset-password/:token' element={<Resetpassword />} />
 
             {/* information */}
             <Route path='privacy-policy' element={<PrivacyPolicy />} />
@@ -57,8 +61,14 @@ function App() {
             <Route path='term-and-conditions' element={<TermAndConditions />} />
 
             {/* cart */}
-            <Route path='cart' element={<Cart />} />
-            <Route path='check-out' element={<Checkout />} />
+            <Route path='cart' element={<PrivateRoutes><Cart /></PrivateRoutes>} />
+            <Route path='check-out' element={<PrivateRoutes><Checkout /></PrivateRoutes>} />
+
+            {/* order */}
+            <Route path='user-order' element={<PrivateRoutes><Order /></PrivateRoutes>} />
+
+            {/* profile */}
+            <Route path='user-profile' element={<PrivateRoutes><Profile /></PrivateRoutes>} />
 
           </Route>
         </Routes>
