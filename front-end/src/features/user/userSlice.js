@@ -153,6 +153,7 @@ const initialState = {
     orderedProducts: {},
     getOrderedProducts: [],
     updatedUser: {},
+    deletedCart: {}
 };
 
 export const authSlice = createSlice({

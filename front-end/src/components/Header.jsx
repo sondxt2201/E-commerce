@@ -1,13 +1,32 @@
-import React, { useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
+import { Typeahead } from 'react-bootstrap-typeahead';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
+
 
 const Header = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartState = useSelector(state => state?.auth?.cartProducts)
   const authState = useSelector(state => state.auth)
+  const productState = useSelector(state => state?.product?.products)
+  const [paginate, setPaginate] = useState(true);
+  const [productOpt, setProductOpt] = useState([]);
 
+  useEffect(() => {
+    let data = [];
+    for (let index = 0; index < productState.length; index++) {
+      const element = productState[index]
+      data.push({
+        id: index,
+        prod: element?._id,
+        name: element?.title
+      })
+    }
+    setProductOpt(data);
+  }, [productState])
 
   const totalPrice = () => {
     let total = 0;
@@ -64,12 +83,18 @@ const Header = () => {
             </div>
             <div className='col-5'>
               <div className="input-group">
-                <input
-                  type="text"
-                  className="form-control py-2"
-                  placeholder="Search Product Here..."
-                  aria-label="Search Product Here..."
-                  aria-describedby="basic-addon2" />
+                <Typeahead
+                  id="pagination-example"
+                  onPaginate={() => console.log('Results paginated')}
+                  options={productOpt}
+                  paginate={paginate}
+                  labelKey={"name"}
+                  placeholder="Search for Products..."
+                  minLength={2}
+                  onChange={(values) => {
+                    navigate(`/product/${values[0]?.prod}`)
+                  }}
+                />
                 <span className="input-group-text p-3" id="basic-addon2">
                   <BsSearch className='fs-6' />
                 </span>
@@ -107,7 +132,7 @@ const Header = () => {
                       ) : (
                         <div className='mb-0'>
                           Welcome <br /> {authState?.user?.firstname + " " + authState?.user?.lastname}
-                          <ul class="dropdown-menu-header">
+                          <ul className="dropdown-menu-header">
                             <li>
                               <span className='border border-0 bg-transparent text-white text-uppercase' type='button' onClick={() => handlelogout()}> Logout</span>
                             </li>

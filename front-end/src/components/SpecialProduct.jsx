@@ -40,7 +40,6 @@ const SpecialProduct = (props) => {
                 }}
                 onClick={() => {
                   navigate(`/product/${data?._id}`)
-                  console.log("test")
                 }}
               >
                 <h5 className="brand">{data?.brand}</h5>

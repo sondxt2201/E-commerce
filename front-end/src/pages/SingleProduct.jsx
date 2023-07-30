@@ -11,7 +11,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import watch from "../assets/images/watch.jpg";
 import watch2 from "../assets/images/watch-1.avif";
 import { useDispatch, useSelector } from "react-redux";
-import { addToWishlist, getAProduct } from "../features/products/productSlice";
+import { addRating, addToWishlist, getAProduct, getAllProduct } from "../features/products/productSlice";
 import { toast } from "react-toastify";
 import { addProd2Cart, getUserCart } from "../features/user/userSlice";
 
@@ -24,21 +24,24 @@ const SingleProduct = () => {
   const [color, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [alreadyAdded, setAlreadyAdded] = useState(false);
+  const [orderedProduct, setorderedProduct] = useState(true);
+  const [popularProduct, setPopularProduct] = useState([]);
+  const [star, setStar] = useState(null);
+  const [comment, setComment] = useState(null);
 
   const getProductId = location.pathname.split("/")[2];
   const productState = useSelector(state => state?.product?.product)
+  const lstProductState = useSelector(state => state?.product?.products)
   const cartState = useSelector(state => state?.auth?.cartProducts)
 
-  const {
-    isSuccess,
-    isError,
-    isLoading,
-  } = productState;
+  console.log(lstProductState)
 
   useEffect(() => {
     dispatch(getAProduct(getProductId));
     dispatch(getUserCart());
-  }, [isSuccess, isError, isLoading]);
+    dispatch(getAllProduct());
+    // add2Wishlist();
+  }, []);
 
   useEffect(() => {
     for (let index = 0; index < cartState?.length; index++) {
@@ -46,10 +49,10 @@ const SingleProduct = () => {
         setAlreadyAdded(true)
       }
     }
-  },[])
+  }, [])
 
   const add2Wishlist = () => {
-    // addToWishlist(getProductId);
+    addToWishlist(getProductId);
   }
 
   const add2Cart = () => {
@@ -77,7 +80,6 @@ const SingleProduct = () => {
       : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"
   };
 
-  const [orderedProduct, setorderedProduct] = useState(true);
   const copyToClipboard = (text) => {
     console.log("text", text);
     var textField = document.createElement("textarea");
@@ -87,11 +89,42 @@ const SingleProduct = () => {
     document.execCommand("copy");
     textField.remove();
   };
+
   const closeModal = () => { };
+
+  useEffect(() => {
+    let data = [];
+    for (let index = 0; index < lstProductState?.length; index++) {
+      const element = lstProductState[index];
+      if (element?.tags === 'popular') {
+        data.push(element)
+      }
+      setPopularProduct(data)
+    }
+  }, [])
+
+
+  const addRatingProduct = () => {
+    if (star == null) {
+      toast.error("Please add star rating!")
+      return false;
+    }
+    if (comment == null) {
+      toast.error("Please write the review about the product!")
+      return false;
+    } else {
+      dispatch(addRating({
+        star: star,
+        comment: comment,
+        prodId: getProductId
+      }))
+    }
+  }
+
   return (
     <>
       <Meta title={"Product Name"} />
-      <BreadCrumb title="Product Name" />
+      <BreadCrumb title={productState?.title} />
       <section className="main-product-wrapper py-5 home-wrapper-2">
         <div className="container-xxl">
           <div className="row">
@@ -242,7 +275,7 @@ const SingleProduct = () => {
                     <p className="product-data">
                       Free shipping and returns available on all orders! <br /> We
                       ship all US domestic orders within
-                      <b>5-10 business days!</b>
+                      <b> 5-10 business days!</b>
                     </p>
                   </div>
                   <div className="d-flex gap-10 align-items-center my-3">
@@ -292,11 +325,11 @@ const SingleProduct = () => {
                       <ReactStars
                         count={5}
                         size={24}
-                        value={4}
+                        value={parseInt(productState?.totalrating)}
                         edit={false}
                         activeColor="#ffd700"
                       />
-                      <p className="mb-0">Based on 2 Reviews</p>
+                      <p className="mb-0">Based on {productState?.ratings?.length} Reviews</p>
                     </div>
                   </div>
                   {orderedProduct && (
@@ -309,58 +342,65 @@ const SingleProduct = () => {
                 </div>
                 <div className="review-form py-4">
                   <h4>Write a Review</h4>
-                  <form action="" className="d-flex flex-column gap-15">
-                    <div>
-                      <ReactStars
-                        count={5}
-                        size={24}
-                        value={4}
-                        edit={true}
-                        activeColor="#ffd700"
-                      />
-                    </div>
-                    <div>
-                      <textarea
-                        name=""
-                        id=""
-                        className="w-100 form-control"
-                        cols="30"
-                        rows="4"
-                        placeholder="Comments"
-                      ></textarea>
-                    </div>
-                    <div className="d-flex justify-content-end">
-                      <button className="button border-0">Submit Review</button>
-                    </div>
-                  </form>
+                  <div>
+                    <ReactStars
+                      count={5}
+                      size={24}
+                      value={4}
+                      edit={true}
+                      activeColor="#ffd700"
+                      onChange={(e) => {
+                        setStar(e)
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <textarea
+                      name=""
+                      id=""
+                      className="w-100 form-control"
+                      cols="30"
+                      rows="4"
+                      placeholder="Comments"
+                      onChange={(e) => {
+                        setComment(e.target.value)
+                      }}
+                    ></textarea>
+                  </div>
+                  <div className="d-flex justify-content-end mt-3">
+                    <button className="button border-0" type="button" onClick={addRatingProduct}>Submit Review</button>
+                  </div>
                 </div>
                 <div className="reviews mt-4">
-                  <div className="review">
-                    <div className="d-flex gap-10 align-items-center">
-                      <h6 className="mb-0">SonDXT</h6>
-                      <ReactStars
-                        count={5}
-                        size={24}
-                        value={4}
-                        edit={false}
-                        activeColor="#ffd700"
-                      />
-                    </div>
-                    <p className="mt-3">
-                      Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                      Consectetur fugit ut excepturi quos. Id reprehenderit
-                      voluptatem placeat consequatur suscipit ex. Accusamus dolore
-                      quisquam deserunt voluptate, sit magni perspiciatis quas
-                      iste?
-                    </p>
-                  </div>
+                  {productState && productState?.ratings?.map((item, index) => {
+                    return (
+                      <div className="review" key={index}>
+                        <div className="d-flex gap-10 align-items-center">
+                          <ReactStars
+                            count={5}
+                            size={24}
+                            value={item?.star}
+                            edit={false}
+                            activeColor="#ffd700"
+                            onChange={() => {
+
+                            }}
+                          />
+                        </div>
+                        <p className="mt-3">
+                          {item?.comment}
+                        </p>
+                      </div>
+                    )
+                  })}
+
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section className="popular-wrapper py-5 home-wrapper-2">
+      {/* <section className="popular-wrapper py-5 home-wrapper-2">
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
@@ -368,10 +408,12 @@ const SingleProduct = () => {
             </div>
           </div>
           <div className="row">
-            <ProductCard />
+            <ProductCard
+              data={popularProduct}
+            />
           </div>
         </div>
-      </section>
+      </section> */}
       <div
         className="modal fade"
         id="staticBackdrop"

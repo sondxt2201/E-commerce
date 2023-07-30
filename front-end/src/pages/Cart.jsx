@@ -73,12 +73,12 @@ const Cart = () => {
                       </div>
                       <div className="w-75">
                         <p className="">{item?.productId?.title}</p>
-                        <p className="d-flex gap-3">Color:
+                        <div className="d-flex gap-3">Color:
                           <ul className="colors ps-0">
                             <li style={{ backgroundColor: item?.color?.title }} ></li>
                           </ul>
                           <span>{ntc.name(item?.color?.title)[1]}</span>
-                        </p>
+                        </div>
                       </div>
                     </div>
                     <div className="cart-col-2">

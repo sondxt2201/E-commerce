@@ -156,7 +156,6 @@ const rating = asyncHandler(async (req, res) => {
     validateMongoDbId(prodId);
     try {
         const product = await Product.findById(prodId);
-        console.log(product)
         let alreadyRated = product.ratings.find((userId) => userId.postedBy.toString() === _id.toString());
         if (alreadyRated) {
             const updateRating = await Product.updateOne(

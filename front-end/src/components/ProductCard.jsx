@@ -45,7 +45,7 @@ const ProductCard = (props) => {
             <img
               className="img-fluid mx-auto"
               alt="product image"
-              src={data?.images[0]?.url
+              src={(data?.images[0] !== undefined)
                 ? data?.images[0]?.url
                 : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"}
               style={{
@@ -56,8 +56,8 @@ const ProductCard = (props) => {
             <img
               className="img-fluid mx-auto"
               alt="product image"
-              src={data?.images[1]?.url
-                ? data?.images[1]?.url
+              src={(data?.images[0] !== undefined)
+                ? data?.images[0]?.url
                 : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"}
               style={{
                 height: '270px',

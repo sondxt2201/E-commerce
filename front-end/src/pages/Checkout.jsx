@@ -23,6 +23,7 @@ const shippingSchema = yup.object({
 
 const Checkout = () => {
   const dispatch = useDispatch();
+  const userState = useSelector(state => state?.auth?.user)
   const cartState = useSelector(state => state?.auth?.cartProducts);
   const [shippingInfo, setShippingInfo] = useState();
   const [cartProductState, setCartProductState] = useState([]);
@@ -143,9 +144,9 @@ const Checkout = () => {
         }))
       },
       prefill: {
-        name: "SonDXT",
-        email: "Son.dxt182755@sis.hust.edu.vn",
-        contact: "+84 848445844",
+        name: `${userState?.firstname} ${userState.lastname}`,
+        email: `${userState?.email}`,
+        contact: `${userState?.mobile}`,
       },
       notes: {
         address: "Số 1 Đại Cồ Việt, Hai Bà Trưng, Hà Nội",
@@ -172,7 +173,7 @@ const Checkout = () => {
                   style={{ "--bs-breadcrumb-divider": ">" }}
                   aria-label="breadcrumb"
                 >
-                  <ol className="breadcrumb">
+                  {/* <ol className="breadcrumb">
                     <li className="breadcrumb-item">
                       <Link className="text-dark total-price"
                         to="/cart"
@@ -180,32 +181,35 @@ const Checkout = () => {
                         Cart/
                       </Link>
                     </li>
-                    {/* &nbsp; / &nbsp; */}
                     <li
                       className="breadcrumb-item total-price active"
                       aria-current="page"
                     >
                       Information/
                     </li>
-                    {/* &nbsp; / &nbsp; */}
                     <li
                       className="breadcrumb-item total-price active"
                       aria-current="page"
                     >
                       Shipping/
                     </li>
-                    {/* &nbsp; / &nbsp; */}
                     <li
                       className="breadcrumb-item total-price active"
                       aria-current="page"
                     >
                       Payment
                     </li>
-                  </ol>
+                  </ol> */}
                 </nav>
                 <h4 className="title total">Contact Information</h4>
                 <p className="user-details total">
-                  SonDXT (SON.DXT182755@sis.hust.edu.vn)
+                  Name: {userState?.firstname} {userState.lastname}
+                </p>
+                <p className="user-details total">
+                  Email: {userState?.email}
+                </p>
+                <p className="user-details total">
+                  Phone Number: {userState?.mobile}
                 </p>
                 <h4 className="mb-3">Shipping Address</h4>
                 <form
@@ -346,9 +350,9 @@ const Checkout = () => {
                         <BiArrowBack className="me-2" />
                         Return to Cart
                       </Link>
-                      <Link to="/cart" className="button">
+                      {/* <Link to="/cart" className="button">
                         Continue to Shipping
-                      </Link>
+                      </Link> */}
                       <button className="button" type="submit">
                         Place Order
                       </button>

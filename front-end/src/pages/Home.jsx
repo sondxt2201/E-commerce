@@ -348,7 +348,7 @@ const Home = () => {
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
-              <h3 className="section-heading">Our Popular Products</h3>
+              <h3 className="section-heading">Popular Products</h3>
             </div>
           </div>
           <div className="row" >
