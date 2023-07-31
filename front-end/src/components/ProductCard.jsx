@@ -88,15 +88,15 @@ const ProductCard = (props) => {
           </div>
           <div className="action-bar position-absolute">
             <div className="d-flex flex-column gap-15">
-              <button className="border-0 bg-transparent">
+              {/* <button className="border-0 bg-transparent">
                 <img src={prodcompare} alt="compare" />
-              </button>
+              </button> */}
               <Link className="border-0 bg-transparent" to={`/product/${data?._id}`}>
                 <img src={view} alt="view" />
               </Link>
-              <button className="border-0 bg-transparent">
+              {/* <button className="border-0 bg-transparent">
                 <img src={addcart} alt="addcart" />
-              </button>
+              </button> */}
             </div>
           </div>
         </div>

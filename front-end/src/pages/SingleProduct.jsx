@@ -25,7 +25,6 @@ const SingleProduct = () => {
   const [quantity, setQuantity] = useState(1);
   const [alreadyAdded, setAlreadyAdded] = useState(false);
   const [orderedProduct, setorderedProduct] = useState(true);
-  const [popularProduct, setPopularProduct] = useState([]);
   const [star, setStar] = useState(null);
   const [comment, setComment] = useState(null);
 
@@ -40,7 +39,6 @@ const SingleProduct = () => {
     dispatch(getAProduct(getProductId));
     dispatch(getUserCart());
     dispatch(getAllProduct());
-    // add2Wishlist();
   }, []);
 
   useEffect(() => {
@@ -91,18 +89,6 @@ const SingleProduct = () => {
   };
 
   const closeModal = () => { };
-
-  useEffect(() => {
-    let data = [];
-    for (let index = 0; index < lstProductState?.length; index++) {
-      const element = lstProductState[index];
-      if (element?.tags === 'popular') {
-        data.push(element)
-      }
-      setPopularProduct(data)
-    }
-  }, [])
-
 
   const addRatingProduct = () => {
     if (star == null) {
@@ -189,10 +175,10 @@ const SingleProduct = () => {
                     <h3 className="product-heading">Tags:</h3>
                     <p className="product-data">{productState?.tags}</p>
                   </div>
-                  <div className="d-flex gap-10 align-items-center my-2">
+                  {/* <div className="d-flex gap-10 align-items-center my-2">
                     <h3 className="product-heading">Available:</h3>
                     <p className="product-data">{productState?.quantity > 0 ? productState?.quantity : "Out of Stock"}</p>
-                  </div>
+                  </div> */}
                   {/* <div className="d-flex gap-10 flex-column mt-2 mb-3">
                     <h3 className="product-heading">Size:</h3>
                     <div className="d-flex flex-wrap gap-15">
@@ -254,22 +240,22 @@ const SingleProduct = () => {
                       <button className="button signup">Buy It Now</button>
                     </div>
                   </div>
-                  <div className="d-flex align-items-center gap-15">
+                  {/* <div className="d-flex align-items-center gap-15">
                     <div>
                       <a href="">
                         <TbGitCompare className="fs-5 me-2" /> Add to Compare
                       </a>
                     </div>
                     <div
-                    // onClick={() =>
-                    //   add2Wishlist()
-                    // }
+                    onClick={() =>
+                      add2Wishlist()
+                    }
                     >
                       <a href="">
                         <AiOutlineHeart className="fs-5 me-2" /> Add to Wishlist
                       </a>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="d-flex gap-10 flex-column  my-3">
                     <h3 className="product-heading">Shipping & Returns :</h3>
                     <p className="product-data">
@@ -400,7 +386,7 @@ const SingleProduct = () => {
           </div>
         </div>
       </section>
-      {/* <section className="popular-wrapper py-5 home-wrapper-2">
+      <section className="popular-wrapper py-5 home-wrapper-2">
         <div className="container-xxl">
           <div className="row">
             <div className="col-12">
@@ -408,12 +394,21 @@ const SingleProduct = () => {
             </div>
           </div>
           <div className="row">
-            <ProductCard
+            {lstProductState && lstProductState?.map((item, index) => {
+              if (item.tags === "popular")
+                return (
+                  <ProductCard
+                    key={index}
+                    data={item}
+                  />
+                )
+            })}
+            {/* <ProductCard
               data={popularProduct}
-            />
+            /> */}
           </div>
         </div>
-      </section> */}
+      </section>
       <div
         className="modal fade"
         id="staticBackdrop"
