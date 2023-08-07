@@ -10,6 +10,7 @@ const fs = require("fs");
 const createBlog = asyncHandler(async (req, res) => {
     try {
         const newBlog = await Blog.create(req.body);
+        console.log(req.body)
         res.json(newBlog);
     } catch (error) {
         throw new Error(error)

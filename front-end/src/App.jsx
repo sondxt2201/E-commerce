@@ -26,6 +26,7 @@ import { PrivateRoutes } from './routing/PrivateRoutes';
 import { OpenRoutes } from './routing/OpenRoutes';
 import Order from './pages/Order';
 import Profile from './pages/Profile';
+import Faq from './pages/Faq';
 
 function App() {
   { console.log("Website run at: " + Utility.GetFullDateMinuteString(new Date())) }
@@ -59,6 +60,10 @@ function App() {
             <Route path='shipping-policy' element={<ShippingPolicy />} />
             <Route path='refund-policy' element={<RefundPolicy />} />
             <Route path='term-and-conditions' element={<TermAndConditions />} />
+            <Route path='about-us' element={<About />} />
+            <Route path='faq' element={<Faq />} />
+
+
 
             {/* cart */}
             <Route path='cart' element={<PrivateRoutes><Cart /></PrivateRoutes>} />

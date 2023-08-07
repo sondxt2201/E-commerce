@@ -38,15 +38,21 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       dispatch(login(values));
-
     },
   })
 
   useEffect(() => {
-    if (isSuccess == true) {
+    if (authState.user !== null && authState.isError === false) {
       navigate("/")
     }
-  }, [isSuccess])
+  }, [authState])
+
+
+  // useEffect(() => {
+  //   if (isSuccess == true) {
+  //     navigate("/")
+  //   }
+  // }, [isSuccess])
 
   return (
     <>

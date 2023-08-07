@@ -5,6 +5,7 @@ import {
   AiOutlineShoppingCart,
   AiOutlineUser,
   AiOutlineBgColors,
+  AiOutlineLogout
 } from "react-icons/ai";
 import { RiCouponLine } from "react-icons/ri";
 import { ToastContainer } from "react-toastify";
@@ -29,6 +30,10 @@ const MainLayout = () => {
     token: { colorBgContainer },
   } = theme.useToken();
   const navigate = useNavigate();
+  const handlelogout = () => {
+    localStorage.clear()
+    navigate('/')
+  }
   return (
     <Layout /* onContextMenu={(e) => e.preventDefault()} */>
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -45,6 +50,9 @@ const MainLayout = () => {
           defaultSelectedKeys={[""]}
           onClick={({ key }) => {
             if (key === "signout") {
+              localStorage.clear()
+              // window.location.reload()
+              navigate('/')
             } else {
               navigate(key);
             }
@@ -157,10 +165,15 @@ const MainLayout = () => {
               ],
             },
             {
-              key: "enquiries",
-              icon: <FaClipboardList className="fs-4" />,
-              label: "Enquiries",
+              key: "signout",
+              icon: <AiOutlineLogout className="fs-4" />,
+              label: "Logout",
             },
+            // {
+            //   key: "enquiries",
+            //   icon: <FaClipboardList className="fs-4" />,
+            //   label: "Enquiries",
+            // },
           ]}
         />
       </Sider>
@@ -183,7 +196,7 @@ const MainLayout = () => {
             <div className="position-relative">
               <IoIosNotifications className="fs-4" />
               <span className="badge bg-warning rounded-circle p-1 position-absolute">
-                3
+                
               </span>
             </div>
 
@@ -218,15 +231,16 @@ const MainLayout = () => {
                     View Profile
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     className="dropdown-item py-1 mb-1"
                     style={{ height: "auto", lineHeight: "20px" }}
                     to="/"
+                    onClick={() => handlelogout()}
                   >
                     Signout
                   </Link>
-                </li>
+                </li> */}
               </div>
             </div>
           </div>

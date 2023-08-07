@@ -7,7 +7,7 @@ import * as ntc from "ntcjs";
 
 const Order = () => {
     const dispatch = useDispatch();
-    const orderState = useSelector(state => state?.auth?.getOrderedProducts.orders)
+    const orderState = useSelector(state => state?.auth?.getOrderedProducts?.orders)
 
     console.log(orderState)
 

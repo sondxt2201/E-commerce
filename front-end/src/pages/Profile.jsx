@@ -58,7 +58,6 @@ const Profile = () => {
                                         name="firstname"
                                         className="form-control"
                                         id="firstname"
-                                        // aria-describedby="emailHelp"
                                         value={formik.values.firstname}
                                         onChange={formik.handleChange("firstname")}
                                         onBlur={formik.handleBlur("firstname")}

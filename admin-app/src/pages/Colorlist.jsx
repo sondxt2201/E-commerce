@@ -6,6 +6,8 @@ import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import CustomModal from "../components/CustomModal";
+import * as ntc from "ntcjs";
+
 
 const columns = [
   {
@@ -42,7 +44,7 @@ const Colorlist = () => {
   for (let i = 0; i < colorState.length; i++) {
     data1.push({
       key: i + 1,
-      name: colorState[i].title,
+      name: ntc.name(colorState[i].title)[1],
       action: (
         <>
           <Link

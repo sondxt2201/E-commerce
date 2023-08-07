@@ -23,12 +23,23 @@ const getProduct = asyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongoDbId(id);
     try {
-        const findProduct = await Product.findById(id).populate("Color");
+        const findProduct = await Product.findById(id).populate("color");
         res.json(findProduct);
     } catch (error) {
         throw new Error(error);
     }
 });
+
+// Get product - admin page
+const getAllProds = asyncHandler(async (req, res) => {
+    try {
+        const allProds = await Product.find().populate("color");
+        res.json(allProds);
+    } catch (error) {
+        throw new Error(error);
+    }
+});
+
 
 // Get all product
 const getallProduct = asyncHandler(async (req, res) => {
@@ -216,4 +227,5 @@ module.exports = {
     deleteProduct,
     add2wishlist,
     rating,
+    getAllProds
 }

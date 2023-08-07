@@ -22,15 +22,19 @@ const {
     getUserCart,
     emptyCart,
     createOrder,
-    applyCoupon,
-    getOrder,
-    updateOrderStatus,
     getAllOrder,
-    getOrderByUserId,
     getOrderByOrderId,
     removeProductFromCart,
     updateProductQuantity,
-    getMyOrders
+    getMyOrders,
+    getOrderByUserId,
+    applyCoupon,
+    getOrder,
+    updateOrderStatus,
+    getMonthWiseOrderIncome,
+    getMonthWiseOrderCount,
+    getYearlyTotalOrders,
+    updateOrder,
 } = require("../controller/userCtrl");
 const { checkout, paymentVerification, createURL, IPN, returnURL } = require("../controller/paymentCtrl");
 const router = express.Router();
@@ -56,24 +60,27 @@ router.get("/refresh", handleRefreshToken);
 router.get("/all-users", getallUser);
 router.get("/logout", logoutUser);
 router.get("/wishlist", authMiddleware, getWishlist);
+router.get("/order/get-order", authMiddleware, getMyOrders);
+router.get("/order/all-order", authMiddleware, isAdmin, getAllOrder);
+router.get("/getMonthWiseOrderIncome", authMiddleware, getMonthWiseOrderIncome);
+router.get("/getYearlyTotalOrders", authMiddleware, getYearlyTotalOrders);
+router.get("/getYearlyOrders", authMiddleware, getYearlyTotalOrders);
 router.get("/:id", authMiddleware, isAdmin, getUser);
 router.get("/order/order-by-id/:id", authMiddleware, isAdmin, getOrderByOrderId);
-router.get("/order/get-order", authMiddleware, getMyOrders);
+router.get("/order/order-by-user/:id", authMiddleware, isAdmin, getOrderByUserId);
 
-// router.get("/order/order-by-user/:id", authMiddleware, isAdmin, getOrderByUserId);
 // router.get("/order/get-order", authMiddleware, getOrder);
-// router.get("/order/all-order", authMiddleware, isAdmin, getAllOrder);
 
 
 // PUT
 router.put("/edit-user", authMiddleware, updateUser);
 router.put("/save-address", authMiddleware, saveAddress);
 router.put("/password", authMiddleware, updatePassword);
+router.put("/update-order/:id", authMiddleware,isAdmin, updateOrder);
 router.put("/reset-password/:token", resetPassword);
 router.put("/block-user/:id", authMiddleware, isAdmin, blockUser);
 router.put("/unblock-user/:id", authMiddleware, isAdmin, unblockUser);
 router.put("/reactive-user/:id", authMiddleware, isAdmin, reActiveUser);
-// router.put("/order/update-order/:id", authMiddleware, isAdmin, updateOrderStatus);
 
 
 // DELETE

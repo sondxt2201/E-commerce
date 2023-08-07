@@ -5,6 +5,8 @@ import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
 import { getOrderByUserId, getOrders, getOrderByOrderId } from "../features/auth/authSlice";
+import * as ntc from "ntcjs";
+
 const columns = [
   {
     title: "SNo",
@@ -50,7 +52,7 @@ const ViewOrder = () => {
     dispatch(getOrderByOrderId(orderId));
   }, []);
 
-  const orderState = useSelector((state) => state.auth.order.products);
+  const orderState = useSelector((state) => state.auth.order.orderItems);
   const data1 = [];
   if (orderState) {
     for (let i = 0; i < orderState.length; i++) {
@@ -60,8 +62,8 @@ const ViewOrder = () => {
         brand: orderState[i]?.product?.brand,
         amount: orderState[i]?.product?.price,
         date: orderState[i]?.product?.createdAt,
-        color: orderState[i]?.color,
-        count: orderState[i]?.count,
+        color: ntc.name(orderState[i]?.product?.color.find(x => x._id == orderState[i]?.color).value)[1],
+        count: orderState[i]?.quantity,
         action: (
           <>
             <Link to="/" className=" fs-3 text-danger">

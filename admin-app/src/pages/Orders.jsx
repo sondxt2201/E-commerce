@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BiEdit } from "react-icons/bi";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { getOrders } from "../features/auth/authSlice";
+import { getOrders, updateOrders } from "../features/auth/authSlice";
 
 const columns = [
   {
@@ -40,28 +40,37 @@ const Orders = () => {
     dispatch(getOrders());
   }, []);
 
+  const updateOrderStatus = (id, status) => {
+    dispatch(updateOrders({id: id, status: status }))
+  }
+
   const orderState = useSelector((state) => state.auth.orders);
   console.log(orderState)
   const data1 = [];
   for (let i = 0; i < orderState.length; i++) {
     data1.push({
       key: i + 1,
-      name: orderState[i].orderBy.firstname,
+      name: orderState[i].shippingInfo.firstName,
       product: (
         <Link to={`/admin/order/${orderState[i]._id}`}>
           View Orders
         </Link>
       ),
-      amount: orderState[i].paymentIntent.amount,
+      amount: orderState[i].totalPriceAfterDiscount,
       date: new Date(orderState[i].createdAt).toLocaleString(),
       action: (
         <>
-          <Link to="/" className=" fs-3 text-danger">
-            <BiEdit />
-          </Link>
-          <Link className="ms-3 fs-3 text-danger" to="/">
-            <AiFillDelete />
-          </Link>
+          <select name="" id=""
+            className="form-control form-select"
+            onChange={(e) => updateOrderStatus(orderState[i]?._id, e.target.value)}
+            defaultValue={orderState[i]?.orderStatus}
+          >
+            <option value="Ordered" selected>Ordered</option>
+            <option value="Processed">Processed</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Out for Delivery">Out for Delivery</option>
+            <option value="Delivered">Delivered</option>
+          </select>
         </>
       ),
     });

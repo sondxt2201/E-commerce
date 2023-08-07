@@ -48,8 +48,8 @@ function App() {
           <Route path='customers' element={<Customers />} />
 
           {/* Enquiry */}
-          <Route path='enquiries' element={<Enquiries />} />
-          <Route path="enquiries/:id" element={<ViewEnq />} />
+          {/* <Route path='enquiries' element={<Enquiries />} />
+          <Route path="enquiries/:id" element={<ViewEnq />} /> */}
 
           {/* Order */}
           <Route path='orders' element={<Orders />} />

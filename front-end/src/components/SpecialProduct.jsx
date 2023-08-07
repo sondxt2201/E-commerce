@@ -18,7 +18,7 @@ const SpecialProduct = (props) => {
     <>
       <div className="col-6 mb-3">
         <div className="special-product-card">
-          <div className="d-flex justify-content-between">
+          <div className="d-flex justify-content-evenly">
             <Link to={`/product/${data?._id}`}>
               <img
                 alt="watch"
@@ -33,7 +33,7 @@ const SpecialProduct = (props) => {
 
               />
             </Link>
-            <div className="special-product-content" >
+            <div className="special-product-content p-2" >
               <div
                 style={{
                   cursor: "pointer"
@@ -55,7 +55,7 @@ const SpecialProduct = (props) => {
               <p className="price">
                 <span className="red-p">{`$${data?.price}`}</span> &nbsp; <strike>{`$${data?.price + 500}`}</strike>
               </p>
-              <div className="discount-till d-flex align-items-center gap-10">
+              {/* <div className="discount-till d-flex align-items-center gap-10">
                 <p className="mb-0">
                   <b>5 </b>days
                 </p>
@@ -64,7 +64,7 @@ const SpecialProduct = (props) => {
                   <span className="badge rounded-circle p-3 bg-danger">1</span>:
                   <span className="badge rounded-circle p-3 bg-danger">1</span>
                 </div>
-              </div>
+              </div> */}
               <div className="prod-count my-3">
                 <p>Products: {data?.quantity}</p>
                 <div className="progress">

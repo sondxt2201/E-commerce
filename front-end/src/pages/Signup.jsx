@@ -1,13 +1,13 @@
-import {React, useEffect} from "react";
+import { React, useEffect } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import CustomInput from "../components/CustomInput";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../features/user/userSlice";
 import * as yup from 'yup';
 import { useFormik } from "formik";
-import { toast } from 'react-toastify'; 
+import { toast } from 'react-toastify';
 
 
 const signupSchema = yup.object({
@@ -20,22 +20,8 @@ const signupSchema = yup.object({
 
 const Signup = () => {
   const dispatch = useDispatch();
-  const signupState = useSelector((state) => state.auth);
-  const {
-    isSuccess,
-    isError,
-    isLoading,
-    createdUser
-  } = signupState;
-
-  useEffect(() => {
-    if (isSuccess && createdUser) {
-      toast.success("User Added Successfully!");
-    }
-    if (isError) {
-      toast.error("Something Went Wrong!");
-    }
-  }, [isSuccess, isError, isLoading]);
+  const navigate = useNavigate();
+  const authState = useSelector((state) => state?.auth);
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -51,6 +37,12 @@ const Signup = () => {
       dispatch(registerUser(values))
     },
   })
+
+  useEffect(() => {
+    if (authState?.createdUser !== undefined && authState.isError === false) {
+      navigate("/login")
+    }
+  }, [authState])
 
 
   return (

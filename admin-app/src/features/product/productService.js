@@ -3,7 +3,7 @@ import { config } from "../../utils/axiosconfig";
 import { base_url } from "../../utils/baseUrl";
 
 const getProducts = async () => {
-  const response = await axios.get(`${base_url}product/all-product`);
+  const response = await axios.get(`${base_url}product/admin/all-prod`);
 
   return response.data;
 };
@@ -25,12 +25,13 @@ const updateProduct = async (product) => {
       brand: product.productData.brand,
       quantity: product.productData.quantity,
       tags: product.productData.tags,
-      color: product.colors,
+      color: product.color,
       images: product.images
     },
     config
   );
-
+  console.log(product)
+  console.log(response.data)
   return response.data;
 };
 

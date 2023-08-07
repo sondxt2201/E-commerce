@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteAProduct, getProducts } from "../features/product/productSlice";
 import { Link } from "react-router-dom";
 import CustomModal from "../components/CustomModal";
+import { getColors } from "../features/color/colorSlice";
+import * as ntc from "ntcjs";
 
 const columns = [
   {
@@ -45,6 +47,8 @@ const columns = [
 const Productlist = () => {
   const [open, setOpen] = useState(false);
   const [productId, setproductId] = useState("");
+  const colorState = useSelector((state) => state.color.colors);
+  const productState = useSelector((state) => state.product.products);
 
   const showModal = (e) => {
     setOpen(true);
@@ -58,9 +62,9 @@ const Productlist = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProducts());
+    dispatch(getColors());
   }, []);
 
-  const productState = useSelector((state) => state.product.products);
   const data1 = [];
   for (let i = 0; i < productState.length; i++) {
     data1.push({
@@ -68,7 +72,7 @@ const Productlist = () => {
       title: productState[i]?.title,
       brand: productState[i]?.brand,
       category: productState[i]?.category,
-      color: productState[i]?.color?.map(item => item?.value).join(","),
+      color: productState[i]?.color?.map(item => ntc.name(item?.title)[1]).join(","),
       price: productState[i]?.price,
       action: (
         <>

@@ -77,9 +77,10 @@ const Addblog = () => {
       url: i.url,
     });
   });
+  
   useEffect(() => {
     formik.values.images = img;
-  }, [blogImages]);
+  }, []);
 
   const formik = useFormik({
     enableReinitialize: true,
@@ -87,7 +88,7 @@ const Addblog = () => {
       title: blogName || "",
       description: blogDesc || "",
       category: blogCategory || "",
-      images: blogImages || {},
+      images: blogImages || "",
     },
     validationSchema: schema,
     onSubmit: (values) => {

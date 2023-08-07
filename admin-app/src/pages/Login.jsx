@@ -91,9 +91,9 @@ const Login = () => {
             <span className='pointer' onClick={togglePassword}>
               {visible === false ? <FaEye /> : <FaEyeSlash />}
             </span>
-            <Link to='forgot-password' className=''>
+            {/* <Link to='forgot-password' className=''>
               Forgot Password?
-            </Link>
+            </Link> */}
           </div>
           <button
             to='/admin'

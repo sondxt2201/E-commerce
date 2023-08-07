@@ -34,11 +34,38 @@ const getOrderByOrderId = async (id) => {
   return response.data;
 };
 
+const updateOrder = async (data) => {
+  const response = await axios.put(
+    `${base_url}user/update-order/${data.id}`, {status: data.status},
+    config
+  );
+  return response.data;
+};
+
+const getMonthlyOrders = async () => {
+  const response = await axios.get(
+    `${base_url}user/getMonthWiseOrderIncome`,
+    config
+  );
+  return response.data;
+};
+
+const getYearlyOrders = async () => {
+  const response = await axios.get(
+    `${base_url}user/getYearlyOrders`,
+    config
+  );
+  return response.data;
+};
+
 const authService = {
   login,
   getOrders,
   getOrderByUserId,
-  getOrderByOrderId
+  getOrderByOrderId,
+  getMonthlyOrders,
+  getYearlyOrders,
+  updateOrder
 };
 
 export default authService;

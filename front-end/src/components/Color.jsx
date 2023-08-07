@@ -9,8 +9,9 @@ const Color = (props) => {
           colorData && colorData?.map((item, index) => {
             return (
               <li
+                className="border border-1 border-dark"
                 key={index}
-                style={{ backgroundColor: item?.value }}
+                style={{ backgroundColor: item?.title }}
                 onClick={() => { setColor(item?._id) }}
               ></li>
             )

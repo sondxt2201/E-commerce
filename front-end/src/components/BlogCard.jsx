@@ -11,7 +11,7 @@ const BlogCard = (props) => {
         <img
           src={data?.images[0]?.url
             ? data?.images[0]?.url
-            : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"}
+            : "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/08/Samsung-Galaxy-S23-FE.jpeg"}
           className="img-fluid "
           alt="blog"
           style={{

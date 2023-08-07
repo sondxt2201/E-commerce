@@ -24,8 +24,8 @@ let schema = yup.object().shape({
   tags: yup.string().required("Tag is Required"),
   color: yup
     .array()
-    .min(1, "Pick at least one color")
     .required("Color is Required"),
+  // .min(1, "Pick at least one color")
   quantity: yup.number().required("Quantity is Required"),
 });
 
@@ -42,23 +42,25 @@ const Addproduct = () => {
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
   const productState = useSelector((state) => state.product);
+  const singleProductState = useSelector((state) => state?.product?.products?.filter(x => x._id == getProductId));
 
   const {
     isSuccess,
     isError,
     isLoading,
     createdProduct,
-    productTitle,
-    productDescription,
-    productPrice,
-    productBrand,
-    productCategory,
-    productTags,
-    productColor,
-    productQuantity,
-    productImages,
     updatedProduct,
   } = productState;
+
+  const {
+    title,
+    description,
+    price,
+    brand,
+    category,
+    tags,
+    quantity,
+  } = singleProductState
 
   useEffect(() => {
     dispatch(getBrands());
@@ -81,16 +83,7 @@ const Addproduct = () => {
     if (isSuccess && updatedProduct) {
       toast.success("Product Updated Successfully!");
     }
-    if (isError &&
-      productTitle &&
-      productDescription &&
-      productPrice &&
-      productBrand &&
-      productCategory &&
-      productTags &&
-      productColor &&
-      productQuantity &&
-      productImages) {
+    if (isError) {
       toast.error("Something Went Wrong!");
     }
   }, [isSuccess, isError, isLoading]);
@@ -119,20 +112,20 @@ const Addproduct = () => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      title: productTitle || "",
-      description: productDescription || "",
-      price: productPrice || "",
-      brand: productBrand || "",
-      category: productCategory || "",
-      tags: productTags || "",
-      quantity: productQuantity || "",
-      color: productColor || "",
-      images: productImages || "",
+      title: title || "",
+      description: description || "",
+      price: price || "",
+      brand: brand || "",
+      category: category || "",
+      tags: tags || "",
+      quantity: quantity || "",
+      color: color || [],
+      images: images || [],
     },
     validationSchema: schema,
     onSubmit: (values) => {
       if (getProductId !== undefined) {
-        const data = { id: getProductId, productData: values, colors: color, images: img };
+        const data = { id: getProductId, productData: values, colors: color, images: img }
         setColor(color);
         dispatch(updateProduct(data));
         formik.resetForm();
@@ -142,17 +135,15 @@ const Addproduct = () => {
       } else {
         dispatch(createProducts(values));
         formik.resetForm();
-        setColor(null);
+        // setColor(null);
         setTimeout(() => {
           dispatch(resetState());
         }, 500);
+        alert(JSON.stringify(values))
       }
     },
   });
 
-  const handleColors = (e) => {
-    setColor(e);
-  };
 
   return (
     <div>
@@ -260,7 +251,10 @@ const Addproduct = () => {
             className="w-100"
             placeholder="--- Select colors ---"
             defaultValue={color}
-            onChange={(i, val) => { handleColors(val) }}
+            onChange={(i, val) => {
+              setColor(val)
+              console.log(color)
+            }}
             options={coloropt}
           />
           <div className="error ms-2 my-1">
