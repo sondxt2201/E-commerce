@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { useFormik } from "formik";
-import { GetFullDateString } from "../utils/Utility";
+import Utility, { GetFullDateString } from "../utils/Utility";
 import {
   createCoupon,
   getACoupon,
@@ -61,7 +61,7 @@ const AddCoupon = () => {
     enableReinitialize: true,
     initialValues: {
       name: couponName || "",
-      expire: GetFullDateString(couponExpire) || "",
+      expire: Utility.GetFullDateString(couponExpire) || "",
       discount: couponDiscount || "",
     },
     validationSchema: schema,

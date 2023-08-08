@@ -42,7 +42,7 @@ const Addproduct = () => {
   const colorState = useSelector((state) => state.color.colors);
   const imgState = useSelector((state) => state.upload.images);
   const productState = useSelector((state) => state.product);
-  const singleProductState = useSelector((state) => state?.product?.products?.filter(x => x._id == getProductId));
+  const singleProductState = useSelector((state) => state?.product?.product);
 
   const {
     isSuccess,
@@ -61,6 +61,7 @@ const Addproduct = () => {
     tags,
     quantity,
   } = singleProductState
+
 
   useEffect(() => {
     dispatch(getBrands());
@@ -119,13 +120,13 @@ const Addproduct = () => {
       category: category || "",
       tags: tags || "",
       quantity: quantity || "",
-      color: color || [],
-      images: images || [],
+      color: coloropt || color,
+      images: img || [],
     },
     validationSchema: schema,
     onSubmit: (values) => {
       if (getProductId !== undefined) {
-        const data = { id: getProductId, productData: values, colors: color, images: img }
+        const data = { id: getProductId, productData: values, color: color, images: img }
         setColor(color);
         dispatch(updateProduct(data));
         formik.resetForm();
@@ -135,7 +136,7 @@ const Addproduct = () => {
       } else {
         dispatch(createProducts(values));
         formik.resetForm();
-        // setColor(null);
+        setColor(null);
         setTimeout(() => {
           dispatch(resetState());
         }, 500);
@@ -253,7 +254,6 @@ const Addproduct = () => {
             defaultValue={color}
             onChange={(i, val) => {
               setColor(val)
-              console.log(color)
             }}
             options={coloropt}
           />

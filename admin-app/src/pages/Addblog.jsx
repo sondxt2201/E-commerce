@@ -32,6 +32,7 @@ const Addblog = () => {
   const imgState = useSelector((state) => state.upload.images);
   const bCatState = useSelector((state) => state.bCategory.bCategories);
   const blogState = useSelector((state) => state.blogs);
+  
   const {
     isSuccess,
     isError,
@@ -43,6 +44,7 @@ const Addblog = () => {
     blogImages,
     updatedBlog,
   } = blogState;
+
   useEffect(() => {
     if (getBlogId !== undefined) {
       dispatch(getABlog(getBlogId));
@@ -88,7 +90,7 @@ const Addblog = () => {
       title: blogName || "",
       description: blogDesc || "",
       category: blogCategory || "",
-      images: blogImages || "",
+      images: img || [],
     },
     validationSchema: schema,
     onSubmit: (values) => {

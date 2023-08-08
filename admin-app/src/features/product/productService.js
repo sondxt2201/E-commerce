@@ -30,8 +30,6 @@ const updateProduct = async (product) => {
     },
     config
   );
-  console.log(product)
-  console.log(response.data)
   return response.data;
 };
 

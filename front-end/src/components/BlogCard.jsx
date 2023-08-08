@@ -21,12 +21,22 @@ const BlogCard = (props) => {
         />
       </div>
       <div className="blog-content">
-        {/* <p className="date">{Utility.GetFullDateMinuteString(new Date())}</p> */}
-        <p className="date">{data?.createdAt}</p>
-        <h5 className="title">{data?.title}</h5>
+        <p className="date">{Utility.GetFullDateMinuteString(data?.createdAt)}</p>
+        <h5 className="title"
+          style={{
+            width: "100%",
+            display: "-webkit-box",
+            WebkitLineClamp: "3",
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+            height: "65px"
+          }}
+        >{data?.title}
+        </h5>
         <p
           className="desc"
-          dangerouslySetInnerHTML={{ __html: data?.description.substr(0, 15) + "...", }}
+          dangerouslySetInnerHTML={{ __html: data?.description?.substring(0, 15) }}
+          
         ></p>
         <Link
           className="button"

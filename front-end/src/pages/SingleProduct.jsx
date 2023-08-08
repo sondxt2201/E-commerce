@@ -33,8 +33,6 @@ const SingleProduct = () => {
   const lstProductState = useSelector(state => state?.product?.products)
   const cartState = useSelector(state => state?.auth?.cartProducts)
 
-  console.log(lstProductState)
-
   useEffect(() => {
     dispatch(getAProduct(getProductId));
     dispatch(getUserCart());

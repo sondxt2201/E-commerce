@@ -496,8 +496,8 @@ const getOrderByOrderId = asyncHandler(async (req, res) => {
     const { id } = req.params;
     try {
         const order = await Order.findById(id)
-            .populate("orderItems.product")
-            .exec();
+        .populate("orderItems.product")
+        .populate("orderItems.color")
         res.json(order);
     } catch (error) {
         throw new Error(error);

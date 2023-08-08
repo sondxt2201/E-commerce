@@ -54,7 +54,7 @@ const Home = () => {
                     or create anywhere.</h4>
                   <h5>MacBook Air</h5>
                   <p>From $1299 <br />
-                    of <br />
+                    or <br />
                     $108.25/mo. for 12 mo.*</p>
                   <Link className='button'>BUY NOW</Link>
                 </div>
@@ -74,7 +74,7 @@ const Home = () => {
                     <h4>BEST SALE</h4>
                     <h5>MacBook Air 15”</h5>
                     <p>From $1299 <br />
-                      of <br />
+                      or <br />
                       $108.25/mo. for 12 mo.*</p>
                   </div>
                 </div>
@@ -122,8 +122,8 @@ const Home = () => {
                     <h4>NEW ARRIVAL</h4>
                     <h5>AirPods Max</h5>
                     <p>From $549.00 <br />
-                      or $91.50/mo.per month <br />
-                      for 6 mo.*</p>
+                      or <br />
+                      $91.50/mo.per month for 6 mo.*</p>
                   </div>
                 </div>
               </div>

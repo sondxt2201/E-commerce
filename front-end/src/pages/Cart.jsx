@@ -75,7 +75,10 @@ const Cart = () => {
                         <p className="">{item?.productId?.title}</p>
                         <div className="d-flex gap-3">Color:
                           <ul className="colors ps-0">
-                            <li style={{ backgroundColor: item?.color?.title }} ></li>
+                            <li
+                              style={{ backgroundColor: item?.color?.title }}
+                              className="border border-1 border-dark"
+                            ></li>
                           </ul>
                           <span>{ntc.name(item?.color?.title)[1]}</span>
                         </div>

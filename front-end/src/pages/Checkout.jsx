@@ -105,7 +105,7 @@ const Checkout = () => {
       key: "rzp_test_Iwzv1fbqTMdnYJ",
       amount: amount,
       currency: currency,
-      name: "Digishop",
+      name: "DigiSmart",
       description: "Test Transaction",
       order_id: order_id,
       handler: async function (response) {

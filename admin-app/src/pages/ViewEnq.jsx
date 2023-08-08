@@ -23,7 +23,6 @@ const ViewEnq = () => {
     navigate(-1);
   };
   const setEnquiryStatus = (e, i) => {
-    console.log(e, i);
     const data = { id: i, enqData: e };
     dispatch(updateAEnquiry(data));
     dispatch(resetState());
