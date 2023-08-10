@@ -78,7 +78,7 @@ const SpecialProduct = (props) => {
                   ></div>
                 </div>
               </div>
-              <Link className="button">Add to Cart</Link>
+              <Link className="button" to={`/product/${data?._id}`}>Add to Cart</Link>
             </div>
           </div>
         </div>

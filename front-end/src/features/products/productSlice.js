@@ -13,6 +13,17 @@ export const getAllProduct = createAsyncThunk(
   }
 );
 
+export const getProductByCategory = createAsyncThunk(
+  "product/product-by-category",
+  async (data, thunkAPI) => {
+    try {
+      return await productService.getProductByCategory(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 export const getAProduct = createAsyncThunk(
   "product/get-product",
   async (id, thunkAPI) => {
@@ -23,6 +34,17 @@ export const getAProduct = createAsyncThunk(
     }
   }
 );
+
+export const getAllCategory = createAsyncThunk(
+    "productCategory/get-categories",
+    async (thunkAPI) => {
+      try {
+        return await productService.getProductCategories();
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
+  );
 
 export const addToWishlist = createAsyncThunk(
   "product/wishlist",
@@ -136,7 +158,39 @@ export const productSlice = createSlice({
           toast.error("Something Went Wrong!");
         }
       })
+      .addCase(getAllCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.categories = action.payload;
+      })
+      .addCase(getAllCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
+      .addCase(getProductByCategory.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProductByCategory.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.products = action.payload;
+      })
+      .addCase(getProductByCategory.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+      })
       .addCase(resetState, () => initialState);
+      
   },
 });
+
 export default productSlice.reducer;

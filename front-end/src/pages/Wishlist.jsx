@@ -30,7 +30,7 @@ const Wishlist = () => {
               <div className="filter-sort-grid mb-4">
                 <div className="d-flex justify-content-between align-items-center flex-row-reverse">
                   <div className="d-flex align-items-center gap-10 ">
-                    <p className="totalproducts mb-0">{wishlistState.length} Products</p>
+                    <p className="totalproducts mb-0">{wishlistState?.length} Products</p>
                     <div className="d-flex gap-10 align-items-center grid">
                       <img
                         onClick={() => {

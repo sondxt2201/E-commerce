@@ -140,7 +140,6 @@ const Addproduct = () => {
         setTimeout(() => {
           dispatch(resetState());
         }, 500);
-        alert(JSON.stringify(values))
       }
     },
   });

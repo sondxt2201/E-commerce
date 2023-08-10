@@ -9,11 +9,24 @@ const getAllProduct = async (data) => {
   }
 };
 
+const getProductByCategory = async (data) => {
+  const response = await axios.get(`${base_url}product/all-product?${data?.category ? `category=${data?.category}&&` : ""}`);
+  if (response.data) {
+    return response.data;
+  }
+};
+
 const getAProduct = async (id) => {
   const response = await axios.get(`${base_url}product/${id}`, config);
   if (response.data) {
     return response.data;
   }
+};
+
+const getProductCategories = async () => {
+  const response = await axios.get(`${base_url}category/all-category`);
+
+  return response.data;
 };
 
 const addToWishlist = async (id) => {
@@ -40,5 +53,7 @@ export const productService = {
   getAllProduct,
   getAProduct,
   addToWishlist,
-  rateProduct
+  rateProduct,
+  getProductCategories,
+  getProductByCategory
 };

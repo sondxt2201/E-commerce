@@ -16,6 +16,7 @@ const createCategory = asyncHandler(async (req, res) => {
 const updateCategory = asyncHandler(async (req, res) => {
     const { id } = req.params;
     validateMongoDbId(id);
+    console.log(req.body)
     try {
         const updateCategory = await Category.findByIdAndUpdate(id, req.body, { new: true });
         res.json(updateCategory);

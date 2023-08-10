@@ -21,22 +21,29 @@ const SingleProduct = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const getProductId = location.pathname.split("/")[2];
+  const productState = useSelector(state => state?.product?.product)
+  const lstProductState = useSelector(state => state?.product?.products)
+  const cartState = useSelector(state => state?.auth?.cartProducts)
+
   const [color, setColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [alreadyAdded, setAlreadyAdded] = useState(false);
   const [orderedProduct, setorderedProduct] = useState(true);
   const [star, setStar] = useState(null);
   const [comment, setComment] = useState(null);
+  const [img, setImg] = useState(productState?.images
+    ? productState?.images[0]?.url
+    : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"
+  );
 
-  const getProductId = location.pathname.split("/")[2];
-  const productState = useSelector(state => state?.product?.product)
-  const lstProductState = useSelector(state => state?.product?.products)
-  const cartState = useSelector(state => state?.auth?.cartProducts)
+
 
   useEffect(() => {
     dispatch(getAProduct(getProductId));
     dispatch(getUserCart());
     dispatch(getAllProduct());
+    // dispatch(setImg(null))
   }, []);
 
   useEffect(() => {
@@ -71,9 +78,7 @@ const SingleProduct = () => {
     width: 600,
     height: 600,
     zoomWidth: 600,
-    img: productState?.images
-      ? productState?.images[0]?.url
-      : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"
+    img: img
   };
 
   const copyToClipboard = (text) => {
@@ -122,11 +127,15 @@ const SingleProduct = () => {
                 {productState?.images?.map((item, index) => {
                   return (
                     <img
+                      onClick={() => {
+                        setImg(item.url)
+                      }}
                       key={index}
+                      // className="img-fluid"
+                      style={{ maxWidth: '150px', height: 'auto' }}
                       src={item?.url
                         ? item?.url
                         : "https://img.freepik.com/free-vector/page-found-concept-illustration_114360-1869.jpg?w=826&t=st=1689703013~exp=1689703613~hmac=8cc035843cbb13edd969450e9ad63b1d2da1106899d1c13e869e01c47969fa55"}
-                      className="img-fluid"
                       alt=""
                     />
                   )

@@ -35,13 +35,20 @@ const SingleBlog = () => {
                 </Link>
                 <h3 className="title">{blogState?.title}</h3>
                 <img
-                  src={blogState?.img
-                    ? blogState?.img[0]?._id
-                    : "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/08/Samsung-Galaxy-S23-FE.jpeg"}
+                  src={blogState?.images
+                    ? blogState?.images[1]?.url
+                    : "https://stock.adobe.com/vn/search/images?k=no+image+available&asset_id=434728286"}
                   className="img-fluid w-75 my-4"
                   alt="blog"
                 />
                 <p dangerouslySetInnerHTML={{ __html: blogState?.description}} ></p>
+                <img
+                  src={blogState?.images
+                    ? blogState?.images[2]?.url
+                    : "https://stock.adobe.com/vn/search/images?k=no+image+available&asset_id=434728286"}
+                  className="img-fluid w-75 my-4"
+                  alt="blog"
+                />
               </div>
             </div>
           </div>

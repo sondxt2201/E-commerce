@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import BreadCrumb from "../components/BreadCrumb";
 import Meta from "../components/Meta";
-import ReactStars from "react-rating-stars-component";
 import ProductCard from "../components/ProductCard";
-import Color from "../components/Color";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct } from "../features/products/productSlice";
-import * as ntc from "ntcjs";
-
+import { TiDeleteOutline } from "react-icons/ti";
 
 const OurStore = () => {
   const dispatch = useDispatch();
@@ -43,21 +40,12 @@ const OurStore = () => {
 
   useEffect(() => {
     getProducts();
-    // resetFilter();
   }, [sort, tag, brand, category, minPrice, maxPrice]);
 
   const getProducts = () => {
     dispatch(getAllProduct({ sort, tag, brand, category, minPrice, maxPrice }));
   }
 
-  const resetFilter = () => {
-    setBrands(null);
-    setCategories(null);
-    setTags(null);
-    setMinPrice(null);
-    setMaxPrice(null);
-    setSort(null);
-  }
   return (
     <>
       <Meta title={"Our Store"} />
@@ -77,6 +65,12 @@ const OurStore = () => {
                         )
                       })
                     }
+                    <li onClick={() => {
+                      dispatch(getAllProduct({}))
+                    }}
+                    >
+                      <TiDeleteOutline />
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -282,7 +276,7 @@ const OurStore = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
     </>
   );
 };

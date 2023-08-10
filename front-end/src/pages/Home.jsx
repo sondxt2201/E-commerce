@@ -11,6 +11,7 @@ import { getAllProduct } from "../features/products/productSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const blogState = useSelector((state) => state?.blog?.blogs)
   const productState = useSelector((state) => state?.product?.products);
 
@@ -35,7 +36,10 @@ const Home = () => {
             <div className='col-6'>
               <div
                 className='main-banner position-relative rounded-3'
-                style={{ overflow: 'hidden' }}
+                style={{ overflow: 'hidden', cursor: "pointer" }}
+                onClick={() => {
+                  navigate('/product/64d51036a67c225d526a2317')
+                }}
               >
                 <img
                   className='img-fluid rounded-3'
@@ -63,7 +67,10 @@ const Home = () => {
             <div className='col-6'>
               <div className="d-flex flex-wrap justify-content-between align-items-center gap-10">
                 <div className="small-banner position-relative"
-                  style={{ overflow: 'hidden' }}
+                  style={{ overflow: 'hidden', cursor: "pointer" }}
+                  onClick={() => {
+                    navigate('/product/64d51036a67c225d526a2317')
+                  }}
                 >
                   <img
                     className='img-fluid rounded-3'
@@ -79,7 +86,10 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="small-banner position-relative"
-                  style={{ overflow: 'hidden' }}
+                  style={{ overflow: 'hidden', cursor: 'pointer' }}
+                  onClick={() => {
+                    navigate('/product/64cc0d098e791a35b2a9fb4a')
+                  }}
                 >
                   <img
                     className='img-fluid rounded-3'
@@ -95,7 +105,10 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="small-banner position-relative"
-                  style={{ overflow: 'hidden' }}
+                  style={{ overflow: 'hidden', cursor: 'pointer' }}
+                  onClick={() => {
+                    navigate('/product/64d5126ca67c225d526a27c6')
+                  }}
                 >
                   <img
                     className='img-fluid rounded-3'
@@ -111,7 +124,10 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="small-banner position-relative"
-                  style={{ overflow: 'hidden' }}
+                  style={{ overflow: 'hidden', cursor: 'pointer' }}
+                  onClick={() => {
+                    navigate('/product/64cc14563cd6106c6b78f557')
+                  }}
                 >
                   <img
                     className='img-fluid rounded-3'
@@ -195,44 +211,6 @@ const Home = () => {
                     }}
                   />
                 </div>
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Music & Gaming</h6>
-                    <p>10 Items</p>
-                  </div>
-                  <img src="https://cdn.tgdd.vn/Products/Images/2162/249767/sony-srs-xb13-150323-031134-600x600.jpg" alt="camera"
-                    style={{
-                      height: '110px',
-                      width: '110px',
-                    }}
-                  />
-                </div>
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Cameras</h6>
-                    <p>10 Items</p>
-                  </div>
-                  <img src="images/camera.jpg" alt="camera" />
-                </div>
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Smart Tv</h6>
-                    <p>10 Items</p>
-                  </div>
-                  <img src="images/tv.jpg" alt="camera" />
-                </div>
-                <div className="d-flex gap align-items-center">
-                  <div>
-                    <h6>Smart Watches</h6>
-                    <p>10 Items</p>
-                  </div>
-                  <img src="https://cdn.tgdd.vn/Products/Images/7077/283208/garmin-forerunner-255-day-silicone-tn-600x600.jpg" alt="camera"
-                    style={{
-                      height: '110px',
-                      width: '110px',
-                    }}
-                  />
-                </div>
               </div>
             </div>
           </div>
@@ -267,16 +245,25 @@ const Home = () => {
                   src="images/famous-1.webp"
                   className="img-fluid"
                   alt="famous"
+                  style={{ overflow: 'hidden', cursor: 'pointer' }}
+                  onClick={() => {
+                    navigate('/product/64d51842a67c225d526a33f8')
+                  }}
                 />
                 <div className="famous-content position-absolute">
                   <h5>Big Screen</h5>
-                  <h6>Smart Watch Series 7</h6>
+                  <h6>Smart Watch Series 8</h6>
                   <p>From $399or $16.62/mo. for 24 mo.*</p>
                 </div>
               </div>
             </div>
             <div className="col-3">
-              <div className="famous-card position-relative">
+              <div className="famous-card position-relative"
+                style={{ overflow: 'hidden', cursor: 'pointer' }}
+                onClick={() => {
+                  navigate('/product/64d519bca67c225d526a36ed')
+                }}
+              >
                 <img
                   src="images/famous-2.webp"
                   className="img-fluid"
@@ -295,18 +282,27 @@ const Home = () => {
                   src="images/famous-3.webp"
                   className="img-fluid"
                   alt="famous"
+                  style={{ overflow: 'hidden', cursor: 'pointer' }}
+                  onClick={() => {
+                    navigate('/product/64cc12d33cd6106c6b78f51f')
+                  }}
                 />
                 <div className="famous-content position-absolute">
                   <h5 className="text-dark">smartphones</h5>
-                  <h6 className="text-dark">Smartphone 13 Pro.</h6>
+                  <h6 className="text-dark">Smartphone 14 Pro.</h6>
                   <p className="text-dark">
-                    Now in Green. From $999.00 or $41.62/mo. for 24 mo. Footnote*
+                    From $999.00 or $41.62/mo. for 24 mo.
                   </p>
                 </div>
               </div>
             </div>
             <div className="col-3">
-              <div className="famous-card position-relative">
+              <div className="famous-card position-relative"
+                style={{ overflow: 'hidden', cursor: 'pointer' }}
+                onClick={() => {
+                  navigate('/product/64d51c5aa67c225d526a3a01')
+                }}
+              >
                 <img
                   src="images/famous-4.webp"
                   className="img-fluid"
@@ -316,7 +312,7 @@ const Home = () => {
                   <h5 className="text-dark">home speakers</h5>
                   <h6 className="text-dark">Room-filling sound.</h6>
                   <p className="text-dark">
-                    From $699 or $116.58/mo. for 12 mo.*
+                    From $299
                   </p>
                 </div>
               </div>

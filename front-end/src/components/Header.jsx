@@ -4,16 +4,30 @@ import { BsSearch } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
+import { getAllCategory, getAllProduct, getProductByCategory } from '../features/products/productSlice';
 
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const cartState = useSelector(state => state?.auth?.cartProducts)
   const authState = useSelector(state => state.auth)
   const productState = useSelector(state => state?.product?.products)
+  const categoryState = useSelector(state => state?.product?.categories)
+
   const [paginate, setPaginate] = useState(true);
   const [productOpt, setProductOpt] = useState([]);
+  const [category, setCategory] = useState(null);
+
+
+  useEffect(() => {
+    dispatch(getAllCategory())
+  }, [])
+
+  useEffect(() => {
+    dispatch(getProductByCategory({ category }));
+  }, [category])
 
   useEffect(() => {
     let data = [];
@@ -100,8 +114,8 @@ const Header = () => {
                 </span>
               </div>
             </div>
-            <div className='col-3'>
-              <div className='header-upper-links d-flex align-items-center justify-content-between'>
+            <div className='col-5'>
+              <div className='header-upper-links d-flex align-items-center justify-content-evenly'>
                 {/* <div>
                   <Link className='d-flex align-items-center gap-10 text-white' to="/compare-product">
                     <img src='images/compare.svg' alt='compare' />
@@ -180,18 +194,28 @@ const Header = () => {
                     </button>
                     <ul className="dropdown-menu"
                       aria-labelledby="dropdownMenuButton1">
-                      <li>
-                        <Link className="dropdown-item text-white" to="#">Wacth</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" to="#">TV</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" to="#">Camera</Link>
-                      </li>
-                      <li>
-                        <Link className="dropdown-item text-white" to="#">Laptop</Link>
-                      </li>
+                      {
+                        categoryState
+                          ? ((categoryState?.map((item, index) => {
+                            return (
+                              <>
+                                <li key={index} onClick={() => {
+                                  setCategory(item.title)
+                                  // setTimeout(() => {
+                                  //   navigate('product')
+                                  // }, 200)
+                                }}
+                                >
+                                  <Link className="dropdown-item text-white" to="/product">{item.title}</Link>
+                                </li>
+                              </>
+                            )
+                          })))
+                          : (
+                            <>
+                            </>
+                          )
+                      }
                     </ul>
                   </div>
                 </div>

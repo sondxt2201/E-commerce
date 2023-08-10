@@ -9,7 +9,7 @@ const BlogCard = (props) => {
     <div className="blog-card" style={{ margin: '5px' }} >
       <div className="card-image">
         <img
-          src={data?.images[0]?.url
+          src={data?.images
             ? data?.images[0]?.url
             : "https://cdn.sforum.vn/sforum/wp-content/uploads/2023/08/Samsung-Galaxy-S23-FE.jpeg"}
           className="img-fluid "
