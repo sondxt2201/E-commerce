@@ -182,7 +182,7 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
             .addCase(registerUser.pending, (state) => {
@@ -203,7 +203,7 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
             .addCase(getWishlist.pending, (state) => {
@@ -221,7 +221,7 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
             .addCase(addProd2Cart.pending, (state) => {
@@ -242,7 +242,7 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
             .addCase(getUserCart.pending, (state) => {
@@ -260,7 +260,7 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
             .addCase(removeAProduct.pending, (state) => {
@@ -281,7 +281,7 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
             .addCase(updateAProduct.pending, (state) => {
@@ -302,7 +302,7 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
             .addCase(createAnOrder.pending, (state) => {
@@ -323,7 +323,7 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
             .addCase(getUserOrder.pending, (state) => {
@@ -341,7 +341,7 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
             .addCase(updateProfile.pending, (state) => {
@@ -372,7 +372,7 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
             .addCase(forgotPasswordToken.pending, (state) => {
@@ -393,7 +393,7 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
             .addCase(resetPassword.pending, (state) => {
@@ -414,7 +414,7 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.message = action.error;
                 if (state.isError) {
-                    toast.error(action.payload.response?.data.message);
+                    toast.error(action.payload?.response?.data?.message);
                 }
             })
     },
