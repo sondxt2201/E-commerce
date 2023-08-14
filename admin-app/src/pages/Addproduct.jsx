@@ -120,7 +120,7 @@ const Addproduct = () => {
       category: category || "",
       tags: tags || "",
       quantity: quantity || "",
-      color: coloropt || color,
+      color: color || [],
       images: img || [],
     },
     validationSchema: schema,

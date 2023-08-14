@@ -3,9 +3,9 @@ import { blogService } from "./blogService";
 
 export const getAllBlog = createAsyncThunk(
     "blog/all-blog",
-    async (thunkAPI) => {
+    async (data, thunkAPI) => {
         try {
-            return await blogService.getAllBlog();
+            return await blogService.getAllBlog(data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }
@@ -22,6 +22,7 @@ export const getABlog = createAsyncThunk(
         }
     }
 );
+
 
 export const resetState = createAction("Reset_all");
 

@@ -65,13 +65,15 @@ const OurStore = () => {
                         )
                       })
                     }
-                    <li onClick={() => {
+                  </ul>
+                  <li
+                    style={{ listStyle: 'none' }}
+                    onClick={() => {
                       dispatch(getAllProduct({}))
                     }}
-                    >
-                      <TiDeleteOutline />
-                    </li>
-                  </ul>
+                  >
+                    <TiDeleteOutline />
+                  </li>
                 </div>
               </div>
               <div className="filter-card mb-3">
@@ -106,7 +108,7 @@ const OurStore = () => {
                       {
                         tags && [...new Set(tags)].map((item, index) => {
                           return (
-                            <li
+                            <><li
                               style={{ cursor: "pointer" }}
                               className="badge bg-light text-secondary rounded-3 py-2 px-3 text-capitalize"
                               key={index}
@@ -114,9 +116,18 @@ const OurStore = () => {
                             >
                               {item}
                             </li>
+                            </>
                           )
                         })
                       }
+                      <li
+                        style={{ listStyle: 'none' }}
+                        onClick={() => {
+                          dispatch(getAllProduct({}))
+                        }}
+                      >
+                        <TiDeleteOutline />
+                      </li>
                     </div>
                   </div>
                   <h5 className="sub-title">Product Brands</h5>
@@ -136,6 +147,14 @@ const OurStore = () => {
                           )
                         })
                       }
+                      <li
+                        style={{ listStyle: 'none' }}
+                        onClick={() => {
+                          dispatch(getAllProduct({}))
+                        }}
+                      >
+                        <TiDeleteOutline />
+                      </li>
                     </div>
                   </div>
                 </div>
@@ -253,7 +272,7 @@ const OurStore = () => {
                 </div>
               </div>
               <div className="products-list pb-5">
-                <div className="d-flex gap-10 flex-wrap">
+                <div className="d-flex gap-10 flex-wrap" >
                   {
                     productState
                       ? ((productState.map((item, index) => {

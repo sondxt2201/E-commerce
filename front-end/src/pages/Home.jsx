@@ -173,38 +173,80 @@ const Home = () => {
           <div className="row">
             <div className="col-12">
               <div className="categories d-flex justify-content-between flex-wrap align-items-center">
-                <div className="d-flex gap align-items-center">
+                <div
+                  className="d-flex gap align-items-center"
+                  onClick={() => navigate('/product')}
+                  style={{
+                    cursor: 'pointer'
+                  }}>
                   <div>
-                    <h6>Music & Gaming</h6>
-                    <p>10 Items</p>
+                    <h6>Laptop</h6>
+                    {/* <p>10 Items</p> */}
                   </div>
-                  <img src="https://cdn.tgdd.vn/Products/Images/44/303500/msi-gaming-gf63-thin-11sc-i5-664vn-glr-thumb-600x600.jpg" alt="camera"
+                  <img
+                    src="https://cdn.tgdd.vn/Products/Images/44/303500/msi-gaming-gf63-thin-11sc-i5-664vn-glr-thumb-600x600.jpg"
+                    alt="Gaming"
                     style={{
                       height: '110px',
                       width: '110px',
                     }}
                   />
                 </div>
-                <div className="d-flex gap align-items-center">
+                <div
+                  className="d-flex gap align-items-center"
+                  onClick={() => navigate('/product')}
+                  style={{
+                    cursor: 'pointer'
+                  }}>
                   <div>
-                    <h6>Cameras</h6>
-                    <p>10 Items</p>
+                    <h6>Cellphone</h6>
+                    {/* <p>10 Items</p> */}
                   </div>
-                  <img src="images/camera.jpg" alt="camera" />
+                  <img
+                    src="https://cdn2.cellphones.com.vn/150x,webp,q70/media/tmp/catalog/product/p/i/pin-trau-0092.png"
+                    alt="Celphone"
+                    style={{
+                      height: '110px',
+                      width: '110px',
+                    }}
+                  />
                 </div>
-                <div className="d-flex gap align-items-center">
+
+                <div
+                  className="d-flex gap align-items-center"
+                  onClick={() => navigate('/product')}
+                  style={{
+                    cursor: 'pointer'
+                  }}
+                >
                   <div>
-                    <h6>Smart Tv</h6>
-                    <p>10 Items</p>
+                    <h6>Speaker</h6>
+                    {/* <p>10 Items</p> */}
                   </div>
-                  <img src="images/tv.jpg" alt="camera" />
+                  <img
+                    src="https://cdn2.cellphones.com.vn/150x,webp,q70/media/catalog/product/l/o/loa-karaoke_1.png"
+                    alt="speaker"
+                    style={{
+                      height: '110px',
+                      width: '110px',
+                    }}
+                  />
                 </div>
-                <div className="d-flex gap align-items-center">
+
+                <div
+                  className="d-flex gap align-items-center"
+                  onClick={() => navigate('/product')}
+                  style={{
+                    cursor: 'pointer'
+                  }}
+                >
                   <div>
                     <h6>Smart Watches</h6>
-                    <p>10 Items</p>
+                    {/* <p>10 Items</p> */}
                   </div>
-                  <img src="https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-tn-2-600x600.jpg" alt="camera"
+                  <img
+                    src="https://cdn.tgdd.vn/Products/Images/7077/248752/samsung-galaxy-watch-4-40mm-tn-2-600x600.jpg"
+                    alt="smart-watch"
                     style={{
                       height: '110px',
                       width: '110px',

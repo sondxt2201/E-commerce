@@ -15,7 +15,7 @@ const BlogCard = (props) => {
           className="img-fluid "
           alt="blog"
           style={{
-            width: '250px',
+            width: '100%',
             height: '250px',
           }}
         />
@@ -36,7 +36,6 @@ const BlogCard = (props) => {
         <p
           className="desc"
           dangerouslySetInnerHTML={{ __html: data?.description?.substring(0, 15) }}
-          
         ></p>
         <Link
           className="button"

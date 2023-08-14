@@ -201,9 +201,6 @@ const Header = () => {
                               <>
                                 <li key={index} onClick={() => {
                                   setCategory(item.title)
-                                  // setTimeout(() => {
-                                  //   navigate('product')
-                                  // }, 200)
                                 }}
                                 >
                                   <Link className="dropdown-item text-white" to="/product">{item.title}</Link>
